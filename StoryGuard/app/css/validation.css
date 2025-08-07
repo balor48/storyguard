@@ -1,0 +1,151 @@
+/* 
+ * Validation Styles for Story Database
+ * Provides consistent styling for form validation errors
+ */
+
+/* Error input styling */
+.error-input {
+    border: 1px solid #e74c3c !important;
+    background-color: rgba(231, 76, 60, 0.05) !important;
+}
+
+.error-input:focus {
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2) !important;
+}
+
+/* Error message styling */
+.validation-error {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Form section with errors */
+.form-group.has-errors {
+    border-left: 3px solid #e74c3c;
+    padding-left: 15px;
+}
+
+/* Error summary at top of form */
+.validation-error-summary {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid #e74c3c;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.validation-error-summary h4 {
+    color: #e74c3c;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.validation-error-summary ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.validation-error-summary li {
+    margin-bottom: 5px;
+}
+
+/* Success indicator for valid fields */
+.valid-input {
+    border: 1px solid #2ecc71 !important;
+}
+
+.input-with-validation-icon {
+    position: relative;
+}
+
+.validation-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+}
+
+.validation-icon.valid {
+    color: #2ecc71;
+}
+
+.validation-icon.invalid {
+    color: #e74c3c;
+}
+
+/* Dark mode support */
+.dark-mode .error-input {
+    background-color: rgba(231, 76, 60, 0.15) !important;
+}
+
+.dark-mode .validation-error {
+    color: #ff6b6b;
+}
+
+.dark-mode .validation-error-summary {
+    background-color: rgba(231, 76, 60, 0.2);
+}
+
+.dark-mode .validation-error-summary h4 {
+    color: #ff6b6b;
+}
+
+/* Animation for error messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tooltip for validation errors */
+.validation-tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.validation-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.validation-tooltip .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+}
+
+.validation-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .validation-error-summary {
+        padding: 8px 12px;
+    }
+    
+    .validation-tooltip .tooltip-text {
+        width: 150px;
+        margin-left: -75px;
+    }
+}

@@ -1,0 +1,80 @@
+/* Fix for tag selector and Add Tag button visibility */
+.tag-selector {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  min-height: 50px;
+}
+
+/* Style the tag selector header */
+.tag-selector-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin-bottom: 10px !important;
+  padding-bottom: 5px !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+/* Make the Add Tag button more prominent and always visible */
+.add-tag-btn {
+  background-color: #3498db !important;
+  color: white !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  border: none !important;
+  display: inline-block !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  z-index: 100 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+/* Extra specific selector to ensure the button is visible */
+.tag-selector-header .add-tag-btn {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  background-color: #3498db !important;
+  color: white !important;
+}
+
+/* Force the tag selector header to display correctly */
+.tag-selector-header {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin-bottom: 10px !important;
+}
+
+.add-tag-btn:hover {
+  background-color: #2980b9 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure tag selector is properly initialized even when entity ID is empty */
+.tag-selector[data-entity-id=""] .tag-selector-header,
+.tag-selector:not([data-entity-id]) .tag-selector-header {
+  display: flex !important;
+}
+
+.tag-selector[data-entity-id=""] .add-tag-btn,
+.tag-selector:not([data-entity-id]) .add-tag-btn {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}

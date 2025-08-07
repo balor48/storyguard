@@ -1,0 +1,80 @@
+/**
+ * Relationship Colors Dark Mode Fix
+ * Ensures relationship type buttons maintain their colors in dark mode
+ */
+
+/* Override dark mode styling for relationship type options */
+body.dark-mode .relationship-option.friend,
+.dark-mode .relationship-option.friend {
+    background-color: #4CAF50 !important;
+    color: white !important;
+    border-color: #2e7d32 !important;
+}
+
+body.dark-mode .relationship-option.family,
+.dark-mode .relationship-option.family {
+    background-color: #2196F3 !important;
+    color: white !important;
+    border-color: #0d47a1 !important;
+}
+
+body.dark-mode .relationship-option.ally,
+.dark-mode .relationship-option.ally {
+    background-color: #8BC34A !important;
+    color: white !important;
+    border-color: #558b2f !important;
+}
+
+body.dark-mode .relationship-option.enemy,
+.dark-mode .relationship-option.enemy {
+    background-color: #F44336 !important;
+    color: white !important;
+    border-color: #b71c1c !important;
+}
+
+body.dark-mode .relationship-option.mentor,
+.dark-mode .relationship-option.mentor {
+    background-color: #FF9800 !important;
+    color: white !important;
+    border-color: #e65100 !important;
+}
+
+body.dark-mode .relationship-option.student,
+.dark-mode .relationship-option.student {
+    background-color: #9C27B0 !important;
+    color: white !important;
+    border-color: #4a148c !important;
+}
+
+body.dark-mode .relationship-option.lover,
+.dark-mode .relationship-option.lover {
+    background-color: #E91E63 !important;
+    color: white !important;
+    border-color: #880e4f !important;
+}
+
+body.dark-mode .relationship-option.rival,
+.dark-mode .relationship-option.rival {
+    background-color: #FF5722 !important;
+    color: white !important;
+    border-color: #bf360c !important;
+}
+
+body.dark-mode .relationship-option.other,
+.dark-mode .relationship-option.other {
+    background-color: #607D8B !important;
+    color: white !important;
+    border-color: #263238 !important;
+}
+
+/* Ensure hover effects don't override colors */
+body.dark-mode .relationship-option:hover {
+    filter: brightness(1.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Make selected relationship options more visible */
+body.dark-mode .relationship-option.selected {
+    box-shadow: 0 0 0 3px white !important;
+    filter: brightness(1.15) !important;
+} 

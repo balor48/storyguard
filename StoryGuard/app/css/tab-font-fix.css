@@ -1,0 +1,47 @@
+/* Tab Font Size Control */
+
+/* Set font size for tab navigation buttons */
+.tab-button {
+    font-size: 18px !important; /* Increased to 18px as requested */
+    font-weight: 600 !important; /* Keep it bold with !important */
+}
+
+/* Ensure the tab buttons have appropriate padding for the text */
+.tab-button {
+    padding: 12px 18px !important; /* Increased padding for larger text */
+}
+
+/* Make active tab more prominent */
+.tab-button.active {
+    font-size: 18px !important;
+    font-weight: 700 !important; /* Keep it bolder for active tab */
+}
+
+/* Match shortcut hints to tab font size */
+.shortcut-hint {
+    font-size: 18px !important; /* Match tab font size */
+    font-weight: 600 !important; /* Match tab font weight */
+    padding: 2px 5px !important;
+}
+
+/* Adjust hover effect */
+.tab-button:hover {
+    background-color: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+/* Dark mode adjustments */
+.dark-theme .tab-button {
+    background-color: #444;
+    color: #f0f0f0;
+}
+
+.dark-theme .tab-button:hover {
+    background-color: #555;
+}
+
+/* Ensure tab spacing is consistent */
+.tab-navigation {
+    gap: 8px;
+    padding-bottom: 8px;
+}

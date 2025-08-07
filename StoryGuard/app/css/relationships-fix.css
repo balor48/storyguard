@@ -1,0 +1,1926 @@
+/**
+ * Relationship Tab UI Improvements
+ * Fixes the relationship filter UI and adds Apply/Clear buttons
+ */
+
+/* STRONGEST OVERRIDE for table headers - apply to all tables */
+table th,
+th,
+[role="columnheader"],
+.table th,
+.table-container th,
+.character-list th,
+thead th {
+    text-align: center !important;
+}
+
+/* DIRECT FIX for headers shown in the image */
+div[role="dialog"] .character-list table th,
+.panel .character-list table th,
+.modal .character-list table th {
+    text-align: center !important;
+    font-weight: bold !important;
+}
+
+/* DIRECT FIX for the relationship dialog header shown in the image */
+div[role="dialog"] > div:first-child,
+.panel > div:first-child,
+.modal > div:first-child,
+div:has(> div:only-child:contains("Relationship")),
+.panel-header,
+.header:contains("Relationship") {
+  background-color: #3498db !important;
+  color: white !important;
+}
+
+div[role="dialog"] > div:first-child *,
+.panel > div:first-child *,
+.modal > div:first-child *,
+div:has(> div:only-child:contains("Relationship")) *,
+.panel-header *,
+.header:contains("Relationship") * {
+  color: white !important;
+}
+
+/* Hide any remaining Actions sections in view popups */
+.character-popup .details-section:has(h3:contains("Actions")),
+.popup-content .details-section:has(h3:contains("Actions")),
+div.details-section:has(> h3:contains("Actions")) {
+  display: none !important;
+}
+
+/* Make the relationship filter container more compact */
+#relationships-tab .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+}
+
+#relationships-tab .search-container select {
+  max-width: 200px;
+  flex: 1;
+  min-width: 150px;
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.relationship-filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* Style the Apply button */
+.apply-filter-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.apply-filter-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Style the Clear button */
+.clear-filter-btn {
+  background-color: var(--neutral-500);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clear-filter-btn:hover {
+  background-color: var(--neutral-600);
+  transform: translateY(-1px);
+}
+
+/**
+ * Enhanced Relationship Manager Styles
+ */
+
+/* Container for the relationship manager */
+.relationship-manager-container {
+  margin-top: 165px !important; /* Increased by additional 50px (from 115px to 165px) */
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Heading styles */
+.relationship-manager-container h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* Horizontal layout container */
+.relationship-tables-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* Sizing for character tables */
+.character-table-container {
+  flex: 1;
+  min-width: 0; /* Allows flex items to shrink below content size */
+}
+
+/* Relationship selector wrapper */
+.relationship-selector-wrapper {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  height: auto;  /* Let it shrink to content */
+}
+
+/* Card styles */
+.relationship-manager-container .card {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  height: 100%;
+}
+
+/* Card header styles */
+.relationship-manager-container .card-header {
+  background-color: var(--neutral-100);
+  padding: 15px;
+  border-bottom: 1px solid var(--neutral-200);
+}
+
+.relationship-manager-container .card-header h5 {
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+/* Table container with fixed height */
+.relationship-manager-container .table-container {
+  height: 300px;
+  overflow-y: auto;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Table styles */
+.relationship-manager-container table {
+  width: 100%;
+  table-layout: fixed !important;
+  border-collapse: collapse;
+}
+
+/* Force equal widths for Character columns */
+.relationship-manager-container table th,
+.relationship-manager-container table td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Character 1 column */
+.relationship-manager-container table th:first-child,
+.relationship-manager-container table td:first-child {
+  width: 200px !important;
+  max-width: 200px !important;
+}
+
+/* Last Name column */
+.relationship-manager-container table th:nth-child(2),
+.relationship-manager-container table td:nth-child(2) {
+  width: 100px !important;
+  max-width: 100px !important;
+  padding-left: 0 !important;
+}
+
+/* Override any other width settings */
+.relationship-list .relationship-table td:nth-child(3),
+#character-tab .relationship-table th:nth-child(2),
+#character-tab .relationship-table td:nth-child(2),
+#relationships-tab .relationship-table th:nth-child(2),
+#relationships-tab .relationship-table td:nth-child(2),
+.relationship-list .relationship-table th:nth-child(2),
+.relationship-list .relationship-table td:nth-child(2) {
+  width: auto !important;
+}
+
+/* Relationship column */
+/* Actions column */
+.relationship-manager-container table th:last-child,
+.relationship-manager-container table td:last-child {
+  width: 10% !important;
+  text-align: center;
+}
+
+.relationship-manager-container th {
+  position: sticky;
+  top: 0;
+  background-color: var(--neutral-100);
+  z-index: 1;
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid var(--neutral-300);
+}
+
+.relationship-manager-container td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Selected row highlighting */
+.relationship-manager-container .selected-row {
+  background-color: var(--primary-50) !important;
+  font-weight: 600;
+}
+
+/* Hover effect on table rows */
+.relationship-manager-container tbody tr:hover {
+  background-color: var(--neutral-100);
+  cursor: pointer;
+}
+
+/* Relationship selector container */
+.relationship-selector-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  background-color: #1a73e8;
+  border-radius: 4px;
+  height: 160px !important; /* Fixed exact height */
+  max-height: 160px !important;
+  overflow: hidden;
+}
+
+/* Relationship type container */
+.relationship-type-container {
+  height: 120px;
+  max-height: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  overflow-y: auto;
+  background-color: var(--input-bg);
+  width: 100%;
+}
+
+/* Relationship section title */
+.relationship-selector-container h3 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Feedback message styles */
+#relationshipFeedback {
+  min-height: 24px;
+  font-size: 0.9rem;
+  margin-top: 15px;
+  position: relative;
+  top: -20px;
+  margin-bottom: -20px; /* Compensate for the upward movement */
+}
+
+.text-danger {
+  color: var(--danger-color);
+}
+
+.text-success {
+  color: var(--success-color);
+}
+
+/* Search input styles */
+.character-search {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+}
+
+/* Add relationship button */
+#addRelationshipBtn {
+  width: 100%;
+  margin-top: 120px; /* Increased by 50px (from 70px to 120px) */
+  padding: 10px;
+  background-color: var(--success-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+#addRelationshipBtn:hover:not(:disabled) {
+  background-color: var(--success-dark);
+  transform: translateY(-1px);
+}
+
+#addRelationshipBtn:disabled {
+  background-color: var(--neutral-400);
+  cursor: not-allowed;
+}
+
+/* Relationship selector dropdown */
+#relationshipSelector {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--neutral-300);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--input-bg);
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+  .relationship-tables-container {
+    flex-direction: column;
+  }
+  
+  .relationship-selector-wrapper {
+    width: 100%;
+    margin: 20px 0;
+  }
+}
+
+/* No data message */
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* CSS Variables */
+:root {
+  --primary-color: #3498db;
+  --primary-dark: #2980b9;
+  --primary-light: #5dade2;
+  --success-color: #2ecc71;
+  --success-dark: #27ae60;
+  --danger-color: #e74c3c;
+  --neutral-50: #f8f9fa;
+  --neutral-100: #f1f3f5;
+  --neutral-200: #e9ecef;
+  --neutral-300: #dee2e6;
+  --neutral-400: #ced4da;
+  --neutral-500: #adb5bd;
+  --neutral-600: #868e96;
+  --neutral-700: #495057;
+  --neutral-800: #343a40;
+  --neutral-900: #212529;
+  --text-color: #2c3e50;
+  --text-muted: #7f8c8d;
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --transition-fast: 0.2s ease;
+  --background-color: #fff;
+  --input-bg: #fff;
+  --border-color: #dee2e6;
+  --table-header-bg: #f8f9fa;
+}
+
+/* Relationship Tab UI */
+
+/* Filter Container */
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f5f5f5;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    max-width: 800px;
+}
+
+.filter-group {
+    flex: 1;
+    min-width: 200px;
+    max-width: 250px;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.filter-group select {
+    width: 100%;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+}
+
+/* Relationship Display */
+.relationship-display-container {
+    margin: 30px 0 2rem !important; /* Reduced from 175px to 30px */
+    padding: 1rem;
+    background-color: var(--background-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#relationship-network {
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    background-color: #fff;
+}
+
+.relationships-list {
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.relationship-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.relationship-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.relationship-type {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #dc3545;
+    cursor: pointer;
+    padding: 0.25rem;
+    opacity: 0.7;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+.relationship-characters {
+    font-size: 0.9375rem;
+    color: #666;
+}
+
+/* Relationship Manager */
+.relationship-manager-container {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    max-width: 1200px;
+}
+
+.relationship-manager-content {
+    margin-top: 1rem;
+}
+
+.character-tables-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.character-table-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.character-search {
+    margin-bottom: 0.5rem;
+}
+
+.character-table-container {
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    height: 240px;
+}
+
+.source-character-table,
+.target-character-table {
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+.source-character-table th,
+.target-character-table th {
+    position: sticky;
+    top: 0;
+    background-color: var(--neutral-100);
+    z-index: 1;
+    padding: 0.75rem;
+    border-bottom: 2px solid var(--neutral-300);
+}
+
+.source-character-table td,
+.target-character-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.source-character-table tbody tr,
+.target-character-table tbody tr {
+    cursor: pointer;
+}
+
+.source-character-table tbody tr:hover,
+.target-character-table tbody tr:hover {
+    background-color: var(--neutral-100);
+}
+
+.selected-row {
+    background-color: var(--primary-50) !important;  /* Bright blue background */
+    color: white !important;
+    font-weight: 500 !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.character-list table tbody tr.selected-row:hover {
+    background-color: var(--primary-100) !important; /* Darker blue on hover */
+}
+
+/* Relationship Type Selection */
+.relationship-type-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.relationship-type-container .relationship-item {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: center;
+    text-transform: capitalize;
+    transition: background-color 0.2s;
+    margin: 0;
+}
+
+.relationship-type-container .relationship-item:hover {
+    background-color: var(--neutral-100);
+}
+
+.relationship-type-container .relationship-item.selected,
+.selected-relationship {
+    border: 3px solid #000 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    opacity: 1 !important;
+}
+
+/* Selection indicator box at bottom */
+.relationship-selection-indicator {
+    display: none;
+}
+
+/* Dark mode styles */
+body.dark-mode .relationship-option.selected,
+body.dark-mode .selected-relationship {
+    border: 3px solid #fff !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .relationship-selection-indicator {
+    display: none;
+}
+
+/* Action Buttons */
+.relationship-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 0;  /* Remove top margin */
+    position: relative;
+    top: -240px;  /* Move buttons up further (-230px - 10px = -240px) */
+}
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.feedback-message {
+    text-align: center;
+    min-height: 1.5rem;
+    font-weight: 500;
+}
+
+/* No Data Message */
+.no-data {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .character-tables-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .relationship-type-section {
+        order: -1;
+    }
+    
+    .relationship-type-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-height: none;
+        justify-content: center;
+    }
+    
+    .relationship-type-container .relationship-item {
+        flex: 0 1 auto;
+    }
+    
+    .filter-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-group {
+        max-width: none;
+    }
+    
+    .filter-buttons {
+        justify-content: center;
+    }
+}
+
+/* Create Relationships Section */
+.create-relationships-section {
+    margin-top: 190px !important; /* Increased by 50px (from 140px to 190px) */
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.create-relationships-section h3 {
+    margin: 0 0 20px;
+    color: var(--text-color);
+    font-size: 1.25rem;
+}
+
+.relationship-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.character-selection {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.character-column {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.character-column h4 {
+    margin: 0 0 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.character-search {
+    width: 100%;
+    padding: 6px 12px;
+    border: 1px solid var(--neutral-300);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 10px;
+}
+
+.character-search::placeholder {
+    color: transparent;
+}
+
+/* Character List Table Styles - Direct targeting */
+.character-list table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed !important;
+}
+
+.character-list table th,
+.character-list table td {
+    padding: 8px 4px !important;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* First Name column */
+.character-list table th:first-child,
+.character-list table td:first-child,
+div[role="dialog"] .character-list table th:first-child,
+div[role="dialog"] th:first-child {
+    width: 200px !important;
+    max-width: 200px !important;
+    text-align: center !important;
+}
+
+/* Last Name column */
+.character-list table th:last-child,
+.character-list table td:last-child,
+div[role="dialog"] .character-list table th:last-child,
+div[role="dialog"] th:last-child {
+    width: 100px !important;
+    max-width: 100px !important;
+    padding-left: 0 !important;
+    text-align: center !important;
+}
+
+/* Override any other styles */
+.character-list {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+/* Table Header Styles */
+.character-list table th {
+    background-color: var(--table-header-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center !important;
+}
+
+/* Table Row Styles */
+.character-list table tbody tr {
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+
+.character-list table tbody tr:hover {
+    background-color: var(--primary-100) !important;
+}
+
+.character-list table tbody tr.selected-row {
+    background-color: var(--primary-50) !important;
+    color: var(--primary-color) !important;
+    font-weight: 500 !important;
+}
+
+.character-list table tbody tr.selected-row:hover {
+    background-color: var(--primary-100) !important;
+}
+
+/* Pagination controls container */
+.pagination-controls {
+    margin-top: 10px;
+    padding: 8px;
+    background-color: var(--background-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Show per page dropdown */
+.show-per-page {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.show-per-page select {
+    padding: 4px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg);
+}
+
+/* Relationship Type */
+.relationship-type {
+    width: 200px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 0 20px;
+    height: 430px !important; /* Restored to original height */
+    min-height: 430px !important;
+    max-height: 430px !important;
+    overflow: hidden;
+}
+
+.relationship-type h4 {
+    color: white;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.relationship-options {
+    background-color: var(--input-bg);
+    border-radius: 4px;
+    width: 100%;
+    height: 435px !important; /* Increased from 425px to 435px (+10px) */
+    overflow-y: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 15px !important; /* Add padding at the bottom */
+}
+
+.relationship-option {
+    padding: 6px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    background-color: var(--primary-color);
+    color: white;
+    margin-bottom: 5px;
+    width: calc(100% - 80px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.relationship-option:hover {
+    background-color: var(--primary-dark);
+}
+
+.relationship-option.selected,
+.selected-relationship {
+    border: 3px solid #000 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    opacity: 1 !important;
+}
+
+/* Consolidated validation message styles */
+.validation-message,
+.validation-error,
+.validation-success,
+#relationshipFeedback {
+    position: relative;
+    top: -20px;
+    margin-bottom: -20px;
+    width: 250px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    text-align: center;
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 80%;
+}
+
+/* Consolidated button styles */
+.add-relationship-btn,
+.clear-btn,
+#clearRelationshipBtn {
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    min-width: 200px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* Updated add relationship button position moved up an additional 15px */
+.add-relationship-btn,
+#addRelationshipBtn {
+    background-color: var(--danger-color) !important;
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-top: -82px !important; /* Moved up 15px from -67px */
+    width: 200px !important;
+}
+
+.add-relationship-btn:disabled {
+    background-color: var(--danger-color) !important;
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.add-relationship-btn:not(:disabled) {
+    background-color: #2ecc71 !important;
+    opacity: 1;
+}
+
+.add-relationship-btn:not(:disabled):hover {
+    background-color: #27ae60 !important;
+}
+
+/* Updated clear button position - moved down 7px from previous position */
+.clear-btn,
+#clearRelationshipBtn {
+    margin-top: -5px !important; /* Changed from -12px to -5px (moved down 7px) */
+    transform: translateY(-5px) !important; /* Changed from -12px to -5px (moved down 7px) */
+    position: relative !important;
+    top: -5px !important; /* Changed from -12px to -5px (moved down 7px) */
+    margin-bottom: 0px !important;
+    z-index: 9999 !important;
+    background-color: var(--neutral-700);
+    color: white;
+    font-weight: 500;
+    width: 200px !important;
+}
+
+/* Consolidated relationship selection style */
+.relationship-type-container .relationship-item.selected,
+.selected-relationship {
+    border: 3px solid #000 !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    opacity: 1 !important;
+}
+
+/* Fix relationship selector container (the middle blue box) */
+.relationship-selector {
+    width: 200px;
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 0 20px;
+    height: 515px !important; /* Increased from 505px to 515px (+10px) */
+    min-height: 515px !important;
+    max-height: 515px !important;
+    overflow: hidden;
+    padding-bottom: 15px !important; /* Ensure there's padding at the bottom */
+}
+
+/* Make sure the relationship type column in the table doesn't inherit background */
+#relationshipList table td:nth-child(2) {
+    background-color: transparent !important;
+}
+
+/* The relationship type badge in the list view */
+.relationship-list .relationship-type {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    background: none !important; /* Reset any background */
+}
+
+/* Center align the relationship type in its cell */
+.relationship-list td.relationship-type-cell {
+    text-align: center !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 8px 10px !important;
+}
+
+/* Relationship type colors - these should be the only color definitions */
+.relationship-list .relationship-type.friend { background-color: #4CAF50 !important; color: white !important; }
+.relationship-list .relationship-type.family { background-color: #2196F3 !important; color: white !important; }
+.relationship-list .relationship-type.ally { background-color: #8BC34A !important; color: white !important; }
+.relationship-list .relationship-type.enemy { background-color: #F44336 !important; color: white !important; }
+.relationship-list .relationship-type.mentor { background-color: #9C27B0 !important; color: white !important; }
+.relationship-list .relationship-type.student { background-color: #FF9800 !important; color: white !important; }
+.relationship-list .relationship-type.lover { background-color: #E91E63 !important; color: white !important; }
+.relationship-list .relationship-type.rival { background-color: #FF5722 !important; color: white !important; }
+.relationship-list .relationship-type.other { background-color: #607D8B !important; color: white !important; }
+
+/* ===== RELATIONSHIP LIST TABLE STYLES ===== */
+/* Specifically target the relationship list table to ensure styles aren't applied elsewhere */
+#relationshipList table,
+.relationship-table {
+    width: 100%;
+    table-layout: fixed !important;
+    border-collapse: collapse;
+}
+
+/* Set equal column widths for Character 1, Relationship, Character 2, and smaller for Actions */
+#relationshipList table th,
+#relationshipList table td,
+.relationship-table th,
+.relationship-table td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 8px 10px !important;
+}
+
+/* Character 1 column */
+#relationshipList table th:nth-child(1),
+#relationshipList table td:nth-child(1),
+.relationship-table th:nth-child(1),
+.relationship-table td:nth-child(1) {
+    width: 33% !important;
+}
+
+/* Relationship column - slightly wider */
+#relationshipList table th:nth-child(2),
+#relationshipList table td:nth-child(2),
+.relationship-table th:nth-child(2),
+.relationship-table td:nth-child(2) {
+    width: 34% !important;
+    text-align: center !important;
+    background-color: transparent !important;
+}
+
+/* Character 2 column */
+#relationshipList table th:nth-child(3),
+#relationshipList table td:nth-child(3),
+.relationship-table th:nth-child(3),
+.relationship-table td:nth-child(3) {
+    width: 33% !important;
+}
+
+/* Actions column */
+#relationshipList table th:nth-child(4),
+#relationshipList table td:nth-child(4),
+.relationship-table th:nth-child(4),
+.relationship-table td:nth-child(4) {
+    width: 10% !important;
+    text-align: center !important;
+}
+
+/* ===== RELATIONSHIP TYPE BADGE IN LIST VIEW ===== */
+/* This is the badge that appears in the relationship list */
+#relationshipList .relationship-type,
+.relationship-table .relationship-type {
+    display: inline-block !important;
+    padding: 4px 10px !important;
+    border-radius: 4px !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    background: none !important; /* Reset any background */
+}
+
+/* Ensure the relationship type cell is properly styled */
+#relationshipList td.relationship-type-cell,
+.relationship-table td.relationship-type-cell {
+    text-align: center !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+}
+
+/* ===== RELATIONSHIP TYPE COLORS FOR BADGES ===== */
+/* These are the only color definitions that should be used for the badges */
+#relationshipList .relationship-type.friend,
+.relationship-table .relationship-type.friend { background-color: #4CAF50 !important; color: white !important; }
+
+#relationshipList .relationship-type.family,
+.relationship-table .relationship-type.family { background-color: #2196F3 !important; color: white !important; }
+
+#relationshipList .relationship-type.ally,
+.relationship-table .relationship-type.ally { background-color: #8BC34A !important; color: white !important; }
+
+#relationshipList .relationship-type.enemy,
+.relationship-table .relationship-type.enemy { background-color: #F44336 !important; color: white !important; }
+
+#relationshipList .relationship-type.mentor,
+.relationship-table .relationship-type.mentor { background-color: #9C27B0 !important; color: white !important; }
+
+#relationshipList .relationship-type.student,
+.relationship-table .relationship-type.student { background-color: #FF9800 !important; color: white !important; }
+
+#relationshipList .relationship-type.lover,
+.relationship-table .relationship-type.lover { background-color: #E91E63 !important; color: white !important; }
+
+#relationshipList .relationship-type.rival,
+.relationship-table .relationship-type.rival { background-color: #FF5722 !important; color: white !important; }
+
+#relationshipList .relationship-type.other,
+.relationship-table .relationship-type.other { background-color: #607D8B !important; color: white !important; }
+
+/* ===== RELATIONSHIP TYPE IN RELATIONSHIP SELECTOR (FORM) ===== */
+/* This is completely separate from the badge in the list */
+.character-selection .relationship-type {
+    width: 200px;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    margin: 0 20px;
+    height: 515px !important; /* Increased from 505px to 515px (+10px) */
+    min-height: 515px !important;
+    max-height: 515px !important;
+    overflow: hidden;
+    padding-bottom: 15px !important; /* Ensure there's padding at the bottom */
+}
+
+.relationship-badge-container {
+    position: relative;
+    display: inline-block;
+    margin-right: 8px;
+    margin-bottom: 5px;
+}
+
+.delete-relationship-btn {
+    position: absolute;
+    right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 4px;
+    border-radius: 50%;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.delete-relationship-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+.delete-all-btn {
+    margin-left: 10px;
+    padding: 2px 8px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.delete-all-btn:hover {
+    background: #c82333;
+}
+
+/* Update relationship type to accommodate delete button */
+#relationshipList .relationship-type,
+.relationship-table .relationship-type {
+    padding-right: 20px !important; /* Make room for delete button */
+}
+
+/* Centered and stacked relationship badges */
+.relationship-type-cell {
+    text-align: center !important;
+    vertical-align: middle !important;
+    background: transparent !important;
+}
+
+/* Relationship List Table - increased height */
+.relationship-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    display: block; /* Make table a block element so scrollbar applies directly to it */
+    max-height: 800px; /* Increased from 600px to 800px to show more rows */
+    overflow-y: auto; /* Add vertical scrollbar to the table */
+}
+
+/* Container for the table - remove scrolling from container */
+#relationshipList {
+    margin-top: 30px !important; /* Reduced from 150px to 30px */
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    position: relative;
+    transform: none !important; /* Remove conflicting transform */
+    overflow: hidden; /* Remove scrollbar from container */
+}
+
+/* Keep the header fixed */
+.relationship-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #f5f5f5;
+    z-index: 1;
+}
+
+/* Restore table styles */
+.relationship-table th {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+.relationship-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Dark mode support */
+body.dark-mode .relationship-table thead {
+    background-color: #2d2d2d;
+}
+
+body.dark-mode .relationship-table th {
+    background-color: #2d2d2d;
+    border-bottom: 2px solid #444;
+}
+
+body.dark-mode .relationship-table td {
+    border-bottom: 1px solid #444;
+}
+
+/* Apply scrollbar styles to table instead of container */
+.relationship-table::-webkit-scrollbar {
+    width: 10px;
+}
+
+.relationship-table::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.relationship-table::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.relationship-table::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Dark mode scrollbar */
+body.dark-mode .relationship-table::-webkit-scrollbar-track {
+    background: #2d2d2d;
+}
+
+body.dark-mode .relationship-table::-webkit-scrollbar-thumb {
+    background: #666;
+}
+
+body.dark-mode .relationship-table::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* Relationship type display - updated for the red-circled area */
+.relationship-type-display {
+    display: none;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .relationship-type-display {
+    display: none;
+}
+
+/* Relationship selection indicator */
+.relationship-selection-indicator {
+    display: none;
+}
+
+/* Relationship type display - updated for the red-circled area */
+.relationship-type-display {
+    padding: 8px 12px;
+    margin: 10px auto;
+    text-align: center;
+    background: #f0f0f0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #6c27b0; /* Purple text for relationship display */
+    max-width: 180px; /* Keep it from expanding buttons */
+    white-space: normal;
+    word-wrap: break-word;
+    height: auto;
+    min-height: 20px;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .relationship-type-display {
+    background: #333;
+    border-color: #555;
+    color: #bb86fc; /* Light purple in dark mode */
+}
+
+/* Selected rows in relationship tables */
+tbody tr.selected {
+    background-color: rgba(100, 149, 237, 0.2);
+}
+
+/* Input fields for character selection */
+.character-selection .character-column input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Relationship type selection */
+.relationship-option.selected-relationship {
+    box-shadow: 0 0 0 2px #007bff;
+    transform: translateY(-2px);
+}
+
+/* Enhanced relationship visualization styling */
+.network-visualization {
+    width: 100%;
+    min-height: 600px;
+    overflow: visible;
+}
+
+/* Character nodes (blue circles) - prevent movement on hover */
+.character-node {
+    cursor: pointer;
+}
+
+/* Highlighted table row when navigating to character */
+.highlight-row {
+    background-color: rgba(74, 159, 230, 0.3) !important;
+    transition: background-color 0.5s ease;
+}
+
+/* Tooltip styling */
+.character-tooltip {
+    font-weight: bold;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    font-size: 14px;
+    z-index: 9999;
+}
+
+/* Relationship label styling - make more visible against lines */
+.relationship-label-text {
+    pointer-events: none;
+    user-select: none;
+    font-weight: 700;
+    /* Text shadow for better visibility */
+    text-shadow: 0px 0px 4px #ffffff, 0px 0px 4px #ffffff;
+    /* No border */
+    border: none !important;
+}
+
+/* Ensure relationship lines go all the way to circles */
+.relationship-lines line {
+    stroke-linecap: round; /* Rounded line ends */
+}
+
+/* Dark mode relationship label shadow */
+body.dark-mode .relationship-label-text {
+    text-shadow: 0px 0px 4px #000000, 0px 0px 4px #000000;
+    fill: #FFFFFF !important; /* Force white text in dark mode */
+    color: #FFFFFF !important;
+    stroke: none !important; /* Remove stroke/border */
+    border: none !important;
+}
+
+/* Ensure no stray elements between nodes */
+.relationship-lines > * {
+    pointer-events: none;
+}
+
+/* Relationship network container */
+#relationshipNetwork {
+    margin-top: 30px !important; /* Reduced from 150px to 30px */
+    min-height: 400px; /* Reduced from 600px to 400px */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    position: relative;
+    transform: none !important; /* Remove conflicting transform */
+    padding: 0 20px !important; /* Add padding to align with other elements */
+    width: calc(100% - 40px) !important; /* Set width to match the padding */
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+}
+
+/* Dark mode adjustments */
+body.dark-mode #relationshipNetwork {
+    background-color: rgba(30, 30, 30, 0.4);
+    border-color: #444;
+}
+
+/* Dark mode relationship label shadow */
+body.dark-mode .relationship-label-text {
+    text-shadow: 0px 0px 4px #000000, 0px 0px 4px #000000;
+}
+
+/* Increase character text size in nodes */
+.character-node text {
+    font-size: 15px !important;
+    font-weight: bold;
+}
+
+/* Validation feedback */
+#relationshipFeedback {
+    padding: 8px 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    background-color: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    display: none;
+}
+
+/* Relationship Display Container */
+#relationshipList,
+#relationshipNetwork {
+    margin-top: 30px !important; /* Reduced from 100px to 30px */
+    margin-bottom: 30px; /* Added consistency */
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+}
+
+/* Add wrapper for scrollable area */
+.relationship-scroll-wrapper {
+    margin-top: 30px !important; /* Reduced from 150px to 30px */
+    position: relative;
+    transform: none !important; /* Remove transform that was adding space */
+}
+
+/* Network container - remove transform */
+#relationshipNetwork {
+    margin-top: 30px !important;
+    transform: none !important; /* Remove transform that was adding space */
+}
+
+/* Keep buttons in original position relative to containers */
+.add-relationship-btn,
+#addRelationshipBtn,
+.clear-btn,
+#clearRelationshipBtn {
+    transform: translateY(-100px) !important; /* Counteract parent movement */
+    position: relative;
+    z-index: 3;
+}
+
+/* ===== FIX FOR RELATIONSHIP TABLE WIDTH AND SCROLLBAR ===== */
+/* Target precisely the relationship list table shown in the image */
+#character-tab .relationship-table,
+#relationships-tab .relationship-table,
+.relationship-list .relationship-table {
+    width: 100% !important;
+    min-width: 100% !important;
+    table-layout: fixed !important;
+    display: block !important;
+    max-height: 800px !important; /* Increased from 600px to 800px */
+    overflow-y: scroll !important; /* Force scrollbar to always show */
+}
+
+/* Force wider column widths */
+#character-tab .relationship-table th,
+#character-tab .relationship-table td,
+#relationships-tab .relationship-table th,
+#relationships-tab .relationship-table td,
+.relationship-list .relationship-table th,
+.relationship-list .relationship-table td {
+    width: auto !important;
+    padding: 10px 15px !important; /* Add more padding for content */
+}
+
+/* Force the first and third columns to be wider */
+#character-tab .relationship-table th:first-child,
+#character-tab .relationship-table td:first-child,
+#character-tab .relationship-table th:nth-child(3),
+#character-tab .relationship-table td:nth-child(3),
+#relationships-tab .relationship-table th:first-child,
+#relationships-tab .relationship-table td:first-child,
+#relationships-tab .relationship-table th:nth-child(3),
+#relationships-tab .relationship-table td:nth-child(3),
+.relationship-list .relationship-table th:first-child,
+.relationship-list .relationship-table td:first-child,
+.relationship-list .relationship-table th:nth-child(3),
+.relationship-list .relationship-table td:nth-child(3) {
+    width: 33% !important;
+}
+
+/* Force center column to be slightly wider */
+#character-tab .relationship-table th:nth-child(2),
+#character-tab .relationship-table td:nth-child(2),
+#relationships-tab .relationship-table th:nth-child(2),
+#relationships-tab .relationship-table td:nth-child(2),
+.relationship-list .relationship-table th:nth-child(2),
+.relationship-list .relationship-table td:nth-child(2) {
+    width: 34% !important;
+    text-align: center !important;
+}
+
+/* Make sure container is full width */
+#relationshipList {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Make scrollbar more visible */
+#character-tab .relationship-table::-webkit-scrollbar,
+#relationships-tab .relationship-table::-webkit-scrollbar,
+.relationship-list .relationship-table::-webkit-scrollbar {
+    width: 14px !important;
+    display: block !important;
+}
+
+#character-tab .relationship-table::-webkit-scrollbar-thumb,
+#relationships-tab .relationship-table::-webkit-scrollbar-thumb,
+.relationship-list .relationship-table::-webkit-scrollbar-thumb {
+    background: #888 !important;
+    border-radius: 4px !important;
+    border: 2px solid #f1f1f1 !important;
+}
+
+#character-tab .relationship-table::-webkit-scrollbar-track,
+#relationships-tab .relationship-table::-webkit-scrollbar-track,
+.relationship-list .relationship-table::-webkit-scrollbar-track {
+    background: #f1f1f1 !important;
+    border-radius: 4px !important;
+}
+
+/* Target the table directly to override all other styles */
+table.relationship-table {
+    display: block !important;  
+    width: 100% !important;
+    max-width: none !important;
+    overflow-y: scroll !important;
+    max-height: 800px !important; /* Increased from 600px to 800px */
+    border-collapse: collapse !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Ensure tbody scrolls but takes full width */
+table.relationship-table tbody {
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Make all cells take appropriate width */
+table.relationship-table tr {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+/* Ensure thead stays at the top with equal width distribution */
+table.relationship-table thead {
+    display: table !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+}
+
+/* Improve text overflow handling */
+table.relationship-table th,
+table.relationship-table td {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    box-sizing: border-box !important;
+}
+
+/* Fix for relationship list container */
+div#relationshipList {
+    padding: 1rem !important;
+    border: 1px solid #ddd !important;
+    border-radius: 8px !important;
+    margin-top: 30px !important; /* Reduced from 150px to 30px */
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* New relationship creation container wrapper - adjust margins */
+.relationship-creation-wrapper {
+    position: relative;
+    margin: 30px auto; /* Reduced from 40px */
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    box-sizing: border-box;
+}
+
+/* Container title styling */
+.relationship-creation-wrapper .header {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin: -20px -20px 20px -20px;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Character selection container - more consistent spacing */
+.character-selection {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 30px;
+}
+
+/* Equal column widths for character lists and relationship selector */
+.character-column {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Center relationship selector */
+.relationship-type {
+    width: 200px !important;
+    flex: 0 0 200px !important;
+    margin: 0 20px !important;
+}
+
+/* Relationship action buttons container */
+.relationship-action-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding-top: 20px;
+}
+
+/* Improve the Add Relationship button placement */
+.add-relationship-btn {
+    position: static !important;
+    margin-top: -270px !important; /* Moved up 15px from -255px */
+    transform: none !important;
+    max-width: 200px !important;
+    width: 200px !important;
+    background-color: #2ecc71;
+    color: white;
+    margin-bottom: 15px;
+}
+
+/* Clear button positioning */
+.clear-btn {
+    position: static !important;
+    margin-top: -90px !important; /* Moved up 100px from 10px */
+    transform: none !important;
+    max-width: 200px !important; /* Narrower from 300px */
+    width: 200px !important; /* Fixed width to make it narrower */
+}
+
+/* Dark mode support */
+body.dark-mode .relationship-creation-wrapper {
+    background: #333;
+    border-color: #444;
+}
+
+/* Adjust for mobile screens */
+@media (max-width: 768px) {
+    .character-selection {
+        flex-direction: column;
+    }
+    
+    .relationship-type {
+        width: 100% !important;
+        margin: 20px 0 !important;
+    }
+}
+
+/* Consistent button styling in relationship creation container */
+.relationship-creation-wrapper button {
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: 200px !important; /* Narrower from 100% */
+    max-width: 200px !important; /* Narrower from 300px */
+    text-align: center;
+}
+
+.relationship-creation-wrapper .add-relationship-btn {
+    background-color: #2ecc71;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.relationship-creation-wrapper .add-relationship-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.relationship-creation-wrapper .add-relationship-btn:not(:disabled):hover {
+    background-color: #27ae60;
+}
+
+.relationship-creation-wrapper .clear-btn {
+    background-color: #7f8c8d;
+    color: white;
+}
+
+.relationship-creation-wrapper .clear-btn:hover {
+    background-color: #95a5a6;
+}
+
+/* Feedback message in the relationship creation container */
+.relationship-creation-wrapper .feedback-message {
+    text-align: center;
+    font-size: 0.9rem;
+    min-height: 24px;
+    margin-bottom: 15px;
+    color: #e74c3c;
+}
+
+/* Move the relationship modal/dialog down by 75px */
+div[role="dialog"],
+.panel,
+.modal,
+div:has(> div:only-child:contains("Relationship")),
+.panel-header {
+  transform: translateY(75px) !important;
+  margin-top: 75px !important;
+  position: relative;
+  z-index: 100;
+}
+
+/* Ensure the scrollable content inside the modal moves with it */
+div[role="dialog"] > div:nth-child(2),
+.panel > div:nth-child(2),
+.modal > div:nth-child(2) {
+  max-height: calc(100% - 75px) !important;
+}
+
+/* Move only the relationship type popup modal down by 75px */
+.modal-relationship-type,
+div[role="dialog"]:has(div:first-child:contains("Relationship")):not(:has(.character-selection)),
+.panel:has(div.panel-header:contains("Relationship")):not(:has(.character-selection)),
+div:has(> div[class*="header"]:contains("Relationship")):not(:has(.character-selection)) {
+  margin-top: 75px !important;
+  transform: translateY(75px) !important;
+  z-index: 9999 !important;
+  position: relative !important;
+}
+
+/* Increase relationship modal height by 75px */
+div[role="dialog"]:has(div:first-child:contains("Relationship")):not(:has(.character-selection)),
+.panel:has(div.panel-header:contains("Relationship")):not(:has(.character-selection)),
+div:has(> div[class*="header"]:contains("Relationship")):not(:has(.character-selection)) {
+  height: calc(100% + 75px) !important;
+  max-height: calc(100% + 75px) !important;
+  overflow-y: auto !important;
+}
+
+/* Increase the height of the relationship options container */
+.relationship-options {
+  height: 435px !important; /* Increased from 425px to 435px (+10px) */
+  max-height: 435px !important;
+  min-height: 435px !important;
+  padding-bottom: 15px !important; /* Add padding at the bottom */
+}
+
+/* Adjust relationship type container height by 10px */
+.relationship-type {
+  height: 515px !important; /* Increased from 505px to 515px (+10px) */
+  min-height: 515px !important;
+  max-height: 515px !important;
+  padding-bottom: 15px !important; /* Ensure there's padding at the bottom */
+}
+
+/* Ensure relationship selector matches height */
+.relationship-selector {
+  height: 515px !important; /* Increased from 505px to 515px (+10px) */
+  min-height: 515px !important;
+  max-height: 515px !important;
+  padding-bottom: 15px !important; /* Ensure there's padding at the bottom */
+}
+
+/* Move the contact panel clear button down 30px */
+.contact-card .clear-btn,
+.contact-panel .clear-btn,
+.dashboard-container .clear-btn,
+.contact button:contains("Clear"),
+button.clear-btn[style*="background-color: rgb(89, 89, 89)"],
+.clear-btn:not(.relationship-action-buttons .clear-btn):not(#clearRelationshipBtn) {
+  margin-top: 30px !important;
+  transform: translateY(30px) !important;
+  position: relative;
+  z-index: 10;
+}
+
+/* Move dashboard Clear button down by 10px from current position */
+#clear-activity-btn,
+.dashboard-activity .clear-btn,
+.dashboard-section-header .clear-btn,
+.dashboard-section-header button[title="Clear all activity"] {
+  margin-top: -15px !important;
+  transform: translateY(-15px) !important;
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+/* Override any conflicting rules */
+#clear-activity-btn {
+  margin-top: -15px !important;
+  transform: translateY(-15px) !important;
+  position: relative !important;
+  z-index: 9999 !important;
+}
+
+/* Relationship status text */
+#relationshipStatusText {
+  color: #e74c3c;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 5px;
+  width: calc(100% - 10px);
+  display: block;
+  clear: both;
+  height: auto;
+  word-wrap: break-word;
+  position: relative;
+  top: -100px;
+  right: -20px;
+  z-index: 100;
+}
+
+/* Dark mode support */
+.dark-mode #relationshipStatusText {
+  color: #ff6b6b;
+}

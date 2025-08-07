@@ -1,0 +1,28 @@
+/* Remove focus outline from checkboxes */
+input[type="checkbox"]:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Add a subtle hover effect instead */
+input[type="checkbox"]:hover {
+    cursor: pointer;
+}
+
+/* Prevent selection highlight on checkbox and label */
+input[type="checkbox"],
+.checkbox-option label {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
+
+/* Remove blue selection background in dark mode */
+body.dark-mode input[type="checkbox"]:checked,
+body.dark-mode input[type="checkbox"]:focus,
+body.dark-mode input[type="checkbox"]:active {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: transparent !important;
+}

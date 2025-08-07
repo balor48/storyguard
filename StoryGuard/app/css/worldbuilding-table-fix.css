@@ -1,0 +1,111 @@
+/* Worldbuilding Table Overrides - Apply maximum width */
+
+/* Worldbuilding Table Fix */
+
+/* Container fixes */
+.tab-pane .table-container,
+#worldbuilding-tab .table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 1000px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow-x: hidden !important;
+  max-height: none; /* Default to no height limit for small number of entries */
+  overflow-y: visible;
+  transition: max-height 0.3s ease, overflow-y 0.3s ease;
+}
+
+/* Applied when showing many entries (25+) */
+#worldbuilding-tab .table-container.many-entries {
+  max-height: 500px; /* Fixed height for larger number of entries */
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+}
+
+/* Table fixes */
+#worldElementTable {
+  width: 100% !important;
+  min-width: 1000px !important;
+  table-layout: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+/* Column width fixes with high specificity */
+#worldbuilding-tab .table-container #worldElementTable th:nth-child(1) { width: 300px !important; } /* Name */
+#worldbuilding-tab .table-container #worldElementTable th:nth-child(2) { width: 300px !important; } /* Category */
+#worldbuilding-tab .table-container #worldElementTable th:nth-child(3) { width: 300px !important; } /* Series */
+#worldbuilding-tab .table-container #worldElementTable th:nth-child(4) { width: 200px !important; } /* Actions */
+
+/* Additional fixes specifically for the worldbuilding table right side gap */
+#worldbuilding-tab .table-container {
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#worldElementTable {
+  max-width: 100% !important;
+  margin-right: 0 !important;
+}
+
+/* Ensure all rows get the fixes */
+#worldElementTable tr,
+#worldElementTable td {
+  box-sizing: border-box !important;
+  padding: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Ensuring pagination controls are always visible at the bottom */
+#worldbuilding-tab .pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 5px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Styles for the pagination buttons */
+#worldbuilding-tab .pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#worldbuilding-tab .pagination-buttons button {
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#worldbuilding-tab .pagination-buttons button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+#worldbuilding-tab .pagination-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Styles for the page size selector */
+#worldbuilding-tab .page-size-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#worldbuilding-tab .page-size-selector {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+/* This file should be loaded last to ensure these styles override all others */ 

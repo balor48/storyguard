@@ -1,0 +1,39 @@
+/**
+ * Pagination Dark Mode Fix for Location and Worldbuilding Tabs
+ * This file ensures that pagination controls in these tabs are properly visible in dark mode
+ */
+
+/* Common style for pagination buttons in dark mode */
+body.dark-mode #locations-tab .pagination-buttons button,
+body.dark-mode #worldbuilding-tab .pagination-buttons button {
+    /* Match the character tab button styling */
+    background-color: var(--neutral-700);
+    color: white; /* Ensure high contrast */
+    border-color: var(--neutral-600);
+    font-weight: 500; /* Make text more visible */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Improve text readability */
+}
+
+/* Hover state */
+body.dark-mode #locations-tab .pagination-buttons button:hover:not(:disabled),
+body.dark-mode #worldbuilding-tab .pagination-buttons button:hover:not(:disabled) {
+    background-color: var(--neutral-600);
+    border-color: var(--primary-light);
+    color: white;
+}
+
+/* Disabled state */
+body.dark-mode #locations-tab .pagination-buttons button:disabled,
+body.dark-mode #worldbuilding-tab .pagination-buttons button:disabled {
+    background-color: var(--neutral-800);
+    opacity: 0.4;
+    color: var(--neutral-400); /* Slightly dimmed but still visible */
+}
+
+/* Ensure all pagination icons are clearly visible */
+body.dark-mode #locations-tab .pagination-buttons button,
+body.dark-mode #worldbuilding-tab .pagination-buttons button {
+    /* These are the characters typically used for pagination << < > >> */
+    font-size: 1.2rem; /* Larger font size for better visibility */
+    line-height: 1; /* Tighter line height for centered alignment */
+} 

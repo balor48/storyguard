@@ -1,0 +1,50 @@
+/* Dashboard Layout Styles - Single Row Layout */
+
+/* Make the stats grid display all items in a single row */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr); /* 8 columns for 8 cards */
+  grid-gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Make individual stat cards smaller */
+.dashboard-stat-card {
+  padding: 10px !important;
+  max-width: 100% !important;
+  min-height: 120px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Scale down icons and text */
+.dashboard-stat-card .stat-icon {
+  font-size: 1.6rem !important;
+  margin-bottom: 5px !important;
+}
+
+.dashboard-stat-card .stat-value {
+  font-size: 1.4rem !important;
+  margin-bottom: 5px !important;
+}
+
+.dashboard-stat-card .stat-label {
+  font-size: 0.8rem !important;
+  text-align: center !important;
+}
+
+/* Media query for smaller screens - allow wrapping on smaller screens */
+@media (max-width: 1024px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 columns on medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns on small screens */
+  }
+} 

@@ -1,0 +1,137 @@
+/**
+ * Character Table Title Column Fix
+ * Makes the title column in the character table narrower and fixes column alignment
+ */
+
+/* Global font size reduction for the character table */
+#characters-tab .table-container table,
+.table-container #characterTable {
+    font-size: 0.85rem !important;
+}
+
+/* Left align headers and ensure proper padding */
+#characters-tab .table-container table th,
+.table-container #characterTable th {
+    text-align: left !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+/* Make icons smaller */
+#characters-tab .table-container table i.fas,
+.table-container #characterTable i.fas {
+    font-size: 0.85rem !important;
+}
+
+/* Make action buttons slightly smaller to match */
+#characters-tab .table-container .btn,
+.table-container #characterTable .btn {
+    padding: 0.25rem 0.5rem !important;
+}
+
+/* Increase overall table width */
+#characters-tab .table-container,
+.table-container #characterTable {
+    width: calc(100% + 10px) !important;
+    max-width: calc(100% + 10px) !important;
+    margin-right: -5px !important;
+    margin-left: -5px !important;
+}
+
+/* Target the title column in character table with high specificity */
+.table-container #characterTable th:first-child,
+.table-container #characterTable td:first-child,
+#characters-tab .table-container table th:first-child,
+#characters-tab .table-container table td:first-child {
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+    font-size: 0.85rem !important; /* Smaller font size for title column */
+}
+
+/* Apply this to any fallback implementations */
+#characterList tr td:first-child {
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+    font-size: 0.85rem !important; /* Smaller font size for title column */
+}
+
+/* Override any other styles with !important to ensure this takes precedence */
+.table-container #characterTable th:nth-child(1),
+.table-container #characterTable td:nth-child(1),
+#characters-tab .table-container #characterTable th:nth-child(1),
+#characters-tab .table-container #characterTable td:nth-child(1) {
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 0.85rem !important; /* Smaller font size for title column */
+}
+
+/* Fix column alignment for character table */
+#characters-tab .table-container table,
+.table-container #characterTable {
+    table-layout: fixed !important;
+}
+
+/* Ensure proper alignment for each column */
+#characters-tab .table-container table th,
+#characters-tab .table-container table td,
+.table-container #characterTable th,
+.table-container #characterTable td {
+    box-sizing: border-box !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
+
+/* Specific column width adjustments to ensure alignment */
+.table-container #characterTable th:nth-child(2),
+.table-container #characterTable td:nth-child(2) {
+    width: 120px !important;
+    min-width: 120px !important;
+}
+
+.table-container #characterTable th:nth-child(3),
+.table-container #characterTable td:nth-child(3) {
+    width: 120px !important;
+    min-width: 120px !important;
+}
+
+.table-container #characterTable th:nth-child(4),
+.table-container #characterTable td:nth-child(4) {
+    width: 60px !important;
+    min-width: 60px !important;
+}
+
+.table-container #characterTable th:nth-child(5),
+.table-container #characterTable td:nth-child(5) {
+    width: 100px !important;
+    min-width: 100px !important;
+}
+
+.table-container #characterTable th:nth-child(6),
+.table-container #characterTable td:nth-child(6) {
+    width: 120px !important;
+    min-width: 120px !important;
+}
+
+.table-container #characterTable th:nth-child(7),
+.table-container #characterTable td:nth-child(7) {
+    width: 120px !important;
+    min-width: 120px !important;
+}
+
+.table-container #characterTable th:nth-child(8),
+.table-container #characterTable td:nth-child(8) {
+    width: 120px !important;
+    min-width: 120px !important;
+}
+
+.table-container #characterTable th:nth-child(9),
+.table-container #characterTable td:nth-child(9) {
+    width: 150px !important;
+    min-width: 150px !important;
+} 

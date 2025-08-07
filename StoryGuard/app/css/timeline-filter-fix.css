@@ -1,0 +1,55 @@
+/**
+ * Timeline Tab UI Improvements
+ * Adds Apply Filters button to the timeline tab
+ */
+
+/* Style the search container to accommodate the button */
+#timeline-tab .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--neutral-100);
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+/* Style the filter selects to be more compact */
+#timeline-tab .search-container select {
+  max-width: 200px;
+  flex: 1;
+  min-width: 150px;
+}
+
+/* Dark mode styles for the filter container */
+body.dark-mode #timeline-tab .search-container {
+  background-color: var(--neutral-700);
+}
+
+/* Style the Apply Filters button */
+.apply-filters-btn {
+  background-color: var(--primary-color, #3498db);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-left: auto;
+}
+
+.apply-filters-btn:hover {
+  background-color: var(--primary-dark, #2980b9);
+  transform: translateY(-1px);
+}
+
+/* Dark mode styles for button */
+body.dark-mode .apply-filters-btn {
+  background-color: var(--primary-color, #3498db);
+}
+
+body.dark-mode .apply-filters-btn:hover {
+  background-color: var(--primary-light, #5dade2);
+} 

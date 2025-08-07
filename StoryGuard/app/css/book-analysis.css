@@ -1,0 +1,423 @@
+/* Book Analysis Styles */
+.book-analysis-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.analysis-options {
+    grid-column: 1 / 2;
+    background-color: var(--card-bg-color, #f5f5f5);
+    border-radius: var(--border-radius, 5px);
+    padding: 15px;
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.1));
+}
+
+.book-upload-section {
+    grid-column: 2 / 3;
+    background-color: var(--card-bg-color, #f5f5f5);
+    border-radius: var(--border-radius, 5px);
+    padding: 15px;
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.1));
+    box-sizing: border-box;
+    min-height: 350px;
+}
+
+/* Override inline styles in HTML */
+#analyze-book-tab .book-upload-section {
+    width: auto !important;
+    min-width: 0 !important;
+}
+
+.analysis-results-container {
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
+    display: none; /* Hide by default */
+    background-color: var(--card-bg-color, #f5f5f5);
+    border-radius: var(--border-radius, 5px);
+    padding: 15px;
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.1));
+    margin-top: 20px;
+}
+
+/* Only show when it has content or is explicitly shown */
+#analyze-book-tab .analysis-results-container.active {
+    display: block;
+}
+
+/* Ensure tab content is visible when active */
+.tab-content.active {
+    display: block !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Fix for analyze book tab hiding other tabs */
+.tab-content:not(.active) {
+    display: none !important;
+}
+
+/* Ensure analyze book tab content is only visible when the tab is active */
+#analyze-book-tab:not(.active) .analysis-results-container {
+    display: none !important;
+}
+
+/* Ensure analyze book tab content doesn't interfere with other tabs */
+/* This rule was causing issues with visibility when switching tabs */
+#analyze-book-tab:not(.active) .analysis-results-container.active {
+    display: none !important;
+}
+
+/* Force proper visibility when tab is active */
+#analyze-book-tab.active .analysis-results-container.active {
+    display: block !important;
+}
+
+.file-drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.file-drop-area:hover {
+    background-color: #f8f8f8;
+}
+
+.drop-area-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.drop-icon-container {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.drop-icon {
+    font-size: 2rem;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.file-input {
+    position: absolute;
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.fake-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.fake-btn:hover {
+    background-color: #2980b9;
+}
+
+.file-msg {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+}
+
+.uploaded-files {
+    margin-top: 15px;
+}
+
+.uploaded-file {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+}
+
+.file-name {
+    flex-grow: 1;
+    margin-right: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.remove-file {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.option-group {
+    margin-bottom: 20px;
+}
+
+.checkbox-option {
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+
+.checkbox-option input[type="checkbox"] {
+    margin-right: 8px;
+    display: inline;
+}
+
+.checkbox-option label {
+    display: inline;
+}
+
+.loading-indicator {
+    text-align: center;
+    padding: 20px;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.progress-container {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #3498db;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+.progress-text {
+    margin-bottom: 15px;
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: var(--card-bg-color, #f5f5f5);
+    border-radius: var(--border-radius, 5px);
+    padding: 15px;
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.1));
+    margin-bottom: 20px;
+}
+
+.results-title {
+    flex: 1;
+}
+
+.results-content {
+    background-color: var(--card-bg-color, #f5f5f5);
+    border-radius: var(--border-radius, 5px);
+    padding: 15px;
+    box-shadow: var(--card-shadow, 0 2px 5px rgba(0,0,0,0.1));
+}
+
+.series-book-section {
+    display: flex;
+    align-items: flex-start;
+    min-height: 150px; /* Fixed height to accommodate expanded forms */
+    position: relative; /* Ensure proper positioning */
+}
+
+/* Style for the new item forms to ensure they don't cause layout shifts */
+.new-item-form {
+    position: absolute; /* Position absolutely to prevent layout shifts */
+    background-color: var(--card-bg-color, #f5f5f5);
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+
+.table-actions {
+    margin-right: 20px;
+    margin-top: 20px; /* Move buttons down by 20px */
+}
+
+/* Make Generate PDF Report button larger */
+#generateReportBtn {
+    min-width: 200px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.result-actions {
+    margin-bottom: 15px;
+}
+
+.result-actions button {
+    margin-right: 10px;
+}
+
+.character-card {
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.character-checkbox {
+    margin-right: 15px;
+}
+
+.character-info {
+    flex-grow: 1;
+}
+
+.character-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.character-mentions {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.character-variants {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.variant-tag {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.primary-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background-color: #2980b9;
+}
+
+.primary-btn:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+.secondary-btn {
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.secondary-btn:hover {
+    background-color: #7f8c8d;
+}
+
+.info-btn {
+    background-color: transparent;
+    color: #3498db;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.info-btn i {
+    margin-right: 5px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .book-analysis-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .analysis-options,
+    .book-upload-section,
+    .analysis-results-container {
+        grid-column: 1 / 2;
+    }
+    
+    .book-upload-section {
+        grid-row: 2 / 3;
+    }
+    
+    .analysis-results-container {
+        grid-row: 3 / 4;
+    }
+    
+    .results-header {
+        flex-direction: column;
+    }
+    
+    .series-book-section {
+        margin-top: 15px;
+    }
+}

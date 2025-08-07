@@ -1,0 +1,224 @@
+/* Enhanced Rich Text Editor Styling */
+
+/* Toolbar Container */
+.rich-text-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Button Groups */
+.rich-text-group {
+    display: flex;
+    gap: 2px;
+    margin-right: 8px;
+    border-right: 1px solid #e0e0e0;
+    padding-right: 8px;
+}
+
+.rich-text-group:last-child {
+    border-right: none;
+}
+
+/* Toolbar Buttons */
+.rich-text-btn {
+    min-width: 30px;
+    min-height: 30px;
+    padding: 5px 8px;
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.rich-text-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.rich-text-btn:active {
+    background-color: #e0e0e0;
+    transform: translateY(1px);
+}
+
+.rich-text-btn.active {
+    background-color: #e3f2fd;
+    border-color: #90caf9;
+    color: #1976d2;
+}
+
+/* Tooltips */
+.rich-text-btn[title] {
+    position: relative;
+}
+
+.rich-text-btn[title]:hover::after {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 8px;
+    border-radius: 3px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Editor Content Area */
+.rich-text-editor {
+    min-height: 150px;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 0 0 5px 5px;
+    background-color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+    transition: border-color 0.3s;
+    overflow-y: auto;
+}
+
+.rich-text-editor:focus {
+    outline: none;
+    border-color: #90caf9;
+    box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* Content Styling */
+.rich-text-editor h1 {
+    font-size: 1.8em;
+    margin: 0.5em 0;
+}
+
+.rich-text-editor h2 {
+    font-size: 1.5em;
+    margin: 0.5em 0;
+}
+
+.rich-text-editor h3 {
+    font-size: 1.3em;
+    margin: 0.5em 0;
+}
+
+.rich-text-editor p {
+    margin: 0.5em 0;
+}
+
+.rich-text-editor ul, 
+.rich-text-editor ol {
+    margin: 0.5em 0;
+    padding-left: 2em;
+}
+
+.rich-text-editor blockquote {
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
+    border-left: 3px solid #ddd;
+    background-color: #f8f9fa;
+}
+
+.rich-text-editor code {
+    font-family: monospace;
+    background-color: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+.rich-text-editor pre {
+    background-color: #f5f5f5;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+}
+
+/* Word Count */
+.word-count {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #777;
+    text-align: right;
+}
+
+/* Dark Mode Support */
+.dark-mode .rich-text-toolbar {
+    background-color: #333;
+    border-color: #444;
+}
+
+.dark-mode .rich-text-group {
+    border-right-color: #444;
+}
+
+.dark-mode .rich-text-btn {
+    background-color: #444;
+    color: #eee;
+    border-color: #555;
+}
+
+.dark-mode .rich-text-btn:hover {
+    background-color: #555;
+}
+
+.dark-mode .rich-text-btn:active {
+    background-color: #666;
+}
+
+.dark-mode .rich-text-btn.active {
+    background-color: #2c3e50;
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.dark-mode .rich-text-editor {
+    background-color: #222;
+    color: #eee;
+    border-color: #444;
+}
+
+.dark-mode .rich-text-editor:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.dark-mode .rich-text-editor blockquote {
+    border-left-color: #444;
+    background-color: #333;
+}
+
+.dark-mode .rich-text-editor code,
+.dark-mode .rich-text-editor pre {
+    background-color: #333;
+}
+
+.dark-mode .word-count {
+    color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .rich-text-toolbar {
+        flex-wrap: wrap;
+    }
+    
+    .rich-text-group {
+        margin-bottom: 5px;
+    }
+}

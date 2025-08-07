@@ -1,0 +1,66 @@
+/* Plots Table Fix - Specifically targeting the right-side gap issue */
+
+/* Container fixes */
+#plots-tab .table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 1000px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow-x: hidden !important;
+  box-sizing: border-box !important;
+}
+
+/* Table fixes */
+#plotTable {
+  width: 100% !important;
+  min-width: 1000px !important;
+  table-layout: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Fixed column widths to ensure full width usage */
+#plots-tab .table-container #plotTable th:nth-child(1) { width: 150px !important; } /* Title */
+#plots-tab .table-container #plotTable th:nth-child(2) { width: 100px !important; } /* Type */
+#plots-tab .table-container #plotTable th:nth-child(3) { width: 120px !important; } /* Series */
+#plots-tab .table-container #plotTable th:nth-child(4) { width: 120px !important; } /* Book */
+#plots-tab .table-container #plotTable th:nth-child(5) { width: 80px !important; } /* Chapter */
+#plots-tab .table-container #plotTable th:nth-child(6) { width: 100px !important; } /* Status */
+#plots-tab .table-container #plotTable th:nth-child(7) { width: 200px !important; } /* Description */
+#plots-tab .table-container #plotTable th:last-child { width: 130px !important; } /* Actions */
+
+/* Fixes for header row */
+#plots-tab .table-container #plotTable thead {
+  display: table-header-group !important;
+  width: 100% !important;
+}
+
+/* Fixes for table body */
+#plots-tab .table-container #plotTable tbody {
+  display: table-row-group !important;
+  width: 100% !important;
+}
+
+/* Ensure table rows take up full width */
+#plots-tab .table-container #plotTable tr {
+  display: table-row !important;
+  width: 100% !important;
+}
+
+/* Reset any special cell padding that might be creating space */
+#plots-tab .table-container #plotTable td,
+#plots-tab .table-container #plotTable th {
+  padding: 8px !important;
+  box-sizing: border-box !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Ensure this stylesheet has priority */
+/* !important rules are used throughout to override existing styles */ 

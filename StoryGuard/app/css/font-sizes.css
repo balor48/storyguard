@@ -1,0 +1,106 @@
+/* Font size classes for the entire application */
+/* Font size is now fixed to medium for the entire application */
+html, body {
+    font-size: 16px; /* Medium size */
+}
+
+/* Keeping these classes for backward compatibility, but they're no longer used */
+body.font-small,
+html.font-small {
+    font-size: 16px; /* Now same as medium */
+}
+
+body.font-medium,
+html.font-medium {
+    font-size: 16px;
+}
+
+body.font-large,
+html.font-large {
+    font-size: 16px; /* Now same as medium */
+}
+
+/* Apply font sizes to specific elements */
+body.font-small .app-title,
+body.font-small h1 {
+    font-size: 1.5rem;
+}
+
+body.font-medium .app-title,
+body.font-medium h1 {
+    font-size: 1.8rem;
+}
+
+body.font-large .app-title,
+body.font-large h1 {
+    font-size: 2.1rem;
+}
+
+body.font-small h2 {
+    font-size: 1.3rem;
+}
+
+body.font-medium h2 {
+    font-size: 1.5rem;
+}
+
+body.font-large h2 {
+    font-size: 1.8rem;
+}
+
+body.font-small h3,
+body.font-small .section-title {
+    font-size: 1.1rem;
+}
+
+body.font-medium h3,
+body.font-medium .section-title {
+    font-size: 1.3rem;
+}
+
+body.font-large h3,
+body.font-large .section-title {
+    font-size: 1.5rem;
+}
+
+body.font-small p,
+body.font-small input,
+body.font-small select,
+body.font-small textarea,
+body.font-small button,
+body.font-small .btn,
+body.font-small label,
+body.font-small div,
+body.font-small span,
+body.font-small li,
+body.font-small a {
+    font-size: 0.85rem;
+}
+
+body.font-medium p,
+body.font-medium input,
+body.font-medium select,
+body.font-medium textarea,
+body.font-medium button,
+body.font-medium .btn,
+body.font-medium label,
+body.font-medium div,
+body.font-medium span,
+body.font-medium li,
+body.font-medium a {
+    font-size: 1rem;
+}
+
+body.font-large p,
+body.font-large input,
+body.font-large select,
+body.font-large textarea,
+body.font-large button,
+body.font-large .btn,
+body.font-large label,
+body.font-large div,
+body.font-large span,
+body.font-large li,
+body.font-large a {
+    font-size: 1.2rem;
+}

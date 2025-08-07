@@ -1,0 +1,203 @@
+/* Global Table Fix - Targets all tables in the application */
+
+/* Target all tables */
+table, 
+.table-container table, 
+#characterTable, 
+#locationTable, 
+#plotTable, 
+#worldElementTable,
+#relationshipTable,
+#statisticsTable,
+#analyzeBookTable,
+div[id$="-tab"] table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 20px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Target all table headers */
+table thead, 
+.table-container thead, 
+#characterTable thead, 
+#locationTable thead, 
+#plotTable thead, 
+#worldElementTable thead,
+#relationshipTable thead,
+#statisticsTable thead,
+#analyzeBookTable thead,
+div[id$="-tab"] table thead {
+    background-color: #3498db !important;
+    color: white !important;
+}
+
+/* Target all table header cells */
+table th, 
+.table-container th, 
+#characterTable th, 
+#locationTable th, 
+#plotTable th, 
+#worldElementTable th,
+#relationshipTable th,
+#statisticsTable th,
+#analyzeBookTable th,
+div[id$="-tab"] table th {
+    padding: 15px !important;
+    text-align: left !important;
+    font-weight: 600 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background-color: #3498db !important;
+}
+
+/* Target all table rows */
+table tr, 
+.table-container tr, 
+#characterTable tr, 
+#locationTable tr, 
+#plotTable tr, 
+#worldElementTable tr,
+#relationshipTable tr,
+#statisticsTable tr,
+#analyzeBookTable tr,
+div[id$="-tab"] table tr {
+    border-bottom: 1px solid #ddd !important;
+    transition: background-color 0.2s ease !important;
+}
+
+/* Target all table cells */
+table td, 
+.table-container td, 
+#characterTable td, 
+#locationTable td, 
+#plotTable td, 
+#worldElementTable td,
+#relationshipTable td,
+#statisticsTable td,
+#analyzeBookTable td,
+div[id$="-tab"] table td {
+    padding: 12px 15px !important;
+    vertical-align: middle !important;
+    background-color: white !important;
+}
+
+/* Alternating row colors */
+table tr:nth-child(even) td, 
+.table-container tr:nth-child(even) td, 
+#characterTable tr:nth-child(even) td, 
+#locationTable tr:nth-child(even) td, 
+#plotTable tr:nth-child(even) td, 
+#worldElementTable tr:nth-child(even) td,
+#relationshipTable tr:nth-child(even) td,
+#statisticsTable tr:nth-child(even) td,
+#analyzeBookTable tr:nth-child(even) td,
+div[id$="-tab"] table tr:nth-child(even) td {
+    background-color: #f5f5f5 !important;
+}
+
+/* Hover effect */
+table tr:hover td, 
+.table-container tr:hover td, 
+#characterTable tr:hover td, 
+#locationTable tr:hover td, 
+#plotTable tr:hover td, 
+#worldElementTable tr:hover td,
+#relationshipTable tr:hover td,
+#statisticsTable tr:hover td,
+#analyzeBookTable tr:hover td,
+div[id$="-tab"] table tr:hover td {
+    background-color: #e3f2fd !important;
+}
+
+/* Dark mode support */
+.dark-mode table thead,
+.dark-mode .table-container thead,
+.dark-mode #characterTable thead,
+.dark-mode #locationTable thead,
+.dark-mode #plotTable thead,
+.dark-mode #worldElementTable thead,
+.dark-mode #relationshipTable thead,
+.dark-mode #statisticsTable thead,
+.dark-mode #analyzeBookTable thead,
+.dark-mode div[id$="-tab"] table thead {
+    background-color: #2c3e50 !important;
+}
+
+.dark-mode table td,
+.dark-mode .table-container td,
+.dark-mode #characterTable td,
+.dark-mode #locationTable td,
+.dark-mode #plotTable td,
+.dark-mode #worldElementTable td,
+.dark-mode #relationshipTable td,
+.dark-mode #statisticsTable td,
+.dark-mode #analyzeBookTable td,
+.dark-mode div[id$="-tab"] table td {
+    background-color: #222 !important;
+}
+
+.dark-mode table tr:nth-child(even) td,
+.dark-mode .table-container tr:nth-child(even) td,
+.dark-mode #characterTable tr:nth-child(even) td,
+.dark-mode #locationTable tr:nth-child(even) td,
+.dark-mode #plotTable tr:nth-child(even) td,
+.dark-mode #worldElementTable tr:nth-child(even) td,
+.dark-mode #relationshipTable tr:nth-child(even) td,
+.dark-mode #statisticsTable tr:nth-child(even) td,
+.dark-mode #analyzeBookTable tr:nth-child(even) td,
+.dark-mode div[id$="-tab"] table tr:nth-child(even) td {
+    background-color: #333 !important;
+}
+
+.dark-mode table tr:hover td,
+.dark-mode .table-container tr:hover td,
+.dark-mode #characterTable tr:hover td,
+.dark-mode #locationTable tr:hover td,
+.dark-mode #plotTable tr:hover td,
+.dark-mode #worldElementTable tr:hover td,
+.dark-mode #relationshipTable tr:hover td,
+.dark-mode #statisticsTable tr:hover td,
+.dark-mode #analyzeBookTable tr:hover td,
+.dark-mode div[id$="-tab"] table tr:hover td {
+    background-color: #3a3a3a !important;
+}
+
+/* Responsive tables */
+@media (max-width: 768px) {
+    table, 
+    .table-container table, 
+    #characterTable, 
+    #locationTable, 
+    #plotTable, 
+    #worldElementTable,
+    #relationshipTable,
+    #statisticsTable,
+    #analyzeBookTable,
+    div[id$="-tab"] table {
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* Make worldbuilding table wider - override */
+#worldbuilding-tab .table-container {
+    max-width: 98% !important;
+    min-width: 1000px !important;
+    width: 98% !important;
+}
+
+#worldbuilding-tab table#worldElementTable {
+    width: 100% !important;
+    min-width: 1000px !important;
+}
+
+/* Force worldbuilding container to be wider than others */
+body #worldbuilding-tab .table-container {
+    max-width: 98% !important;
+    width: 98% !important;
+}

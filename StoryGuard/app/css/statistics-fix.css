@@ -1,0 +1,53 @@
+/* Fix for Statistics tab and Analyze Book tab */
+
+/* Make the dropdown bars more compact */
+#statistics-tab select,
+#analyze-book-tab select {
+    max-width: 300px;
+    display: inline-block;
+    width: auto;
+    margin-right: 15px;
+}
+
+/* Make the filter container more compact */
+#statistics-tab .search-container,
+#analyze-book-tab .search-container {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Character Network Analysis section */
+.character-network-analysis {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.character-network-analysis select {
+    max-width: 300px;
+    width: auto;
+    margin-right: 15px;
+    flex: 0 0 auto;
+}
+
+.character-network-analysis button {
+    flex: 0 0 auto;
+}
+
+/* Dark mode support */
+.dark-mode #statistics-tab .search-container,
+.dark-mode #analyze-book-tab .search-container {
+    background-color: #333;
+}

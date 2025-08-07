@@ -1,0 +1,152 @@
+/**
+ * Pagination Controls Styling
+ * This stylesheet adds styling for pagination controls in the Story Database
+ */
+
+/* Pagination Container */
+.pagination-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-top: 1px solid var(--neutral-200);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* Page Size Container */
+.page-size-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--neutral-600);
+    font-size: 0.9rem;
+}
+
+/* Page Size Selector */
+.page-size-selector {
+    padding: 8px 12px;
+    border: 2px solid var(--primary-color);
+    border-radius: var(--border-radius);
+    background-color: white;
+    color: var(--neutral-700);
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 120px;
+}
+
+.page-size-selector:hover {
+    border-color: var(--primary-color);
+}
+
+.page-size-selector:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(58, 110, 165, 0.2);
+}
+
+/* Pagination Buttons Container */
+.pagination-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Pagination Buttons */
+.pagination-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid var(--neutral-300);
+    border-radius: var(--border-radius);
+    background-color: white;
+    color: var(--neutral-700);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin: 0 2px;
+}
+
+.pagination-buttons button:hover:not(:disabled) {
+    background-color: var(--neutral-100);
+    border-color: var(--neutral-400);
+    color: var(--primary-color);
+}
+
+.pagination-buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--neutral-100);
+}
+
+/* Pagination Info */
+.pagination-info {
+    padding: 0 12px;
+    color: var(--neutral-600);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Dark Mode Support */
+body.dark-mode .pagination-controls {
+    background-color: var(--neutral-800);
+    border-color: var(--neutral-700);
+}
+
+body.dark-mode .page-size-container {
+    color: var(--neutral-400);
+}
+
+body.dark-mode .page-size-selector {
+    background-color: var(--neutral-700);
+    color: var(--neutral-300);
+    border-color: var(--neutral-600);
+}
+
+body.dark-mode .page-size-selector:hover {
+    border-color: var(--primary-light);
+}
+
+body.dark-mode .pagination-buttons button {
+    background-color: var(--neutral-700);
+    color: var(--neutral-300);
+    border-color: var(--neutral-600);
+}
+
+body.dark-mode .pagination-buttons button:hover:not(:disabled) {
+    background-color: var(--neutral-600);
+    border-color: var(--primary-light);
+    color: white;
+}
+
+body.dark-mode .pagination-buttons button:disabled {
+    background-color: var(--neutral-800);
+    opacity: 0.4;
+}
+
+body.dark-mode .pagination-info {
+    color: var(--neutral-400);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pagination-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .page-size-container {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .pagination-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+}

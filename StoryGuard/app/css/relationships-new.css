@@ -1,0 +1,1342 @@
+/**
+ * Relationships Tab Styles
+ * Modern UI for character relationships management
+ */
+
+/* Container styles */
+.relationships-container {
+    padding: 0px !important;
+    max-width: 1200px;
+    margin: 0 auto !important;
+    padding-bottom: 0px !important;
+    position: relative;
+    height: auto !important;
+    min-height: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center !important;
+    width: 100% !important;
+    gap: 5px !important;
+}
+
+/* Create relationship section - single source of truth for margins */
+.create-relationship-section,
+.relationship-creation-wrapper,
+.create-relationships-section {
+    margin: 0 auto !important;
+    margin-bottom: 5px !important;
+    padding: 20px !important;
+    height: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    position: relative !important;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Container title styling */
+.create-relationship-section h2,
+.relationship-creation-wrapper .header {
+    margin: 0 !important;
+    padding: 10px !important;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.relationship-form {
+    margin: 0 !important;
+    padding: 5px !important;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+.form-actions {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Character relationships section */
+.character-relationships-section {
+    background-color: var(--background-color);
+    border-radius: 8px;
+    padding: 0px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px !important;
+}
+
+.character-relationships-section h2 {
+    margin: 0 0 20px 0;
+    color: var(--text-color);
+    font-size: 1.5rem;
+}
+
+.filters-section {
+    margin-bottom: 5px !important;
+    padding: 5px !important;
+    background-color: var(--background-alt);
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+/* Relationship table styles */
+.relationship-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 !important;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    overflow: hidden;
+    table-layout: fixed !important;
+}
+
+.relationship-table tbody {
+    display: block;
+    max-height: 360px !important;
+    overflow-y: auto;
+}
+
+.relationship-table thead,
+.relationship-table tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Column widths */
+.relationship-table th,
+.relationship-table td {
+    padding: 2px 10px !important;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* First Name column */
+.relationship-table th:nth-child(1),
+.relationship-table td:nth-child(1) {
+    width: 200px !important;
+    max-width: 200px !important;
+}
+
+/* Last Name column */
+.relationship-table th:nth-child(2),
+.relationship-table td:nth-child(2) {
+    width: 100px !important;
+    max-width: 100px !important;
+    padding-left: 0 !important;
+}
+
+/* Remove any previous width settings */
+.relationship-table th:first-child,
+.relationship-table td:first-child,
+.relationship-table th:last-child,
+.relationship-table td:last-child {
+    width: auto !important;
+}
+
+/* Remove any transforms */
+.relationship-table th:last-child,
+.relationship-table td:last-child {
+    transform: none !important;
+}
+
+.relationship-table th {
+    background-color: var(--header-background);
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.relationship-table tr:hover {
+    background-color: var(--hover-background);
+}
+
+/* Relationship type badges */
+.relationship-type {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: white !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background-color: #555 !important;
+}
+
+/* Default relationship type colors */
+.relationship-type.friend { background-color: #4CAF50; }
+.relationship-type.family { background-color: #2196F3; }
+.relationship-type.ally { background-color: #8BC34A; }
+.relationship-type.enemy { background-color: #F44336; }
+.relationship-type.mentor { background-color: #9C27B0; }
+.relationship-type.student { background-color: #FF9800; }
+.relationship-type.lover { background-color: #E91E63; }
+.relationship-type.rival { background-color: #FF5722; }
+.relationship-type.other { background-color: #607D8B; }
+
+/* Center badge within cell */
+.relationship-type-cell {
+    text-align: center !important;
+    padding: 4px;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .relationship-type {
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Button styles */
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn i {
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--neutral-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--neutral-dark);
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    padding: 6px;
+    background: none;
+    border: none;
+    color: var(--danger-color);
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+/* Relationship visualization */
+.relationship-visualization {
+    margin-top: 5px !important;
+    padding: 5px !important;
+    background-color: var(--background-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px !important;
+    position: relative !important;
+    height: auto !important;
+}
+
+.relationship-visualization svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto !important;
+    max-height: 180px !important;
+}
+
+.relationship-visualization text {
+    font-size: 12px;
+    font-family: var(--font-family);
+}
+
+.relationship-visualization line {
+    transition: stroke-width 0.2s ease;
+}
+
+.relationship-visualization line:hover {
+    stroke-width: 3;
+}
+
+.relationship-visualization circle {
+    transition: r 0.2s ease;
+    cursor: pointer;
+}
+
+.relationship-visualization circle:hover {
+    r: 7;
+}
+
+/* Dark mode styles */
+body.dark-mode .create-relationship-section,
+body.dark-mode .character-relationships-section {
+    background-color: var(--dark-background);
+}
+
+body.dark-mode .filters-section {
+    background-color: var(--dark-background-alt);
+    border-color: var(--dark-border);
+}
+
+body.dark-mode .relationship-table th {
+    background-color: var(--dark-header);
+}
+
+body.dark-mode .relationship-table tr:hover {
+    background-color: var(--dark-hover);
+}
+
+body.dark-mode .relationship-visualization text {
+    fill: var(--dark-text);
+}
+
+/* No data message */
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* CSS Variables */
+:root {
+    --primary-color: #3498db;
+    --primary-dark: #2980b9;
+    --neutral-color: #95a5a6;
+    --neutral-dark: #7f8c8d;
+    --danger-color: #e74c3c;
+    --text-color: #2c3e50;
+    --text-muted: #7f8c8d;
+    --border-color: #dcdde1;
+    --background-color: #ffffff;
+    --background-alt: #f8f9fa;
+    --header-background: #f5f6fa;
+    --hover-background: #f1f2f6;
+    --input-background: #ffffff;
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    /* Dark mode variables */
+    --dark-background: #2d3436;
+    --dark-background-alt: #353b48;
+    --dark-header: #2f3640;
+    --dark-hover: #40739e;
+    --dark-border: #487eb0;
+    --dark-text: #dcdde1;
+}
+
+/* Add New Relationship Type Button */
+.relationship-option.add-new-relationship-type {
+    background-color: #f0f0f0;
+    border: 1px dashed #999;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.relationship-option.add-new-relationship-type:hover {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.relationship-option.add-new-relationship-type i {
+    margin-right: 5px;
+}
+
+/* Relationship Type Dialog */
+#addRelationshipTypeDialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#addRelationshipTypeDialog .modal-content {
+    background-color: #fff;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#addRelationshipTypeDialog .modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#addRelationshipTypeDialog .modal-header h3 {
+    margin: 0;
+    font-weight: 500;
+    color: #333;
+}
+
+#addRelationshipTypeDialog .close-btn {
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+#addRelationshipTypeDialog .close-btn:hover {
+    color: #333;
+}
+
+#addRelationshipTypeDialog .modal-body {
+    padding: 20px;
+}
+
+#addRelationshipTypeDialog .input-group {
+    margin-bottom: 15px;
+}
+
+#addRelationshipTypeDialog label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+#addRelationshipTypeDialog input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#addRelationshipTypeDialog input.error-input {
+    border-color: #f44336;
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+#addRelationshipTypeDialog .modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #e0e0e0;
+    text-align: right;
+}
+
+#addRelationshipTypeDialog button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#addRelationshipTypeDialog .cancel-btn {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+#addRelationshipTypeDialog .add-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+#addRelationshipTypeDialog .add-btn:hover {
+    background-color: #1976D2;
+}
+
+#addRelationshipTypeDialog .cancel-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Fix for relationship network container in index.html */
+#relationshipNetwork {
+    width: 100% !important;
+    height: 180px !important;
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    border: 1px solid #ddd !important;
+    border-radius: var(--border-radius) !important;
+}
+
+#relationships-tab {
+    padding-bottom: 0px !important;
+}
+
+/* Add styles for relationship options with color picker */
+.relationship-option {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    border: 5px solid transparent;
+    width: 120px !important;
+    margin: 5px auto !important;
+    text-align: left !important;
+}
+
+.relationship-option span {
+    flex: 1;
+}
+
+.relationship-option.selected,
+.selected-relationship {
+    border: 5px solid #000 !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-2px) !important;
+}
+
+.color-picker-icon {
+    opacity: 0.7;
+    margin-left: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    position: absolute !important;
+    right: 10px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+.color-picker-icon:hover {
+    opacity: 1;
+}
+
+/* Color picker dialog styles */
+.color-picker-container {
+    padding: 15px;
+}
+
+.color-picker-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.color-input {
+    width: 100%;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.color-preview {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.color-preview-box {
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.color-info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.color-value-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.color-value-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.color-value-input {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Modal buttons */
+.save-btn {
+    background-color: var(--primary-color, #1a73e8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background-color: var(--primary-dark, #1565c0);
+}
+
+.cancel-btn {
+    background-color: var(--neutral-500, #6c757d);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-right: 10px;
+    transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+    background-color: var(--neutral-600, #5a6268);
+}
+
+/* Modal dialog */
+.modal-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 95%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    flex: 1;
+}
+
+.close-btn {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #777;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Modal header close button */
+.dialog-close-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    padding: 4px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dialog-close-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Ensure the modal header displays title and close button properly */
+.modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    flex: 1;
+}
+
+.reset-visualization-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.reset-visualization-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.reset-visualization-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Make sure .reset-view-button class also works for backward compatibility */
+.reset-view-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    z-index: 100;
+}
+
+.reset-view-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+body.dark-mode .reset-visualization-btn,
+body.dark-mode .reset-view-button {
+    background-color: var(--dark-background-alt);
+    color: var(--dark-text);
+    border: 1px solid var(--dark-border);
+}
+
+body.dark-mode .reset-visualization-btn:hover,
+body.dark-mode .reset-view-button:hover {
+    background-color: var(--dark-hover);
+}
+
+body {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+#relationshipList {
+    margin-top: 5px !important;
+    margin-bottom: 0px !important;
+}
+
+/* Super aggressive fix to eliminate empty space */
+html, body {
+    min-height: 0 !important;
+    height: auto !important;
+    overflow-y: auto !important;
+}
+
+/* Force minimal height for main content area */
+#content-wrapper {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+/* Reduce all content container heights */
+#content {
+    min-height: 0 !important;
+    height: auto !important;
+}
+
+/* Override any bottom margins in the main container */
+.main-container {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+/* Target the relationship table specifically to make rows more compact */
+.relationship-table tbody tr {
+    height: 60px !important;
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Make the relationship table maximum height for 6 rows */
+.relationship-table tbody {
+    max-height: 360px !important;
+    display: block;
+    overflow-y: auto;
+}
+
+/* Make the relationship network even smaller */
+#relationshipNetwork {
+    height: 180px !important;
+}
+
+/* Ensure no height is set on parent containers */
+.tab-pane, 
+.tab-content,
+#relationships-tab, 
+#relationships-tab > div {
+    padding: inherit !important;
+    margin: inherit !important;
+    min-height: auto !important;
+    height: auto !important;
+}
+
+/* Ensure footer doesn't add space */
+footer, 
+.footer {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Remove any fixed positioning on the footer */
+footer, 
+.footer {
+    position: static !important;
+}
+
+/* Override any inline styles */
+#relationshipList,
+#relationshipNetwork {
+    margin-bottom: 0px !important;
+}
+
+/* Character List Table Styles */
+.character-list {
+    width: 100% !important;
+    max-width: none !important;
+    height: 600px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--background-color);
+}
+
+.character-list table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0 !important;
+    table-layout: fixed !important;
+}
+
+/* Header row styling */
+.character-list table thead {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    width: 100% !important;
+    display: table !important;
+    table-layout: fixed !important;
+    border-bottom: 2px solid #2980b9 !important; /* Darker border for visual separation */
+}
+
+.character-list table thead tr {
+    height: 48px !important;
+    background-color: #3498db !important;
+    display: flex !important;
+    width: 100% !important;
+}
+
+/* Header styles with improved spacing */
+.character-list table th {
+    padding: 0 8px !important;
+    background-color: #3498db !important;
+    color: white !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    height: 48px !important;
+    font-size: 16px !important; /* Slightly larger font for header */
+}
+
+/* Table body styling */
+.character-list table tbody {
+    display: block !important;
+    width: 100% !important;
+    overflow-y: auto !important;
+    margin-top: 0 !important; /* Removed gap after header */
+}
+
+/* First row after header - fix excessive height */
+.character-list table tbody tr:first-child {
+    margin-top: 0 !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+}
+
+/* Normal row styling */
+.character-list table tbody tr {
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    display: flex !important;
+    width: 100% !important;
+    border-bottom: 1px solid #eee !important;
+    box-sizing: border-box !important;
+}
+
+/* Alternate row coloring for better readability */
+.character-list table tbody tr:nth-child(even) {
+    background-color: #f9f9f9 !important;
+}
+
+/* Cell styling for perfect vertical alignment */
+.character-list table td {
+    padding: 0 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    box-sizing: border-box !important;
+}
+
+.character-list table th,
+.character-list table td {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* First Name column width */
+.character-list table th:first-child,
+.character-list table td:first-child {
+    width: 150px !important;
+    min-width: 150px !important;
+    max-width: 150px !important;
+}
+
+/* Last Name column width */
+.character-list table th:last-child,
+.character-list table td:last-child {
+    width: 300px !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+}
+
+/* Add scrollbar styles */
+.character-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.character-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.character-list::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+/* Character selection container */
+.character-selection {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    justify-content: center !important;
+    padding: 20px !important;
+    margin: 0 auto !important;
+    position: relative;
+    width: 100% !important;
+}
+
+.character-column {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    max-width: 450px !important;
+}
+
+.relationship-creation-wrapper {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Create New Relationship section positioning */
+.create-new-relationship {
+    margin: 20px 0 0 50px !important;
+    position: relative !important;
+}
+
+/* Style the Add Relationship button specifically */
+.relationship-options button:last-child,
+.relationship-options button[onclick*="addRelationship"],
+button[onclick*="createNewRelationship"] {
+    transform: translate(10px, 20px) !important;
+    position: relative !important;
+    z-index: 10 !important;
+}
+
+/* Add Relationship button container positioning */
+.relationship-options {
+    position: relative !important;
+    width: 180px !important;
+    margin: 0 auto !important;
+    padding: 10px !important;
+}
+
+/* Add Relationship button positioning */
+.relationship-options button[onclick*="addRelationship"],
+.relationship-options button[onclick*="createNewRelationship"],
+.add-relationship-btn,
+button[onclick*="Relationships.addRelationship"],
+#addRelationshipBtn {
+    position: relative !important;
+    left: 20px !important;
+    transform: translateX(20px) !important;
+    width: 120px !important;
+    margin: 5px auto !important;
+    text-align: center !important;
+    background-color: #e74c3c !important; /* Default red color */
+    color: white !important;
+    transition: background-color 0.2s ease !important;
+}
+
+/* Style for when the button is active/selectable - high specificity to override any other styles */
+.relationship-options button[onclick*="addRelationship"]:not(:disabled),
+.relationship-options button[onclick*="createNewRelationship"]:not(:disabled),
+.add-relationship-btn:not(:disabled),
+button[onclick*="Relationships.addRelationship"]:not(:disabled),
+#addRelationshipBtn:not(:disabled),
+#addRelationshipBtn.enabled,
+button#addRelationshipBtn.enabled {
+    background-color: #2ecc71 !important; /* Green color when active */
+    cursor: pointer !important;
+}
+
+/* Hover effect for active button */
+.relationship-options button[onclick*="addRelationship"]:not(:disabled):hover,
+.relationship-options button[onclick*="createNewRelationship"]:not(:disabled):hover,
+.add-relationship-btn:not(:disabled):hover,
+button[onclick*="Relationships.addRelationship"]:not(:disabled):hover,
+#addRelationshipBtn:not(:disabled):hover,
+#addRelationshipBtn.enabled:hover {
+    background-color: #27ae60 !important; /* Darker green on hover */
+}
+
+/* Clear button specific positioning */
+.relationship-creation-wrapper button[onclick*="Clear"],
+.relationship-creation-wrapper .clear-btn {
+    margin-top: 10px !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+
+/* Ensure proper spacing in the container */
+.relationship-creation-wrapper {
+    padding-bottom: 5px !important;
+}
+
+/* Add gap between search and visualization */
+.search-container {
+    margin-bottom: 5px !important;
+}
+
+/* Make sure the relationship network has proper spacing */
+#relationshipNetwork {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+/* Ensure the visualization has proper space on all sides */
+.relationship-visualization {
+    padding: 5px !important;
+    margin-top: 5px !important;
+}
+
+/* Reset any forced zero gaps */
+.relationships-container {
+    gap: 5px !important;
+}
+
+/* Add specific margins between search and visualization */
+#relationshipNetwork {
+    margin-top: 5px !important;
+}
+
+/* Override any zero-margin/padding rules */
+#relationships-tab > div,
+#relationships-tab > section,
+#relationships-tab > * {
+    margin-bottom: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Ensure proper spacing in the container */
+.relationship-creation-wrapper {
+    padding-bottom: 5px !important;
+}
+
+/* Add gap between search and visualization */
+.search-container {
+    margin-bottom: 5px !important;
+}
+
+/* Make sure the relationship network has proper spacing */
+#relationshipNetwork {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+
+/* Override any collapsing margins */
+.relationships-container > * {
+    margin: 5px 0 !important;
+}
+
+/* Button container positioning */
+.relationship-options button,
+button[onclick*="addRelationship"],
+button[onclick*="createNewRelationship"],
+button[onclick*="Clear"],
+.clear-btn,
+.add-relationship-btn {
+    position: relative !important;
+    left: 20px !important;
+    transform: translateX(20px) !important;
+    width: 120px !important;
+    margin: 5px auto !important;
+    text-align: center !important;
+}
+
+/* Ensure buttons stay in their container */
+.relationship-options {
+    position: relative !important;
+    width: 180px !important;
+    margin: 0 auto !important;
+    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+/* Dashboard Clear button specific positioning */
+.character-selection button[onclick*="Clear"] {
+    position: relative !important;
+    left: 20px !important;
+    transform: translateX(20px) !important;
+    width: 120px !important;
+    margin: 5px auto !important;
+    text-align: center !important;
+    background-color: #95a5a6 !important;
+    display: block !important;
+    z-index: 100 !important;
+}
+
+/* Keep the relationship creation wrapper Clear button unchanged */
+.relationship-creation-wrapper button[onclick*="Clear"],
+.relationship-creation-wrapper .clear-btn {
+    margin-top: 10px !important;
+    display: block !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    text-align: center !important;
+}
+
+/* Icon alignment fix - ensure icons are properly centered */
+.color-picker-icon,
+button .icon,
+.relationship-option .icon,
+[class*="Icon"],
+img.icon,
+i.icon,
+.icon {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: auto !important;
+    vertical-align: middle !important;
+    position: relative !important;
+}
+
+/* Relationship type icons proper centering */
+.relationship-option img,
+.relationship-option i,
+button img,
+button i {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    vertical-align: middle !important;
+    position: relative !important;
+    top: 0 !important;
+    margin: auto !important;
+}
+
+/* Color picker icon specific alignment */
+.color-picker-icon {
+    opacity: 0.7;
+    margin-left: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    position: absolute !important;
+    right: 10px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Export buttons styling (PDF, HTML, TXT) - updated for consistency */
+button[data-export-type],
+.export-btn,
+button[onclick*="export"],
+button[onclick*="Export"],
+.plots-tab button[data-export-type],
+.worldbuilding-tab button[data-export-type],
+#plots-tab button[data-export-type],
+#worldbuilding-tab button[data-export-type],
+div[id*="plots"] button[data-export-type],
+div[id*="world"] button[data-export-type] {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2px !important;
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
+    border-radius: 4px !important;
+}
+
+/* Export button icons - updated for tighter spacing */
+button[data-export-type] i,
+button[data-export-type] img,
+.export-btn i,
+.export-btn img,
+button[onclick*="export"] i,
+button[onclick*="export"] img,
+button[onclick*="Export"] i,
+button[onclick*="Export"] img,
+.plots-tab button i,
+.worldbuilding-tab button i,
+#plots-tab button i,
+#worldbuilding-tab button i,
+div[id*="plots"] button i,
+div[id*="world"] button i {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 16px !important;
+    line-height: 1 !important;
+}
+
+/* Blue export buttons */
+.blue-btn,
+button.btn-primary,
+button[data-export-type] {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+    color: white !important;
+    text-align: center !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+} 

@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Database - Documentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/professional-ui.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .dark-mode {
+            background-color: #222;
+            color: #f0f0f0;
+        }
+        
+        .dark-mode a {
+            color: #6db4ff;
+        }
+        
+        .dark-mode .card {
+            background-color: #333;
+            border-color: #444;
+        }
+        
+        .dark-mode code {
+            background-color: #444;
+            color: #f0f0f0;
+        }
+        
+        .dark-mode table {
+            border-color: #444;
+        }
+        
+        .dark-mode th {
+            background-color: #444;
+        }
+        
+        .dark-mode tr:nth-child(even) {
+            background-color: #3a3a3a;
+        }
+        
+        h1, h2, h3, h4 {
+            color: #2c3e50;
+            margin-top: 1.5em;
+        }
+        
+        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4 {
+            color: #e0e0e0;
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 0.5em;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.3em;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 0.3em;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+        }
+        
+        h4 {
+            font-size: 1.2em;
+        }
+        
+        p {
+            margin-bottom: 1em;
+        }
+        
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 1em;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: monospace;
+            margin-bottom: 1em;
+        }
+        
+        .dark-mode pre {
+            background-color: #444;
+        }
+        
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 1em 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode img {
+            border-color: #444;
+        }
+        
+        .screenshot-container {
+            margin: 2em 0;
+        }
+        
+        .screenshot-container img {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .caption {
+            text-align: center;
+            font-style: italic;
+            margin-top: 0.5em;
+            color: #666;
+        }
+        
+        .dark-mode .caption {
+            color: #aaa;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5em;
+            border: 1px solid #ddd;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f5f5f5;
+        }
+        
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1.5em;
+            margin-bottom: 1.5em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tip {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+        
+        .dark-mode .tip {
+            background-color: #2c3e50;
+            border-left-color: #3498db;
+        }
+        
+        .warning {
+            background-color: #fff5e6;
+            border-left: 4px solid #f39c12;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+        
+        .dark-mode .warning {
+            background-color: #3d3223;
+            border-left-color: #f39c12;
+        }
+        
+        .note {
+            background-color: #f0f0f0;
+            border-left: 4px solid #95a5a6;
+            padding: 1em;
+            margin-bottom: 1em;
+        }
+        
+        .dark-mode .note {
+            background-color: #333;
+            border-left-color: #95a5a6;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 2em 0;
+        }
+        
+        .feature-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1.5em;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode .feature-card {
+            border-color: #444;
+        }
+        
+        .feature-icon {
+            font-size: 2em;
+            color: #3498db;
+            margin-bottom: 0.5em;
+        }
+        
+        .feature-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+        }
+        
+        .toc {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1.5em;
+            margin-bottom: 2em;
+        }
+        
+        .dark-mode .toc {
+            background-color: #333;
+            border-color: #444;
+        }
+        
+        .toc-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 1em;
+            text-align: center;
+        }
+        
+        .toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin-bottom: 0.5em;
+        }
+        
+        .toc-h2 {
+            padding-left: 1em;
+        }
+        
+        .toc-h3 {
+            padding-left: 2em;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3498db;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .back-to-top:hover {
+            opacity: 1;
+            text-decoration: none;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        
+        .dark-mode .theme-toggle {
+            background-color: #333;
+            border-color: #444;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            h3 {
+                font-size: 1.2em;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="theme-toggle" onclick="toggleDarkMode()">
+        <i class="fas fa-moon"></i> Toggle Theme
+    </div>
+    
+    <a href="#top" class="back-to-top" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    <h1 id="top">Story Database Documentation</h1>
+    
+    <div class="toc">
+        <div class="toc-title">Table of Contents</div>
+        <ul>
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#getting-started">2. Getting Started</a></li>
+            <li><a href="#dashboard">3. Dashboard Overview</a></li>
+            <li><a href="#characters">4. Character Management</a></li>
+            <li><a href="#locations">5. Location Management</a></li>
+            <li><a href="#relationships">6. Relationship Mapping</a></li>
+            <li><a href="#plots">7. Plot Management</a></li>
+            <li><a href="#worldbuilding">8. World-Building</a></li>
+            <li><a href="#timeline">9. Timeline Visualization</a></li>
+            <li><a href="#statistics">10. Statistics and Analysis</a></li>
+            <li><a href="#data-management">11. Data Management</a></li>
+            <li><a href="#book-analysis">12. Book Analysis</a></li>
+            <li><a href="#cloud-storage">13. Cloud Storage Integration</a></li>
+            <li><a href="#tips">14. Tips and Best Practices</a></li>
+            <li><a href="#troubleshooting">15. Troubleshooting</a></li>
+        </ul>
+    </div>
+    
+    <section id="introduction">
+        <h2>1. Introduction</h2>
+        <div class="card">
+            <p>Welcome to <strong>Story Database</strong>, a comprehensive web application designed to help writers organize and manage all aspects of their stories. Whether you're working on a novel, screenplay, or game narrative, Story Database provides the tools you need to create detailed outlines, manage characters and locations, map relationships, and visualize your story's timeline.</p>
+            
+            <p>This documentation provides a detailed guide to using Story Database, including step-by-step instructions, screenshots, and tips to help you get the most out of the application.</p>
+            
+            <h3>Key Features</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-user-circle"></i></div>
+                    <div class="feature-title">Character Management</div>
+                    <p>Create and manage detailed character profiles, including personal information, story roles, relationships, and custom fields.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="feature-title">Location Management</div>
+                    <p>Define and organize locations within your story world, including descriptions, images, and related elements.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="feature-title">Relationship Mapping</div>
+                    <p>Visualize and manage relationships between characters with an interactive network diagram.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-scroll"></i></div>
+                    <div class="feature-title">Plot Management</div>
+                    <p>Outline plot points, story arcs, and chapters, linking them to characters and locations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                    <div class="feature-title">World-Building</div>
+                    <p>Create and manage world-building elements, such as cultures, histories, and magic systems.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <div class="feature-title">Timeline Visualization</div>
+                    <p>Display story events in chronological order to maintain consistency and track character arcs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="feature-title">Statistics and Analysis</div>
+                    <p>Generate statistics and insights about your story elements to identify patterns and gaps.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-cloud"></i></div>
+                    <div class="feature-title">Cloud Storage Integration</div>
+                    <p>Integrate with cloud storage providers for data backup and synchronization across devices.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="getting-started">
+        <h2>2. Getting Started</h2>
+        <div class="card">
+            <h3>System Requirements</h3>
+            <p>Story Database is a web-based application that runs in your browser. For optimal performance, we recommend:</p>
+            <ul>
+                <li>A modern web browser (Chrome, Firefox, Edge, or Safari)</li>
+                <li>JavaScript enabled</li>
+                <li>At least 4GB of RAM</li>
+                <li>Screen resolution of 1280×720 or higher</li>
+            </ul>
+            
+            <h3>First-Time Setup</h3>
+            <p>When you first open Story Database, you'll be presented with the main interface. Here's what you should do to get started:</p>
+            
+            <ol>
+                <li><strong>Navigate to the Dashboard:</strong> Click on the "Dashboard" tab in the navigation bar to see an overview of your story elements.</li>
+                <li><strong>Create Your First Character:</strong> Click on the "Characters" tab and use the form to add your first character.</li>
+                <li><strong>Add a Location:</strong> Navigate to the "Locations" tab to add your first story location.</li>
+                <li><strong>Define Relationships:</strong> Once you have multiple characters, you can define relationships between them in the "Relationships" tab.</li>
+                <li><strong>Add Plot Points:</strong> Use the "Plots" tab to start outlining your story's plot points.</li>
+                <li><strong>Build Your World:</strong> Add world-building elements in the "World-Building" tab.</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Start with the core elements of your story (main characters, key locations, and major plot points) before adding more detailed information. This will help you establish a solid foundation for your story database.
+            </div>
+            
+            <h3>Data Storage</h3>
+            <p>By default, Story Database stores all your data in your browser's local storage. This means:</p>
+            <ul>
+                <li>Your data remains on your computer</li>
+                <li>No internet connection is required to use the application</li>
+                <li>Your data persists between browser sessions</li>
+            </ul>
+            
+            <div class="warning">
+                <strong>Important:</strong> Local storage has limitations. We strongly recommend regularly backing up your data using the export functions or setting up cloud storage integration to prevent data loss.
+            </div>
+        </div>
+    </section>
+    
+    <section id="dashboard">
+        <h2>3. Dashboard Overview</h2>
+        <div class="card">
+            <p>The Dashboard is your central hub for accessing all features of Story Database and getting a quick overview of your story elements.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/Dashboard.png" alt="Dashboard Screenshot">
+                <div class="caption">The Story Database Dashboard provides a quick overview of your story elements.</div>
+            </div>
+            
+            <h3>Dashboard Sections</h3>
+            
+            <h4>Welcome Section</h4>
+            <p>At the top of the dashboard, you'll find a welcome message that introduces you to Story Database.</p>
+            
+            <h4>Story Overview</h4>
+            <p>The Story Overview section displays statistics about your story elements:</p>
+            <ul>
+                <li><strong>Characters:</strong> Total number of characters in your database</li>
+                <li><strong>Locations:</strong> Total number of locations</li>
+                <li><strong>Relationships:</strong> Total number of defined relationships between characters</li>
+                <li><strong>Plot Points:</strong> Total number of plot points</li>
+                <li><strong>World Elements:</strong> Total number of world-building elements</li>
+                <li><strong>Timeline:</strong> Quick access to your story timeline</li>
+                <li><strong>Statistics:</strong> Detailed statistics about your story</li>
+            </ul>
+            
+            <p>Each card in this section is clickable and will take you directly to the corresponding tab.</p>
+            
+            <h4>Additional Resources</h4>
+            <p>The Additional Resources section provides quick access to helpful resources:</p>
+            <ul>
+                <li><strong>Read Me:</strong> Opens this documentation in a new tab</li>
+                <li><strong>Webpage:</strong> Links to the Story Database website</li>
+            </ul>
+            
+            <h4>Recent Activity</h4>
+            <p>The Recent Activity section displays a log of your recent actions in Story Database, such as adding or editing characters, locations, etc. This helps you keep track of your progress and quickly access recently modified elements.</p>
+            
+            <h4>Series Overview (if applicable)</h4>
+            <p>If you have defined series in your database, the Series Overview section will display statistics for each series, such as the number of characters per series.</p>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the dashboard as your starting point whenever you open Story Database. It provides a quick overview of your story and easy access to all features.
+            </div>
+        </div>
+    </section>
+    
+    <section id="characters">
+        <h2>4. Character Management</h2>
+        <div class="card">
+            <p>The Characters tab allows you to create and manage detailed character profiles for your story.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/Character.png" alt="Characters Tab Screenshot">
+                <div class="caption">The Characters tab provides tools for creating and managing character profiles.</div>
+            </div>
+            
+            <h3>Character Form</h3>
+            <p>The character form is divided into three main sections:</p>
+            
+            <h4>Personal Information</h4>
+            <ul>
+                <li><strong>Image Upload:</strong> Add a character portrait or reference image</li>
+                <li><strong>Title:</strong> Character's title (e.g., Dr., King, Captain)</li>
+                <li><strong>First Name:</strong> Character's first name (required)</li>
+                <li><strong>Last Name:</strong> Character's last name</li>
+                <li><strong>Name Generator:</strong> Generate random names based on race</li>
+                <li><strong>Sex:</strong> Character's sex</li>
+                <li><strong>Race:</strong> Character's race or species</li>
+            </ul>
+            
+            <h4>Story Information</h4>
+            <ul>
+                <li><strong>Role:</strong> Character's role in the story (e.g., Protagonist, Antagonist, Mentor)</li>
+                <li><strong>Series:</strong> The series this character belongs to</li>
+                <li><strong>Book:</strong> The book this character appears in</li>
+                <li><strong>Character Relationships:</strong> Define relationships with other characters</li>
+                <li><strong>Tags:</strong> Add tags to categorize and filter characters</li>
+            </ul>
+            
+            <h4>Additional Details</h4>
+            <ul>
+                <li><strong>Custom Fields:</strong> Add custom fields for additional character information</li>
+                <li><strong>Notes:</strong> Rich text editor for detailed character notes</li>
+            </ul>
+            
+            <h3>Adding a New Character</h3>
+            <ol>
+                <li>Fill out the character form with the character's information</li>
+                <li>Click the "Add" button to add the character to your database</li>
+            </ol>
+            
+            <h3>Character Table</h3>
+            <p>The character table displays all characters in your database with the following columns:</p>
+            <ul>
+                <li><strong>Image:</strong> Character's image (if uploaded)</li>
+                <li><strong>Title:</strong> Character's title</li>
+                <li><strong>First Name:</strong> Character's first name</li>
+                <li><strong>Last Name:</strong> Character's last name</li>
+                <li><strong>Sex:</strong> Character's sex</li>
+                <li><strong>Race:</strong> Character's race</li>
+                <li><strong>Series:</strong> The series this character belongs to</li>
+                <li><strong>Book:</strong> The book this character appears in</li>
+                <li><strong>Notes:</strong> Preview of character notes</li>
+                <li><strong>Actions:</strong> Edit, delete, and view options</li>
+            </ul>
+            
+            <h3>Searching and Filtering Characters</h3>
+            <p>Use the search bar at the top of the character table to search for characters by name, series, book, etc. You can also use the advanced search options to filter characters by specific criteria.</p>
+            
+            <h3>Tag Cloud</h3>
+            <p>The tag cloud displays all tags used for characters, with the size of each tag indicating how frequently it's used. Click on a tag to filter characters by that tag.</p>
+            
+            <h3>Editing a Character</h3>
+            <ol>
+                <li>Click the "Edit" button in the Actions column for the character you want to edit</li>
+                <li>The character form will be populated with the character's information</li>
+                <li>Make your changes</li>
+                <li>Click the "Update" button to save your changes</li>
+            </ol>
+            
+            <h3>Deleting a Character</h3>
+            <ol>
+                <li>Click the "Delete" button in the Actions column for the character you want to delete</li>
+                <li>Confirm the deletion when prompted</li>
+            </ol>
+            
+            <div class="warning">
+                <strong>Warning:</strong> Deleting a character will also delete all relationships associated with that character. This action cannot be undone.
+            </div>
+            
+            <h3>Viewing Character Details</h3>
+            <ol>
+                <li>Click the "View" button in the Actions column for the character you want to view</li>
+                <li>A modal will open displaying all details for the character</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the name generator to quickly create names for minor characters or when you're stuck for ideas. You can generate names for different races, such as Human, Elf, Dwarf, etc.
+            </div>
+        </div>
+    </section>
+    
+    <section id="locations">
+        <h2>5. Location Management</h2>
+        <div class="card">
+            <p>The Locations tab allows you to create and manage detailed profiles for the locations in your story.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/locations.png" alt="Locations Tab Screenshot">
+                <div class="caption">The Locations tab provides tools for creating and managing location profiles.</div>
+            </div>
+            
+            <h3>Location Form</h3>
+            <p>The location form is divided into three main sections:</p>
+            
+            <h4>Basic Information</h4>
+            <ul>
+                <li><strong>Image Upload:</strong> Add a location image or map</li>
+                <li><strong>Name:</strong> Location name (required)</li>
+                <li><strong>Name Generator:</strong> Generate random location names based on type</li>
+                <li><strong>Type:</strong> Location type (e.g., City, Forest, Castle)</li>
+                <li><strong>Size/Scale:</strong> Physical size or scale of the location</li>
+            </ul>
+            
+            <h4>Story Context</h4>
+            <ul>
+                <li><strong>Series:</strong> The series this location belongs to</li>
+                <li><strong>Book:</strong> The book this location appears in</li>
+                <li><strong>Tags:</strong> Add tags to categorize and filter locations</li>
+                <li><strong>Description:</strong> Rich text editor for detailed location description</li>
+            </ul>
+            
+            <h4>Additional Details</h4>
+            <ul>
+                <li><strong>Climate/Environment:</strong> Climate or environmental conditions</li>
+                <li><strong>Population/Inhabitants:</strong> Information about who lives there</li>
+                <li><strong>Notes:</strong> Additional notes about the location</li>
+            </ul>
+            
+            <h3>Adding a New Location</h3>
+            <ol>
+                <li>Fill out the location form with the location's information</li>
+                <li>Click the "Add" button to add the location to your database</li>
+            </ol>
+            
+            <h3>Location Table</h3>
+            <p>The location table displays all locations in your database with the following columns:</p>
+            <ul>
+                <li><strong>Image:</strong> Location image (if uploaded)</li>
+                <li><strong>Name:</strong> Location name</li>
+                <li><strong>Type:</strong> Location type</li>
+                <li><strong>Size/Scale:</strong> Physical size or scale</li>
+                <li><strong>Series:</strong> The series this location belongs to</li>
+                <li><strong>Book:</strong> The book this location appears in</li>
+                <li><strong>Description:</strong> Preview of location description</li>
+                <li><strong>Actions:</strong> Edit, delete, and view options</li>
+            </ul>
+            
+            <h3>Searching and Filtering Locations</h3>
+            <p>Use the search bar at the top of the location table to search for locations by name, type, series, etc. You can also use the advanced search options to filter locations by specific criteria.</p>
+            
+            <h3>Tag Cloud</h3>
+            <p>The tag cloud displays all tags used for locations, with the size of each tag indicating how frequently it's used. Click on a tag to filter locations by that tag.</p>
+            
+            <h3>Editing a Location</h3>
+            <ol>
+                <li>Click the "Edit" button in the Actions column for the location you want to edit</li>
+                <li>The location form will be populated with the location's information</li>
+                <li>Make your changes</li>
+                <li>Click the "Update" button to save your changes</li>
+            </ol>
+            
+            <h3>Deleting a Location</h3>
+            <ol>
+                <li>Click the "Delete" button in the Actions column for the location you want to delete</li>
+                <li>Confirm the deletion when prompted</li>
+            </ol>
+            
+            <div class="warning">
+                <strong>Warning:</strong> Deleting a location will also remove it from any plot points or world-building elements that reference it. This action cannot be undone.
+            </div>
+            
+            <h3>Viewing Location Details</h3>
+            <ol>
+                <li>Click the "View" button in the Actions column for the location you want to view</li>
+                <li>A modal will open displaying all details for the location</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the location name generator to quickly create names for different types of locations. You can generate names for cities, towns, forests, mountains, and more.
+            </div>
+        </div>
+    </section>
+    
+    <section id="relationships">
+        <h2>6. Relationship Mapping</h2>
+        <div class="card">
+            <p>The Relationships tab allows you to visualize and manage relationships between characters in your story.</p>
+            
+            <h3>Relationship Network Diagram</h3>
+            <p>The relationship network diagram provides a visual representation of character relationships. Each character is represented by a node, and relationships between characters are represented by lines connecting the nodes.</p>
+            
+            <h3>Filtering Relationships</h3>
+            <p>Use the filters at the top of the Relationships tab to focus on specific types of relationships or characters:</p>
+            <ul>
+                <li><strong>Relationship Type:</strong> Filter by relationship type (e.g., Friends, Family, Allies)</li>
+                <li><strong>Character:</strong> Filter to show only relationships involving a specific character</li>
+            </ul>
+            
+            <h3>Adding Relationships</h3>
+            <p>Relationships are added through the Character form in the Characters tab:</p>
+            <ol>
+                <li>Navigate to the Characters tab</li>
+                <li>Edit an existing character or create a new one</li>
+                <li>In the "Character Relationships" section, select another character and the relationship type</li>
+                <li>Click the "Add" button to create the relationship</li>
+            </ol>
+            
+            <h3>Relationship Types</h3>
+            <p>Story Database supports the following relationship types:</p>
+            <ul>
+                <li><strong>Friend:</strong> Characters who are friends</li>
+                <li><strong>Family:</strong> Characters who are related by blood or marriage</li>
+                <li><strong>Ally:</strong> Characters who work together toward a common goal</li>
+                <li><strong>Enemy:</strong> Characters who are in conflict with each other</li>
+                <li><strong>Mentor:</strong> Character who guides or teaches another character</li>
+                <li><strong>Student:</strong> Character who learns from another character</li>
+                <li><strong>Lover:</strong> Characters in a romantic relationship</li>
+                <li><strong>Rival:</strong> Characters who compete with each other</li>
+                <li><strong>Other:</strong> Any other type of relationship</li>
+            </ul>
+            
+            <h3>Relationship List</h3>
+            <p>Below the network diagram, you'll find a list of all relationships in your database. Each entry includes:</p>
+            <ul>
+                <li>The names of the two characters</li>
+                <li>The relationship type</li>
+                <li>Options to edit or delete the relationship</li>
+            </ul>
+            
+            <h3>Editing a Relationship</h3>
+            <ol>
+                <li>Click the "Edit" button next to the relationship you want to edit</li>
+                <li>Select a new relationship type from the dropdown menu</li>
+                <li>Click "Save" to update the relationship</li>
+            </ol>
+            
+            <h3>Deleting a Relationship</h3>
+            <ol>
+                <li>Click the "Delete" button next to the relationship you want to delete</li>
+                <li>Confirm the deletion when prompted</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the relationship network diagram to identify isolated characters (those with few or no connections) or to visualize character groups and factions within your story.
+            </div>
+        </div>
+    </section>
+    
+    <section id="plots">
+        <h2>7. Plot Management</h2>
+        <div class="card">
+            <p>The Plots tab allows you to outline and manage plot points, story arcs, and chapters for your story.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/plots.png" alt="Plots Tab Screenshot">
+                <div class="caption">The Plots tab provides tools for creating and managing plot points and story arcs.</div>
+            </div>
+            
+            <h3>Plot Form</h3>
+            <p>The plot form is divided into three main sections:</p>
+            
+            <h4>Basic Information</h4>
+            <ul>
+                <li><strong>Title:</strong> Plot point title (required)</li>
+                <li><strong>Type:</strong> Plot point type (e.g., Main Plot, Subplot, Character Arc)</li>
+                <li><strong>Status:</strong> Current status (e.g., Planned, In Progress, Completed)</li>
+                <li><strong>Order/Sequence:</strong> Numerical order in the plot sequence</li>
+            </ul>
+            
+            <h4>Story Context</h4>
+            <ul>
+                <li><strong>Series:</strong> The series this plot point belongs to</li>
+                <li><strong>Book:</strong> The book this plot point appears in</li>
+                <li><strong>Chapter:</strong> The chapter this plot point appears in</li>
+                <li><strong>Tags:</strong> Add tags to categorize and filter plot points</li>
+            </ul>
+            
+            <h4>Related Elements</h4>
+            <ul>
+                <li><strong>Characters:</strong> Characters involved in this plot point</li>
+                <li><strong>Locations:</strong> Locations where this plot point takes place</li>
+                <li><strong>Description:</strong> Rich text editor for detailed plot description</li>
+            </ul>
+            
+            <h3>Adding a New Plot Point</h3>
+            <ol>
+                <li>Fill out the plot form with the plot point's information</li>
+                <li>Click the "Add" button to add the plot point to your database</li>
+            </ol>
+            
+            <h3>Plot Table</h3>
+            <p>The plot table displays all plot points in your database with the following columns:</p>
+            <ul>
+                <li><strong>Title:</strong> Plot point title</li>
+                <li><strong>Type:</strong> Plot point type</li>
+                <li><strong>Series:</strong> The series this plot point belongs to</li>
+                <li><strong>Book:</strong> The book this plot point appears in</li>
+                <li><strong>Chapter:</strong> The chapter this plot point appears in</li>
+                <li><strong>Status:</strong> Current status</li>
+                <li><strong>Description:</strong> Preview of plot description</li>
+                <li><strong>Actions:</strong> Edit, delete, and view options</li>
+            </ul>
+            
+            <h3>Searching and Filtering Plots</h3>
+            <p>Use the search bar at the top of the plot table to search for plot points by title, type, series, etc. You can also use the advanced search options to filter plot points by specific criteria.</p>
+            
+            <h3>Tag Cloud</h3>
+            <p>The tag cloud displays all tags used for plot points, with the size of each tag indicating how frequently it's used. Click on a tag to filter plot points by that tag.</p>
+            
+            <h3>Plot Arc Visualization</h3>
+            <p>The plot arc visualization provides a graphical representation of your story's plot structure, showing the progression of plot points and their relationships to each other.</p>
+            
+            <h3>Editing a Plot Point</h3>
+            <ol>
+                <li>Click the "Edit" button in the Actions column for the plot point you want to edit</li>
+                <li>The plot form will be populated with the plot point's information</li>
+                <li>Make your changes</li>
+                <li>Click the "Update" button to save your changes</li>
+            </ol>
+            
+            <h3>Deleting a Plot Point</h3>
+            <ol>
+                <li>Click the "Delete" button in the Actions column for the plot point you want to delete</li>
+                <li>Confirm the deletion when prompted</li>
+            </ol>
+            
+            <h3>Viewing Plot Details</h3>
+            <ol>
+                <li>Click the "View" button in the Actions column for the plot point you want to view</li>
+                <li>A modal will open displaying all details for the plot point</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the Order/Sequence field to arrange your plot points in chronological order. This will help you visualize the flow of your story and ensure that events occur in a logical sequence.
+            </div>
+        </div>
+    </section>
+    
+    <section id="worldbuilding">
+        <h2>8. World-Building</h2>
+        <div class="card">
+            <p>The World-Building tab allows you to create and manage world-building elements for your story, such as cultures, histories, magic systems, and more.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/worldbuilding.png" alt="World-Building Tab Screenshot">
+                <div class="caption">The World-Building tab provides tools for creating and managing world-building elements.</div>
+            </div>
+            
+            <h3>World Element Form</h3>
+            <p>The world element form is divided into three main sections:</p>
+            
+            <h4>Basic Information</h4>
+            <ul>
+                <li><strong>Name:</strong> Element name (required)</li>
+                <li><strong>Category:</strong> Element category (e.g., Culture, History, Magic System)</li>
+                <li><strong>Series:</strong> The series this element belongs to</li>
+            </ul>
+            
+            <h4>Related Elements</h4>
+            <ul>
+                <li><strong>Related Elements:</strong> Other world-building elements related to this one</li>
+                <li><strong>Tags:</strong> Add tags to categorize and filter world elements</li>
+            </ul>
+            
+            <h4>Description</h4>
+            <ul>
+                <li><strong>Description:</strong> Rich text editor for detailed element description</li>
+            </ul>
+            
+            <h3>Adding a New World Element</h3>
+            <ol>
+                <li>Fill out the world element form with the element's information</li>
+                <li>Click the "Add" button to add the element to your database</li>
+            </ol>
+            
+            <h3>World Element Table</h3>
+            <p>The world element table displays all world-building elements in your database with the following columns:</p>
+            <ul>
+                <li><strong>Name:</strong> Element name</li>
+                <li><strong>Category:</strong> Element category</li>
+                <li><strong>Series:</strong> The series this element belongs to</li>
+                <li><strong>Description:</strong> Preview of element description</li>
+                <li><strong>Actions:</strong> Edit, delete, and view options</li>
+            </ul>
+            
+            <h3>Searching and Filtering World Elements</h3>
+            <p>Use the search bar at the top of the world element table to search for elements by name, category, series, etc. You can also use the advanced search options to filter elements by specific criteria.</p>
+            
+            <h3>Tag Cloud</h3>
+            <p>The tag cloud displays all tags used for world elements, with the size of each tag indicating how frequently it's used. Click on a tag to filter world elements by that tag.</p>
+            
+            <h3>World-Building Visualization</h3>
+            <p>The world-building visualization provides a graphical representation of your story's world elements and their relationships to each other.</p>
+            
+            <h3>Editing a World Element</h3>
+            <ol>
+                <li>Click the "Edit" button in the Actions column for the element you want to edit</li>
+                <li>The world element form will be populated with the element's information</li>
+                <li>Make your changes</li>
+                <li>Click the "Update" button to save your changes</li>
+            </ol>
+            
+            <h3>Deleting a World Element</h3>
+            <ol>
+                <li>Click the "Delete" button in the Actions column for the element you want to delete</li>
+                <li>Confirm the deletion when prompted</li>
+            </ol>
+            
+            <h3>Viewing World Element Details</h3>
+            <ol>
+                <li>Click the "View" button in the Actions column for the element you want to view</li>
+                <li>A modal will open displaying all details for the element</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the Related Elements field to create connections between different world-building elements. For example, you might connect a culture to its history, religion, and magic system to create a cohesive world.
+            </div>
+        </div>
+    </section>
+    
+    <section id="timeline">
+        <h2>9. Timeline Visualization</h2>
+        <div class="card">
+            <p>The Timeline tab allows you to visualize your story's events in chronological order, helping you maintain consistency and track character arcs.</p>
+            
+            <h3>Timeline Filters</h3>
+            <p>Use the filters at the top of the Timeline tab to focus on specific aspects of your timeline:</p>
+            <ul>
+                <li><strong>Series:</strong> Filter by series</li>
+                <li><strong>Book:</strong> Filter by book</li>
+                <li><strong>Character:</strong> Filter to show only events involving a specific character</li>
+            </ul>
+            
+            <h3>Timeline Display</h3>
+            <p>The timeline displays events in chronological order, with each event represented by a card containing:</p>
+            <ul>
+                <li>Event title</li>
+                <li>Event date/time</li>
+                <li>Characters involved</li>
+                <li>Location</li>
+                <li>Brief description</li>
+            </ul>
+            
+            <h3>Adding Events to the Timeline</h3>
+            <p>Events are automatically added to the timeline based on plot points you create in the Plots tab. To add an event to the timeline:</p>
+            <ol>
+                <li>Navigate to the Plots tab</li>
+                <li>Create a new plot point or edit an existing one</li>
+                <li>Ensure the plot point has an Order/Sequence value to determine its position in the timeline</li>
+                <li>The plot point will appear in the timeline based on its sequence value</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the timeline to identify potential inconsistencies in your story's chronology. For example, if a character appears in two different locations at the same time, the timeline will help you spot this issue.
+            </div>
+        </div>
+    </section>
+    
+    <section id="statistics">
+        <h2>10. Statistics and Analysis</h2>
+        <div class="card">
+            <p>The Statistics tab provides insights and analytics about your story elements, helping you identify patterns, gaps, and opportunities for improvement.</p>
+            
+            <h3>Character Statistics</h3>
+            <p>The Character Statistics section provides information about your characters, such as:</p>
+            <ul>
+                <li>Total number of characters</li>
+                <li>Distribution of characters by role (e.g., Protagonist, Antagonist, Supporting)</li>
+                <li>Distribution of characters by sex</li>
+                <li>Distribution of characters by race</li>
+                <li>Characters per series/book</li>
+                <li>Most connected characters (based on relationships)</li>
+            </ul>
+            
+            <h3>Location Statistics</h3>
+            <p>The Location Statistics section provides information about your locations, such as:</p>
+            <ul>
+                <li>Total number of locations</li>
+                <li>Distribution of locations by type (e.g., City, Forest, Castle)</li>
+                <li>Locations per series/book</li>
+                <li>Most frequently used locations (based on plot points)</li>
+            </ul>
+            
+            <h3>Plot Statistics</h3>
+            <p>The Plot Statistics section provides information about your plot points, such as:</p>
+            <ul>
+                <li>Total number of plot points</li>
+                <li>Distribution of plot points by type (e.g., Main Plot, Subplot)</li>
+                <li>Distribution of plot points by status (e.g., Planned, In Progress, Completed)</li>
+                <li>Plot points per series/book/chapter</li>
+            </ul>
+            
+            <h3>World-Building Statistics</h3>
+            <p>The World-Building Statistics section provides information about your world-building elements, such as:</p>
+            <ul>
+                <li>Total number of world elements</li>
+                <li>Distribution of world elements by category</li>
+                <li>World elements per series</li>
+            </ul>
+            
+            <h3>Tag Analysis</h3>
+            <p>The Tag Analysis section provides information about your tags, such as:</p>
+            <ul>
+                <li>Most frequently used tags</li>
+                <li>Tags per entity type (Character, Location, Plot, World Element)</li>
+            </ul>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Use the statistics to identify areas of your story that may need more development. For example, if you notice that one of your main characters has few relationships or appears in few plot points, you might want to develop that character further.
+            </div>
+        </div>
+    </section>
+    
+    <section id="data-management">
+        <h2>11. Data Management</h2>
+        <div class="card">
+            <p>Story Database provides several options for managing your data, including import, export, and backup functions.</p>
+            
+            <h3>Exporting Data</h3>
+            <p>You can export your data in JSON format for backup or transfer to another device:</p>
+            <ol>
+                <li>Navigate to the tab containing the data you want to export (Characters, Locations, etc.)</li>
+                <li>Click the "Export" button in the file controls section</li>
+                <li>Choose a location to save the exported file</li>
+                <li>Click "Save"</li>
+            </ol>
+            
+            <h3>Exporting to PDF</h3>
+            <p>You can export your data to PDF format for printing or sharing:</p>
+            <ol>
+                <li>Navigate to the tab containing the data you want to export (Characters, Locations, etc.)</li>
+                <li>Click the "PDF" button in the file controls section</li>
+                <li>A PDF will be generated and downloaded automatically</li>
+            </ol>
+            
+            <h3>Importing Data</h3>
+            <p>You can import data from a previously exported JSON file:</p>
+            <ol>
+                <li>Navigate to the tab where you want to import data (Characters, Locations, etc.)</li>
+                <li>Click the "Import" button in the file controls section</li>
+                <li>Select the JSON file you want to import</li>
+                <li>Click "Open"</li>
+                <li>Confirm the import when prompted</li>
+            </ol>
+            
+            <div class="warning">
+                <strong>Warning:</strong> Importing data will overwrite any existing data of the same type. Make sure to back up your current data before importing.
+            </div>
+            
+            <h3>Backing Up Data</h3>
+            <p>You can create a backup of your data that will be stored in your browser's local storage:</p>
+            <ol>
+                <li>Navigate to the tab containing the data you want to back up (Characters, Locations, etc.)</li>
+                <li>Click the "Backup" button in the file controls section</li>
+                <li>Enter a name for the backup when prompted</li>
+                <li>Click "OK"</li>
+            </ol>
+            
+            <h3>Restoring from Backup</h3>
+            <p>You can restore your data from a previously created backup:</p>
+            <ol>
+                <li>Navigate to the tab containing the data you want to restore (Characters, Locations, etc.)</li>
+                <li>Click the "Backup" button in the file controls section</li>
+                <li>Select "Restore from Backup" from the dropdown menu</li>
+                <li>Select the backup you want to restore from the list</li>
+                <li>Click "Restore"</li>
+                <li>Confirm the restoration when prompted</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Create regular backups of your data to prevent loss due to browser cache clearing or other issues. We recommend exporting your data to JSON files as an additional precaution.
+            </div>
+        </div>
+    </section>
+    
+    <!-- Database Management section removed -->
+    
+    <section id="book-analysis">
+        <h2>12. Book Analysis</h2>
+        <div class="card">
+            <p>The Book Analysis feature allows you to analyze existing manuscripts to extract character information, helping you quickly populate your character database from your written work.</p>
+            
+            <div class="screenshot-container">
+                <img src="Images/Analyze.png" alt="Book Analysis Screenshot">
+                <div class="caption">The Book Analysis tab provides tools for analyzing manuscripts and extracting character information.</div>
+            </div>
+            
+            <h3>Accessing Book Analysis</h3>
+            <p>To access the Book Analysis feature:</p>
+            <ol>
+                <li>Click on the "Analyze Book" tab in the navigation bar (or use the Alt+9 keyboard shortcut)</li>
+                <li>The Book Analysis interface will load, displaying analysis options and a file upload area</li>
+            </ol>
+            
+            <h3>Analysis Options</h3>
+            <p>The Book Analysis feature offers several options for analyzing your manuscript:</p>
+            
+            <h4>Minimum Character Mentions</h4>
+            <p>Set the minimum number of times a name must appear in the text to be considered a character. This helps filter out names that are mentioned only once or twice.</p>
+            
+            <h4>Detection Methods</h4>
+            <ul>
+                <li><strong>Dialogue Attribution:</strong> Detects character names in dialogue attribution (e.g., "said John")</li>
+                <li><strong>Named Entity Recognition:</strong> Uses natural language processing to identify names of people</li>
+                <li><strong>Capitalized Word Analysis:</strong> Identifies capitalized words that might be names</li>
+                <li><strong>Frequency Analysis:</strong> Analyzes word frequency to identify potential character names</li>
+                <li><strong>Title & Honorific Detection:</strong> Identifies titles and honorifics (e.g., Mr., Dr., King)</li>
+                <li><strong>Direct Address Pattern:</strong> Detects names in direct address (e.g., "Hello, John")</li>
+                <li><strong>Possessive Form Detection:</strong> Identifies possessive forms of names (e.g., "John's")</li>
+                <li><strong>Character Introduction:</strong> Detects character introductions (e.g., "a man named John")</li>
+            </ul>
+            
+            <h4>Additional Options</h4>
+            <ul>
+                <li><strong>Combine name variants:</strong> Combines different forms of the same name (e.g., "John" and "Johnny")</li>
+                <li><strong>Filter common words:</strong> Filters out common words that might be mistaken for names</li>
+            </ul>
+            
+            <h3>Uploading a Book</h3>
+            <p>To upload a book for analysis:</p>
+            <ol>
+                <li>In the Book Analysis tab, locate the "Upload Book" section</li>
+                <li>Either drag and drop your book file into the designated area or click the "Choose Files" button to select a file</li>
+                <li>Supported file formats include TXT, DOCX, RTF, and HTML</li>
+            </ol>
+            
+            <h3>Analyzing a Book</h3>
+            <p>To analyze a book:</p>
+            <ol>
+                <li>Upload your book file as described above</li>
+                <li>Configure the analysis options according to your preferences</li>
+                <li>Click the "Analyze Book" button</li>
+                <li>The analysis will begin, and a progress indicator will show the status</li>
+                <li>Once complete, the results will be displayed in the "Character Analysis Results" section</li>
+            </ol>
+            
+            <h3>Character Analysis Results</h3>
+            <p>The Character Analysis Results section displays a table of detected characters with the following information:</p>
+            <ul>
+                <li><strong>Select:</strong> Checkbox to select characters for adding to your database</li>
+                <li><strong>Title:</strong> Detected title (if any)</li>
+                <li><strong>First Name:</strong> Detected first name</li>
+                <li><strong>Last Name:</strong> Detected last name</li>
+                <li><strong>Series:</strong> Series selection dropdown (optional)</li>
+                <li><strong>Book:</strong> Book selection dropdown (optional)</li>
+                <li><strong>Mentions:</strong> Number of times the character is mentioned in the text</li>
+            </ul>
+            
+            <h3>Adding Characters to Your Database</h3>
+            <p>To add detected characters to your database:</p>
+            <ol>
+                <li>Select the characters you want to add by checking the boxes in the "Select" column</li>
+                <li>Optionally, select a series and book for the characters using the dropdown menus</li>
+                <li>Click the "Add Selected to Database" button</li>
+                <li>The selected characters will be added to your character database</li>
+            </ol>
+            
+            <h3>Generating a PDF Report</h3>
+            <p>To generate a PDF report of the analysis results:</p>
+            <ol>
+                <li>After analyzing a book, click the "Generate PDF Report" button</li>
+                <li>A PDF will be generated and downloaded automatically</li>
+                <li>The report includes all detected characters and their mention counts</li>
+            </ol>
+            
+            <div class="tip">
+                <strong>Tip:</strong> For best results, start with the default analysis options and then adjust them based on your specific manuscript. Different writing styles may require different detection methods.
+            </div>
+        </div>
+    </section>
+    
+    <section id="cloud-storage">
+        <h2>13. Cloud Storage Integration</h2>
+        <div class="card">
+            <p>Story Database can integrate with cloud storage providers to automatically back up and synchronize your data across devices.</p>
+            
+            <h3>Supported Cloud Storage Providers</h3>
+            <ul>
+                <li>Google Drive</li>
+                <li>Dropbox</li>
+                <li>OneDrive</li>
+            </ul>
+            
+            <h3>Setting Up Cloud Storage</h3>
+            <ol>
+                <li>Click the "Cloud Settings" button in the file controls section of any tab</li>
+                <li>Select your preferred cloud storage provider from the dropdown menu</li>
+                <li>Click the "Connect" button</li>
+                <li>Follow the authentication process for your selected provider</li>
+                <li>Once authenticated, select a folder for storing your Story Database files</li>
+                <li>Click "Save Settings"</li>
+            </ol>
+            
+            <h3>Cloud Sync Status</h3>
+            <p>The cloud sync status indicator shows the current state of your cloud synchronization:</p>
+            <ul>
+                <li><strong>Green:</strong> Data is synced and up to date</li>
+                <li><strong>Yellow:</strong> Sync in progress</li>
+                <li><strong>Red:</strong> Sync error or not connected</li>
+            </ul>
+            
+            <h3>Manual Sync</h3>
+            <p>You can manually trigger a sync with your cloud storage:</p>
+            <ol>
+                <li>Click the "Cloud Settings" button in the file controls section</li>
+                <li>Click the "Sync Now" button</li>
+            </ol>
+            
+            <h3>Disconnecting Cloud Storage</h3>
+            <ol>
+                <li>Click the "Cloud Settings" button in the file controls section</li>
+                <li>Click the "Disconnect" button</li>
+                <li>Confirm the disconnection when prompted</li>
+            </ol>
+            
+            <div class="warning">
+                <strong>Warning:</strong> Disconnecting cloud storage will not delete your data from the cloud, but it will stop automatic synchronization. Your data will remain in your browser's local storage.
+            </div>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Cloud storage integration allows you to access your Story Database from multiple devices. For example, you can work on your story on your desktop computer and then continue on your laptop without having to manually transfer files.
+            </div>
+        </div>
+    </section>
+    
+    <section id="tips">
+        <h2>14. Tips and Best Practices</h2>
+        <div class="card">
+            <h3>Getting the Most Out of Story Database</h3>
+            
+            <h4>Start with the Basics</h4>
+            <p>Begin by adding your main characters, key locations, and major plot points. This will give you a solid foundation to build upon.</p>
+            
+            <h4>Use Tags Effectively</h4>
+            <p>Tags are a powerful way to categorize and filter your story elements. Create a consistent tagging system to help you quickly find related elements.</p>
+            
+            <h4>Leverage Relationships</h4>
+            <p>Character relationships add depth to your story. Use the Relationships tab to visualize how your characters interact and identify opportunities for conflict or alliance.</p>
+            
+            <h4>Maintain Chronology</h4>
+            <p>Use the Order/Sequence field for plot points to maintain a clear chronology. This will help you visualize your story's timeline and ensure events occur in a logical order.</p>
+            
+            <h4>Regular Backups</h4>
+            <p>Regularly export your data and/or set up cloud storage integration to prevent data loss. Local storage has limitations and can be cleared by browser updates or cache clearing.</p>
+            
+            <h4>Use Custom Fields</h4>
+            <p>Take advantage of custom fields in the Character form to add information specific to your story's needs. For example, you might add fields for magical abilities, equipment, or psychological traits.</p>
+            
+            <h4>Consistent Naming</h4>
+            <p>Establish consistent naming conventions for series, books, character roles, location types, etc. This will make it easier to filter and organize your data.</p>
+            
+            <h4>Regular Reviews</h4>
+            <p>Periodically review your story elements to ensure consistency and identify areas for development. The Statistics tab can help you identify patterns and gaps.</p>
+            
+            <h4>Use Rich Text Formatting</h4>
+            <p>Take advantage of the rich text editor for notes and descriptions. Use formatting options like bold, italic, and lists to make your content more readable and organized.</p>
+            
+            <h4>Collaborative Writing</h4>
+            <p>If you're collaborating with other writers, use the export/import functions to share your story database. Each writer can work on their own copy and then merge changes.</p>
+            
+            <div class="tip">
+                <strong>Tip:</strong> Story Database is a tool to support your writing process, not replace it. Use it to organize your ideas and maintain consistency, but don't let it constrain your creativity.
+            </div>
+        </div>
+    </section>
+    
+    <section id="troubleshooting">
+        <h2>15. Troubleshooting</h2>
+        <div class="card">
+            <h3>Common Issues and Solutions</h3>
+            
+            <h4>Data Loss</h4>
+            <p><strong>Issue:</strong> My data disappeared after clearing my browser cache or using a different browser.</p>
+            <p><strong>Solution:</strong> Story Database uses local storage by default, which is browser-specific and can be cleared. To prevent data loss:</p>
+            <ul>
+                <li>Regularly export your data to JSON files</li>
+                <li>Set up cloud storage integration</li>
+                <li>Create regular backups using the Backup function</li>
+            </ul>
+            
+            <h4>Performance Issues</h4>
+            <p><strong>Issue:</strong> The application is running slowly or becoming unresponsive.</p>
+            <p><strong>Solution:</strong> Performance issues can occur when you have a large amount of data. Try the following:</p>
+            <ul>
+                <li>Clear your browser cache and reload the application</li>
+                <li>Export your data, clear local storage, and then import your data again</li>
+                <li>If you have a very large database, consider splitting it into multiple databases (e.g., one per series)</li>
+            </ul>
+            
+            <h4>Import Errors</h4>
+            <p><strong>Issue:</strong> I'm getting errors when trying to import data.</p>
+            <p><strong>Solution:</strong> Import errors usually occur when the imported file is not in the correct format. Ensure that:</p>
+            <ul>
+                <li>The file was exported from Story Database</li>
+                <li>The file has not been modified since export</li>
+                <li>You're importing to the correct tab (e.g., Character data to the Characters tab)</li>
+            </ul>
+            
+            <h4>Cloud Storage Sync Issues</h4>
+            <p><strong>Issue:</strong> My data is not syncing with cloud storage.</p>
+            <p><strong>Solution:</strong> Cloud storage sync issues can have several causes:</p>
+            <ul>
+                <li>Check your internet connection</li>
+                <li>Ensure you're still authenticated with your cloud storage provider</li>
+                <li>Try disconnecting and reconnecting your cloud storage</li>
+                <li>Check if your cloud storage quota is full</li>
+            </ul>
+            
+            <h4>Browser Compatibility</h4>
+            <p><strong>Issue:</strong> Some features are not working in my browser.</p>
+            <p><strong>Solution:</strong> Story Database is designed to work with modern browsers. If you're experiencing issues:</p>
+            <ul>
+                <li>Update your browser to the latest version</li>
+                <li>Try using a different browser (Chrome, Firefox, Edge, or Safari)</li>
+                <li>Ensure JavaScript is enabled in your browser settings</li>
+            </ul>
+            
+            <h4>Image Upload Issues</h4>
+            <p><strong>Issue:</strong> I can't upload images or images are not displaying.</p>
+            <p><strong>Solution:</strong> Image issues can be caused by:</p>
+            <ul>
+                <li>File size too large (try using a smaller image)</li>
+                <li>Unsupported file format (use JPG, PNG, or GIF)</li>
+                <li>Browser storage limitations (clear some space in your browser storage)</li>
+            </ul>
+            
+            <div class="note">
+                <strong>Note:</strong> If you continue to experience issues that aren't resolved by these troubleshooting steps, try clearing your browser cache and reloading the application. If problems persist, you may need to export your data, clear your browser's local storage, and then import your data again.
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // Toggle dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Update theme toggle icon
+            const themeToggle = document.querySelector('.theme-toggle i');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.className = 'fas fa-sun';
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                themeToggle.className = 'fas fa-moon';
+                localStorage.setItem('darkMode', 'disabled');
+            }
+        }
+        
+        // Check for saved theme preference
+        document.addEventListener('DOMContentLoaded', function() {
+            if (localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Show/hide back-to-top button based on scroll position
+            window.addEventListener('scroll', function() {
+                const backToTopButton = document.querySelector('.back-to-top');
+                if (window.pageYOffset > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

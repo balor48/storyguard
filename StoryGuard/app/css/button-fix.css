@@ -1,0 +1,368 @@
+/**
+ * Button Fix CSS
+ * This file contains fixes for button alignment issues
+ */
+
+/* Fix for file controls */
+.file-controls {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 0.3rem !important;
+    margin-bottom: 20px !important;
+    width: 100% !important;
+}
+
+/* Fix for all buttons in file controls */
+.file-controls button {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    width: 100% !important;
+}
+
+/* Fix for Cloud Settings button only */
+.cloud-settings-btn {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    line-height: 1 !important;
+    width: 100% !important;
+    background-color: #3498db !important;
+    color: white !important;
+}
+
+/* Fix for the cloud status container - Allow display in all tabs */
+.cloud-status-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+}
+
+/* Cloud status styling - Allow display in all tabs */
+.cloud-status {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 9999 !important;
+}
+
+/* Fix for cloud status text */
+.cloud-status .cloud-text {
+    display: block !important;
+    margin-bottom: 5px !important;
+}
+
+/* Fix for cloud status icon */
+.cloud-status .cloud-icon {
+    display: block !important;
+    margin-bottom: 5px !important;
+    font-size: 1.2rem !important;
+}
+
+/* Fix for cloud user info */
+.cloud-status .cloud-user {
+    display: block !important;
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+}
+
+/* Fix for cloud last sync info */
+.cloud-status .cloud-last-sync {
+    display: block !important;
+    font-size: 0.8rem !important;
+    margin-bottom: 5px !important;
+}
+
+/* Advanced Search positioning */
+.advanced-search-toggle {
+    margin-top: 15px !important;
+    display: block !important;
+    text-align: right !important;
+    clear: both !important;
+}
+
+/* Advanced Search container */
+.search-container {
+    clear: both !important;
+    padding-top: 10px !important;
+}
+
+/* Hide duplicate cloud settings buttons */
+.search-container .cloud-settings-btn,
+.search-container .cloud-status {
+    display: none !important;
+}
+
+/* Clear floats */
+.file-controls:after,
+.cloud-status-container:after {
+    content: "" !important;
+    display: table !important;
+    clear: both !important;
+}
+
+/* Add icons to buttons */
+.file-controls button i {
+    margin-right: 5px !important;
+}
+
+/* Fix for all input fields */
+input[type="text"],
+input:not([type]),
+.new-item-form input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Specific fixes for the problematic input fields */
+input[placeholder="Enter first name"],
+input[placeholder="Enter last name"],
+input[placeholder="Enter sex"],
+input[placeholder="Enter race"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* Fix for new item forms in both character and location tabs */
+.new-item-form {
+    display: none;
+    margin-top: 10px !important;
+}
+
+.new-item-form input {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-bottom: 5px !important;
+}
+
+.new-item-form button {
+    padding: 5px 10px !important;
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 4px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+}
+
+/* Ensure consistent dropdown behavior */
+#locations-tab select[onchange*="handleDropdownChange"] {
+    width: 100% !important;
+    margin-bottom: 5px !important;
+}
+
+/* Add missing new item forms for locations */
+#newLocationSeriesForm,
+#newLocationBookForm {
+    display: none;
+    margin-top: 10px !important;
+}
+
+/* Position the statistics section next to the form buttons */
+#characters-tab .form-buttons {
+    display: inline-block !important;
+    width: auto !important;
+    vertical-align: middle !important;
+}
+
+#characters-tab .statistics {
+    display: inline-block !important;
+    margin-left: 50px !important;
+    vertical-align: middle !important;
+}
+
+#characters-tab .statistics-grid {
+    display: flex !important;
+    gap: 30px !important;
+}
+
+#characters-tab .stat-card {
+    margin: 0 !important;
+}
+
+/* Fix for plots and worldbuilding tabs file controls to match character and location tabs */
+#plots-tab .file-controls,
+#worldbuilding-tab .file-controls {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    gap: 0.3rem !important;
+}
+
+#plots-tab .file-controls button,
+#worldbuilding-tab .file-controls button {
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    padding: 0.25rem 0.4rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1 !important;
+    min-width: 100px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Fix for Add and Clear buttons in plots and worldbuilding tabs */
+#plots-tab .add-plot-btn,
+#worldbuilding-tab .add-element-btn,
+#plots-tab .clear-form-btn,
+#worldbuilding-tab .clear-form-btn {
+    font-size: 0.7rem !important; /* Smaller font size */
+    min-width: 120px !important; /* Reduced width */
+}
+/* Remove duplicate icons for plots and worldbuilding tab buttons */
+/* Icons are already included in the HTML with <i> tags */
+
+/* Dashboard stat cards styling */
+.dashboard-stats-grid {
+    display: grid !important;
+    grid-template-columns: repeat(8, 1fr) !important;
+    gap: 1rem !important;
+    margin-bottom: 2rem !important;
+}
+
+.dashboard-stat-card {
+    background: white !important;
+    border-radius: 8px !important;
+    padding: 1.5rem !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    text-align: center !important;
+    transition: all 0.3s ease !important;
+    cursor: pointer !important;
+    border: 1px solid #e5e7eb !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 180px !important;
+}
+
+.dashboard-stat-card:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+    border-color: var(--primary-color) !important;
+}
+
+.stat-icon {
+    font-size: 3rem !important;
+    margin-bottom: 0.5rem !important;
+    color: var(--primary-color) !important;
+}
+
+.stat-value {
+    font-size: 2.5rem !important;
+    font-weight: bold !important;
+    margin-bottom: 0.25rem !important;
+    color: var(--primary-dark) !important;
+}
+
+.stat-label {
+    font-size: 1.3rem !important;
+    color: var(--neutral-600) !important;
+    font-weight: bold !important;
+}
+
+/* Dark mode support for dashboard cards */
+body.dark-mode .dashboard-stat-card {
+    background: var(--neutral-800) !important;
+    border-color: var(--neutral-700) !important;
+}
+
+body.dark-mode .stat-value {
+    color: var(--primary-light) !important;
+}
+
+body.dark-mode .stat-label {
+    color: var(--neutral-400) !important;
+}
+
+/* Additional Resources section styling */
+.dashboard-additional-buttons {
+    margin-bottom: 2rem !important;
+}
+
+.dashboard-buttons-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 1rem !important;
+}
+
+.dashboard-resource-btn {
+    background: var(--primary-color) !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    min-height: 100px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.dashboard-resource-btn:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-5px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+.resource-icon {
+    font-size: 2rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.resource-text {
+    font-size: 1rem !important;
+    font-weight: bold !important;
+}
+
+/* Dark mode support for resource buttons */
+body.dark-mode .dashboard-resource-btn {
+    background: var(--primary-dark) !important;
+}
+
+body.dark-mode .dashboard-resource-btn:hover {
+    background: var(--primary-color) !important;
+}
+/* Icons are already included in the HTML with <i> tags */
+
+/* Fix for export file buttons displayed in a flex layout */
+.file-controls[style*="display: flex"] button {
+    margin-right: 10px !important;
+    min-width: 90px !important;
+    flex: 0 0 auto !important;
+}
+
+.file-controls[style*="display: flex"] button:last-child {
+    margin-right: 0 !important;
+}

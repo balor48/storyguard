@@ -1,0 +1,71 @@
+/**
+ * Relationship Tab UI Improvements
+ * Fixes the relationship filter UI and adds Apply/Clear buttons
+ */
+
+/* Make the relationship filter container more compact */
+#relationships-tab .search-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+}
+
+/* Style the filter selects to be more compact */
+#relationships-tab .search-container select {
+  max-width: 200px;
+  flex: 1;
+  min-width: 150px;
+  padding: 6px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+/* Add filter buttons container */
+.relationship-filter-buttons {
+  display: flex;
+  gap: 10px;
+  margin-left: auto;
+}
+
+/* Style the Apply button */
+.apply-filter-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.apply-filter-btn:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Style the Clear button */
+.clear-filter-btn {
+  background-color: var(--neutral-500);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.clear-filter-btn:hover {
+  background-color: var(--neutral-600);
+  transform: translateY(-1px);
+}

@@ -1,0 +1,56 @@
+/**
+ * Relationship Network Alignment Fix
+ * Ensures the relationship network visualization has proper margins and alignment
+ */
+
+/* Main relationship network container */
+#relationshipNetwork {
+    width: calc(100% - 40px) !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+}
+
+/* Visualization container created by JavaScript */
+#relationshipNetwork .visualization-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 10px !important;
+}
+
+/* SVG container */
+#relationshipNetwork svg {
+    max-width: 100% !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Reset view button position */
+#relationshipNetwork .reset-view-button {
+    position: absolute !important;
+    top: 10px !important;
+    right: 10px !important;
+    z-index: 100 !important;
+}
+
+/* Ensure proper layout for relationship tab content */
+#relationships-tab #relationshipNetwork,
+#relationships-tab #relationshipList,
+#relationships-tab .relationship-creation-wrapper {
+    width: calc(100% - 40px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* Align search container with same width */
+#relationships-tab .search-container {
+    width: calc(100% - 40px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+} 

@@ -1,0 +1,779 @@
+/**
+ * Relationship management functionality for Story Database
+ * Handles character relationships and visualization
+ */
+
+// Character comparison
+let comparisonCharacters = [];
+
+// Add relationship
+function addRelationship() {
+    const character1Select = document.getElementById('relatedCharacter');
+    const character2Input = document.getElementById('firstName');
+    const relationshipTypeSelect = document.getElementById('relationshipType');
+    
+    if (!character1Select || !character2Input || !relationshipTypeSelect) return;
+    
+    const character1 = character1Select.value;
+    const character2 = `${character2Input.value} ${document.getElementById('lastName').value || ''}`.trim();
+    const type = relationshipTypeSelect.value;
+    
+    if (!character1 || !character2 || character1 === character2) {
+        Core.showToast('Please select two different characters', 'error');
+        return;
+    }
+    
+    // Check if relationship already exists
+    const existingRelationship = relationships.find(rel =>
+        (rel.character1 === character1 && rel.character2 === character2) ||
+        (rel.character1 === character2 && rel.character2 === character1)
+    );
+    
+    if (existingRelationship) {
+        Core.showToast('This relationship already exists', 'error');
+        return;
+    }
+    
+    // Add new relationship
+    const newRelationship = {
+        id: Core.generateId(),
+        character1,
+        character2,
+        type,
+        createdAt: new Date().toISOString()
+    };
+    
+    relationships.push(newRelationship);
+    
+    // Save to localStorage
+    if (Core.safelyStoreItem('relationships', JSON.stringify(relationships))) {
+        // Add to recent activity
+        Dashboard.addActivity('relationship', `Added ${type} relationship between ${character1} and ${character2}`, newRelationship.id);
+        
+        Core.showToast('Relationship added successfully');
+        
+        // Update relationship dropdown
+        updateRelationshipsList();
+    }
+}
+
+// Delete relationship
+function deleteRelationship(index) {
+    const deletedRelationship = relationships[index];
+    const char1 = deletedRelationship.character1;
+    const char2 = deletedRelationship.character2;
+    
+    Core.showConfirmationDialog(
+        `Are you sure you want to delete the relationship between "${char1}" and "${char2}"?`,
+        function() {
+            // User confirmed deletion
+            try {
+                relationships.splice(index, 1);
+                
+                if (!Core.safelyStoreItem('relationships', JSON.stringify(relationships))) {
+                    // If storage fails, restore the relationship
+                    relationships.splice(index, 0, deletedRelationship);
+                    return;
+                }
+                
+                // Add to recent activity
+                Dashboard.addActivity('relationship', `Deleted relationship between ${deletedRelationship.character1} and ${deletedRelationship.character2}`, deletedRelationship.id);
+                
+                displayRelationships();
+                Core.showToast('Relationship deleted successfully');
+            } catch (error) {
+                Core.showToast('Error deleting relationship: ' + error.message, 'error');
+            }
+        },
+        function() {
+            // User canceled deletion
+            Core.showToast('Relationship deletion canceled');
+        }
+    );
+}
+
+// Update relationships dropdown
+function updateRelationshipsList() {
+    const relatedCharacterSelect = document.getElementById('relatedCharacter');
+    if (!relatedCharacterSelect) return;
+    
+    // Clear existing options
+    relatedCharacterSelect.innerHTML = '<option value="">Select Character</option>';
+    
+    // Add all characters
+    characters.forEach(char => {
+        const fullName = `${char.firstName} ${char.lastName || ''}`.trim();
+        const option = document.createElement('option');
+        option.value = fullName;
+        option.textContent = fullName;
+        relatedCharacterSelect.appendChild(option);
+    });
+    
+    // Update the relationships list for the current character
+    updateCharacterRelationships();
+}
+
+// Display relationships for the current character being edited
+function updateCharacterRelationships() {
+    const relationshipsList = document.getElementById('relationshipsList');
+    const firstNameInput = document.getElementById('firstName');
+    const lastNameInput = document.getElementById('lastName');
+    
+    if (!relationshipsList || !firstNameInput) return;
+    
+    // Get current character name
+    const currentCharName = `${firstNameInput.value} ${lastNameInput?.value || ''}`.trim();
+    if (!currentCharName) {
+        relationshipsList.innerHTML = '';
+        return;
+    }
+    
+    // Find relationships for this character
+    const characterRelationships = relationships.filter(rel =>
+        rel.character1 === currentCharName || rel.character2 === currentCharName
+    );
+    
+    // Display relationships
+    if (characterRelationships.length === 0) {
+        relationshipsList.innerHTML = '<div class="no-relationships">No relationships defined</div>';
+        return;
+    }
+    
+    let html = '<div class="character-relationships">';
+    
+    characterRelationships.forEach(rel => {
+        // Determine the other character in the relationship
+        const otherCharName = rel.character1 === currentCharName ? rel.character2 : rel.character1;
+        
+        html += `
+            <div class="relationship-item">
+                <span class="relationship-name">${otherCharName}</span>
+                <span class="relationship-type ${rel.type}">${rel.type}</span>
+                <button type="button" class="remove-relationship-btn"
+                    onclick="Relationships.removeCharacterRelationship('${rel.id}')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    relationshipsList.innerHTML = html;
+}
+
+// Display relationships
+function displayRelationships() {
+    const relationshipList = document.getElementById('relationshipList');
+    const relationshipNetwork = document.getElementById('relationshipNetwork');
+    
+    // Add more robust error handling
+    if (!relationshipList || !relationshipNetwork) {
+        console.error('Error loading relationships tab: Required DOM elements not found');
+        return;
+    }
+    
+    // Get filter values from dropdowns or localStorage
+    let filterType = document.getElementById('relationshipFilterType')?.value;
+    let filterCharacter = document.getElementById('relationshipFilterCharacter')?.value;
+    
+    // If dropdowns don't have values, try to get from localStorage
+    if (!filterType) {
+        filterType = localStorage.getItem('relationshipFilterType') || 'all';
+        // Update dropdown to match localStorage value
+        const typeDropdown = document.getElementById('relationshipFilterType');
+        if (typeDropdown) typeDropdown.value = filterType;
+    }
+    
+    if (!filterCharacter) {
+        filterCharacter = localStorage.getItem('relationshipFilterCharacter') || 'all';
+        // Update dropdown to match localStorage value
+        const charDropdown = document.getElementById('relationshipFilterCharacter');
+        if (charDropdown) charDropdown.value = filterCharacter;
+    }
+    
+    // Filter relationships
+    let filteredRelationships = [...relationships];
+    if (filterType !== 'all') {
+        filteredRelationships = filteredRelationships.filter(rel => rel.type === filterType);
+    }
+    if (filterCharacter !== 'all') {
+        filteredRelationships = filteredRelationships.filter(rel =>
+            rel.character1 === filterCharacter || rel.character2 === filterCharacter
+        );
+    }
+    
+    // Clear previous content
+    relationshipList.innerHTML = '';
+    relationshipNetwork.innerHTML = '';
+    
+    if (filteredRelationships.length === 0) {
+        relationshipList.innerHTML = '<div class="no-data">No relationships found. Add relationships in the character form.</div>';
+        return;
+    }
+    
+    // Create a simple visualization
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('width', '100%');
+    svg.setAttribute('height', '100%');
+    svg.setAttribute('viewBox', '0 0 800 500');
+    
+    // Create a map of characters and their positions
+    const characterMap = new Map();
+    const characterNodes = new Set();
+    
+    // Add all characters from relationships to the set
+    filteredRelationships.forEach(rel => {
+        characterNodes.add(rel.character1);
+        characterNodes.add(rel.character2);
+    });
+    
+    // Calculate positions in a circle
+    const centerX = 400;
+    const centerY = 250;
+    const radius = 200;
+    const characterArray = Array.from(characterNodes);
+    
+    characterArray.forEach((charName, index) => {
+        const angle = (2 * Math.PI * index) / characterArray.length;
+        const x = centerX + radius * Math.cos(angle);
+        const y = centerY + radius * Math.sin(angle);
+        characterMap.set(charName, { x, y });
+    });
+    
+    // Draw relationships (lines)
+    const relationshipColors = {
+        'friend': '#4CAF50',
+        'family': '#2196F3',
+        'ally': '#8BC34A',
+        'enemy': '#F44336',
+        'mentor': '#9C27B0',
+        'student': '#FF9800',
+        'lover': '#E91E63',
+        'rival': '#FF5722',
+        'other': '#607D8B'
+    };
+    
+    filteredRelationships.forEach(rel => {
+        const char1Pos = characterMap.get(rel.character1);
+        const char2Pos = characterMap.get(rel.character2);
+        
+        if (char1Pos && char2Pos) {
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', char1Pos.x);
+            line.setAttribute('y1', char1Pos.y);
+            line.setAttribute('x2', char2Pos.x);
+            line.setAttribute('y2', char2Pos.y);
+            line.setAttribute('stroke', relationshipColors[rel.type] || '#999');
+            line.setAttribute('stroke-width', '2');
+            
+            // Add relationship type as a label
+            const midX = (char1Pos.x + char2Pos.x) / 2;
+            const midY = (char1Pos.y + char2Pos.y) / 2;
+            
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', midX);
+            text.setAttribute('y', midY);
+            text.setAttribute('text-anchor', 'middle');
+            text.setAttribute('fill', '#333');
+            text.setAttribute('font-size', '12');
+            text.setAttribute('font-weight', 'bold');
+            text.setAttribute('background', 'white');
+            text.textContent = rel.type;
+            
+            svg.appendChild(line);
+            svg.appendChild(text);
+        }
+    });
+    
+    // Draw character nodes (circles)
+    characterArray.forEach(charName => {
+        const pos = characterMap.get(charName);
+        if (!pos) return;
+        
+        // Find the character in the database
+        const character = characters.find(c =>
+            `${c.firstName} ${c.lastName}`.trim() === charName
+        );
+        
+        // Create circle for character
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', pos.x);
+        circle.setAttribute('cy', pos.y);
+        circle.setAttribute('r', '30');
+        circle.setAttribute('fill', character?.image ? 'url(#pattern-' + charName.replace(/\s+/g, '-') + ')' : '#3498db');
+        circle.setAttribute('stroke', '#2980b9');
+        circle.setAttribute('stroke-width', '2');
+        
+        // Add character name
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', pos.x);
+        text.setAttribute('y', pos.y + 45);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('fill', '#333');
+        text.setAttribute('font-size', '14');
+        text.textContent = charName;
+        
+        svg.appendChild(circle);
+        svg.appendChild(text);
+        
+        // If character has an image, create a pattern
+        if (character?.image) {
+            const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
+            const pattern = document.createElementNS('http://www.w3.org/2000/svg', 'pattern');
+            pattern.setAttribute('id', 'pattern-' + charName.replace(/\s+/g, '-'));
+            pattern.setAttribute('width', '100%');
+            pattern.setAttribute('height', '100%');
+            pattern.setAttribute('patternContentUnits', 'objectBoundingBox');
+            
+            const image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+            image.setAttribute('href', character.image);
+            image.setAttribute('width', '1');
+            image.setAttribute('height', '1');
+            image.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+            
+            pattern.appendChild(image);
+            defs.appendChild(pattern);
+            svg.appendChild(defs);
+        }
+    });
+    
+    relationshipNetwork.appendChild(svg);
+    
+    // Create a list of relationships
+    const relationshipListHeader = document.createElement('h3');
+    relationshipListHeader.textContent = 'Relationship List';
+    relationshipList.appendChild(relationshipListHeader);
+    
+    const relationshipTable = document.createElement('table');
+    relationshipTable.className = 'relationship-table';
+    relationshipTable.innerHTML = `
+        <thead>
+            <tr>
+                <th>Character 1</th>
+                <th>Relationship</th>
+                <th>Character 2</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    `;
+    
+    const tbody = relationshipTable.querySelector('tbody');
+    
+    filteredRelationships.forEach((rel, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${rel.character1}</td>
+            <td><span class="relationship-type ${rel.type}">${rel.type}</span></td>
+            <td>${rel.character2}</td>
+            <td>
+                <button class="delete-btn" onclick="Relationships.deleteRelationship(${index})" title="Delete">Delete</button>
+            </td>
+        `;
+        tbody.appendChild(row);
+    });
+    
+    relationshipList.appendChild(relationshipTable);
+    
+    // Update relationship filter dropdowns
+    updateRelationshipFilterDropdowns();
+}
+
+// Update relationship filter dropdowns
+function updateRelationshipFilterDropdowns() {
+    const characterFilter = document.getElementById('relationshipFilterCharacter');
+    if (characterFilter) {
+        // Save current selection
+        const currentValue = characterFilter.value;
+        
+        // Clear options except first one
+        while (characterFilter.options.length > 1) {
+            characterFilter.remove(1);
+        }
+        
+        // Get unique characters from relationships
+        const uniqueCharacters = new Set();
+        relationships.forEach(rel => {
+            uniqueCharacters.add(rel.character1);
+            uniqueCharacters.add(rel.character2);
+        });
+        
+        // Add options
+        Array.from(uniqueCharacters).sort().forEach(charName => {
+            const option = document.createElement('option');
+            option.value = charName;
+            option.textContent = charName;
+            characterFilter.appendChild(option);
+        });
+        
+        // Restore selection if possible
+        if (Array.from(characterFilter.options).some(opt => opt.value === currentValue)) {
+            characterFilter.value = currentValue;
+        }
+    }
+}
+
+// Character Comparison Feature
+function selectForComparison(index) {
+    const char = characters[index];
+    
+    // Add to comparison array if not already there
+    if (!comparisonCharacters.some(c => c.index === index)) {
+        comparisonCharacters.push({
+            index,
+            name: `${char.firstName} ${char.lastName}`.trim()
+        });
+        
+        Core.showToast(`Added ${char.firstName} ${char.lastName} to comparison`);
+        
+        // If we have 2 characters, show comparison
+        if (comparisonCharacters.length === 2) {
+            showCharacterComparison();
+            // Reset after comparison
+            comparisonCharacters = [];
+        }
+    }
+}
+
+function showCharacterComparison() {
+    if (comparisonCharacters.length !== 2) return;
+    
+    const char1 = characters[comparisonCharacters[0].index];
+    const char2 = characters[comparisonCharacters[1].index];
+    
+    const popup = document.createElement('div');
+    popup.className = 'character-popup comparison-popup';
+    
+    // Create comparison table
+    let comparisonHTML = `
+        <div class="popup-content wide-popup" style="max-width: 900px; width: 95%;">
+            <span class="close-btn" onclick="this.parentElement.parentElement.remove()">&times;</span>
+            <h2>Character Comparison</h2>
+            
+            <div class="comparison-header">
+                <div class="comparison-column">
+                    ${char1.image ? `<img src="${char1.image}" alt="${char1.firstName}" class="comparison-image">` : ''}
+                    <h3>${char1.firstName} ${char1.lastName}</h3>
+                </div>
+                <div class="comparison-column">
+                    ${char2.image ? `<img src="${char2.image}" alt="${char2.firstName}" class="comparison-image">` : ''}
+                    <h3>${char2.firstName} ${char2.lastName}</h3>
+                </div>
+            </div>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Attribute</th>
+                    <th>${char1.firstName}</th>
+                    <th>${char2.firstName}</th>
+                </tr>
+    `;
+    
+    // Basic attributes
+    const attributes = [
+        { name: 'Title', field: 'title' },
+        { name: 'Sex', field: 'sex' },
+        { name: 'Race', field: 'race' },
+        { name: 'Series', field: 'series' },
+        { name: 'Book', field: 'book' },
+        { name: 'Role', field: 'role' }
+    ];
+    
+    attributes.forEach(attr => {
+        const value1 = char1[attr.field] || 'N/A';
+        const value2 = char2[attr.field] || 'N/A';
+        const isEqual = value1 === value2 && value1 !== 'N/A';
+        
+        comparisonHTML += `
+            <tr ${isEqual ? 'class="matching-row"' : ''}>
+                <td>${attr.name}</td>
+                <td>${value1}</td>
+                <td>${value2}</td>
+            </tr>
+        `;
+    });
+    
+    // Custom fields (combine both characters' custom fields)
+    const allCustomFields = new Set();
+    if (char1.customFields) {
+        Object.keys(char1.customFields).forEach(key => allCustomFields.add(key));
+    }
+    if (char2.customFields) {
+        Object.keys(char2.customFields).forEach(key => allCustomFields.add(key));
+    }
+    
+    if (allCustomFields.size > 0) {
+        comparisonHTML += `
+            <tr>
+                <th colspan="3">Custom Fields</th>
+            </tr>
+        `;
+        
+        allCustomFields.forEach(field => {
+            const value1 = char1.customFields?.[field] || 'N/A';
+            const value2 = char2.customFields?.[field] || 'N/A';
+            const isEqual = value1 === value2 && value1 !== 'N/A';
+            
+            comparisonHTML += `
+                <tr ${isEqual ? 'class="matching-row"' : ''}>
+                    <td>${field}</td>
+                    <td>${value1}</td>
+                    <td>${value2}</td>
+                </tr>
+            `;
+        });
+    }
+    
+    // Check for relationships between these characters
+    const char1Name = `${char1.firstName} ${char1.lastName}`.trim();
+    const char2Name = `${char2.firstName} ${char2.lastName}`.trim();
+    
+    const relationshipBetween = relationships.find(rel =>
+        (rel.character1 === char1Name && rel.character2 === char2Name) ||
+        (rel.character1 === char2Name && rel.character2 === char1Name)
+    );
+    
+    if (relationshipBetween) {
+        comparisonHTML += `
+            <tr>
+                <th colspan="3">Relationship</th>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td colspan="2" class="relationship-cell">
+                    <span class="relationship-type ${relationshipBetween.type}">${relationshipBetween.type}</span>
+                </td>
+            </tr>
+        `;
+    } else {
+        comparisonHTML += `
+            <tr>
+                <th colspan="3">Relationship</th>
+            </tr>
+            <tr>
+                <td>Type</td>
+                <td colspan="2">No direct relationship defined</td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center;">
+                    <div style="display: flex; justify-content: center; width: 100%;">
+                        <button id="addRelationshipBtn" class="add-relationship-btn" style="background-color: #4CAF50; color: white; border: none; border-radius: 4px; padding: 12px 24px; font-size: 16px; cursor: pointer; text-align: center; margin: 10px auto; width: 250px; min-width: 250px;">
+                            Add Relationship
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    }
+    
+    comparisonHTML += `
+            </table>
+            
+            <div class="comparison-notes">
+                <div class="comparison-column">
+                    <h4>Notes</h4>
+                    <div class="notes-content">${char1.notes || 'No notes available'}</div>
+                </div>
+                <div class="comparison-column">
+                    <h4>Notes</h4>
+                    <div class="notes-content">${char2.notes || 'No notes available'}</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    popup.innerHTML = comparisonHTML;
+    document.body.appendChild(popup);
+    
+    // Add event listener to the Add Relationship button after the popup is created
+    const addRelationshipBtn = document.getElementById('addRelationshipBtn');
+    if (addRelationshipBtn) {
+        console.log('Found Add Relationship button, adding event listener');
+        addRelationshipBtn.addEventListener('click', function() {
+            console.log('Add Relationship button clicked via event listener');
+            addComparisonRelationship(char1Name, char2Name);
+        });
+    } else {
+        console.error('Could not find Add Relationship button');
+    }
+}
+
+function addComparisonRelationship(char1Name, char2Name) {
+    console.log("addComparisonRelationship called with:", char1Name, char2Name);
+    
+    // Create a dropdown for relationship type
+    const relationshipTypes = ['friend', 'family', 'ally', 'enemy', 'mentor', 'student', 'lover', 'rival', 'other'];
+    
+    const popup = document.createElement('div');
+    popup.className = 'mini-popup';
+    
+    let popupHTML = `
+        <div class="mini-popup-content" style="min-width: 500px; width: 95%; max-width: 800px;">
+            <h3 style="width: 100%; text-align: center; font-size: 18px;">Add Relationship</h3>
+            <p>${char1Name} and ${char2Name}</p>
+            
+            <div class="form-group">
+                <label for="comparisonRelationType">Relationship Type:</label>
+                <select id="comparisonRelationType">
+    `;
+    
+    relationshipTypes.forEach(type => {
+        popupHTML += `<option value="${type}">${type}</option>`;
+    });
+    
+    popupHTML += `
+                </select>
+            </div>
+            
+            <div class="form-actions" style="display: flex; justify-content: space-between; gap: 10px; margin-top: 15px;">
+                <button style="flex: 1; padding: 8px; min-width: 120px;" onclick="this.parentElement.parentElement.parentElement.remove()">Cancel</button>
+                <button style="flex: 1; padding: 8px; min-width: 120px;" onclick="Relationships.saveComparisonRelationship('${char1Name}', '${char2Name}')">Save</button>
+            </div>
+        </div>
+    `;
+    
+    popup.innerHTML = popupHTML;
+    document.body.appendChild(popup);
+}
+
+function saveComparisonRelationship(char1Name, char2Name) {
+    console.log("saveComparisonRelationship called with:", char1Name, char2Name);
+    
+    const typeSelect = document.getElementById('comparisonRelationType');
+    if (!typeSelect) {
+        console.error("Could not find comparisonRelationType select element");
+        return;
+    }
+    
+    const type = typeSelect.value;
+    console.log("Selected relationship type:", type);
+    
+    // Add new relationship
+    const newRelationship = {
+        id: Core.generateId(),
+        character1: char1Name,
+        character2: char2Name,
+        type,
+        createdAt: new Date().toISOString()
+    };
+    
+    relationships.push(newRelationship);
+    
+    // Save to localStorage
+    if (Core.safelyStoreItem('relationships', JSON.stringify(relationships))) {
+        // Add to recent activity
+        Dashboard.addActivity('relationship', `Added ${type} relationship between ${char1Name} and ${char2Name}`, newRelationship.id);
+        
+        Core.showToast('Relationship added successfully');
+        
+        // Close mini popup
+        document.querySelector('.mini-popup').remove();
+        
+        // Close comparison popup and reopen with updated data
+        document.querySelector('.comparison-popup').remove();
+        
+        // Find character indices
+        const char1Index = characters.findIndex(c => `${c.firstName} ${c.lastName}`.trim() === char1Name);
+        const char2Index = characters.findIndex(c => `${c.firstName} ${c.lastName}`.trim() === char2Name);
+        
+        if (char1Index !== -1 && char2Index !== -1) {
+            comparisonCharacters = [
+                { index: char1Index, name: char1Name },
+                { index: char2Index, name: char2Name }
+            ];
+            showCharacterComparison();
+            comparisonCharacters = [];
+        }
+    }
+}
+
+// Remove a relationship from the character form
+function removeCharacterRelationship(relationshipId) {
+    const index = relationships.findIndex(rel => rel.id === relationshipId);
+    
+    if (index === -1) {
+        Core.showToast('Relationship not found', 'error');
+        return;
+    }
+    
+    const deletedRelationship = relationships[index];
+    const char1 = deletedRelationship.character1;
+    const char2 = deletedRelationship.character2;
+    
+    Core.showConfirmationDialog(
+        `Are you sure you want to remove the relationship between "${char1}" and "${char2}"?`,
+        function() {
+            // User confirmed removal
+            relationships.splice(index, 1);
+            
+            if (!Core.safelyStoreItem('relationships', JSON.stringify(relationships))) {
+                // If storage fails, restore the relationship
+                relationships.splice(index, 0, deletedRelationship);
+                Core.showToast('Failed to remove relationship', 'error');
+                return;
+            }
+            
+            // Add to recent activity
+            Dashboard.addActivity('relationship', `Removed relationship between ${deletedRelationship.character1} and ${deletedRelationship.character2}`, deletedRelationship.id);
+            
+            // Update the relationships list
+            updateCharacterRelationships();
+            Core.showToast('Relationship removed successfully');
+        },
+        function() {
+            // User canceled removal
+            Core.showToast('Relationship removal canceled');
+        }
+    );
+}
+
+// Apply relationship filters
+function applyFilters() {
+    // Get filter values
+    const filterType = document.getElementById('relationshipFilterType').value;
+    const filterCharacter = document.getElementById('relationshipFilterCharacter').value;
+    
+    // Store filter values in localStorage for persistence
+    localStorage.setItem('relationshipFilterType', filterType);
+    localStorage.setItem('relationshipFilterCharacter', filterCharacter);
+    
+    // Display relationships with the selected filters
+    displayRelationships();
+    
+    // Show toast message
+    Core.showToast('Filters applied');
+}
+
+// Clear relationship filters
+function clearFilters() {
+    // Reset filter dropdowns to "All"
+    document.getElementById('relationshipFilterType').value = 'all';
+    document.getElementById('relationshipFilterCharacter').value = 'all';
+    
+    // Clear stored filter values
+    localStorage.removeItem('relationshipFilterType');
+    localStorage.removeItem('relationshipFilterCharacter');
+    
+    // Display all relationships
+    displayRelationships();
+    
+    // Show toast message
+    Core.showToast('Filters cleared');
+}
+
+// Export relationships functions
+window.Relationships = {
+    addRelationship,
+    deleteRelationship,
+    updateRelationshipsList,
+    displayRelationships,
+    updateRelationshipFilterDropdowns,
+    selectForComparison,
+    showCharacterComparison,
+    addComparisonRelationship,
+    saveComparisonRelationship,
+    updateCharacterRelationships,
+    removeCharacterRelationship,
+    applyFilters,
+    clearFilters
+};

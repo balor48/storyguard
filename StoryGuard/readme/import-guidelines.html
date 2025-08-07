@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Guidelines - Story Database</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #3498db;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #ffeeba;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 15px 0;
+            border-left: 4px solid #bee5eb;
+        }
+        code {
+            background-color: #f8f9fa;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Import Guidelines</h1>
+    
+    <div class="warning">
+        <h3>⚠️ Important</h3>
+        <p>Only import files that were exported from this program. Files from other sources will likely fail to import correctly and may cause errors or data loss.</p>
+    </div>
+    
+    <h2>Supported File Formats</h2>
+    <p>The Story Database supports importing data from the following file formats:</p>
+    <ul>
+        <li><strong>JSON files</strong> (.json) - Exported from this application</li>
+    </ul>
+    
+    <h2>Import Process</h2>
+    <ol>
+        <li>Click the "Import" button in the file controls section</li>
+        <li>Choose whether to import from a file or from cloud storage</li>
+        <li>If importing from a file, select the JSON file exported from this application</li>
+        <li>Choose whether to import into a new database or an existing one</li>
+        <li>If importing into a new database, you can provide a name or leave it blank for an auto-generated name</li>
+        <li>Wait for the import process to complete</li>
+    </ol>
+    
+    <h2>File Structure Requirements</h2>
+    <p>The imported JSON file must contain the following structure:</p>
+    <pre><code>{
+  "characters": [...],  // Array of character objects
+  "titles": [...],      // Array of title strings
+  "seriesList": [...],  // Array of series strings
+  "books": [...],       // Array of book strings
+  "roles": [...],       // Array of role strings
+  "customFieldTypes": [...], // Array of custom field type objects
+  "relationships": [...], // Array of relationship objects
+  "tags": [...],        // Array of tag objects
+  "plots": [...],       // Array of plot objects
+  "worldElements": [...], // Array of world building element objects
+  "exportDate": "2023-01-01T00:00:00.000Z", // ISO date string
+  "version": "2.0.0"    // Version string
+}</code></pre>
+    
+    <div class="info">
+        <h3>ℹ️ Note</h3>
+        <p>The application will attempt to handle missing properties by using default values, but the "characters" property is required for successful import.</p>
+    </div>
+    
+    <h2>Troubleshooting</h2>
+    <h3>Common Import Issues</h3>
+    <table>
+        <tr>
+            <th>Error</th>
+            <th>Possible Cause</th>
+            <th>Solution</th>
+        </tr>
+        <tr>
+            <td>Invalid database file format</td>
+            <td>The file is not a valid JSON file or is missing required properties</td>
+            <td>Make sure you're importing a file that was exported from this application</td>
+        </tr>
+        <tr>
+            <td>Storage Error</td>
+            <td>Your browser storage may be full</td>
+            <td>Export your current data as a backup, then clear some space by deleting unnecessary data</td>
+        </tr>
+        <tr>
+            <td>Error loading from cloud</td>
+            <td>Network issues or cloud storage authentication problems</td>
+            <td>Check your internet connection and make sure you're properly authenticated with cloud storage</td>
+        </tr>
+    </table>
+    
+    <h2>Best Practices</h2>
+    <ul>
+        <li>Always create a backup of your current data before importing new data</li>
+        <li>Verify the imported data after import to ensure everything was imported correctly</li>
+        <li>If you encounter issues, try importing the file again or contact support</li>
+    </ul>
+    
+    <div class="info">
+        <h3>Need Help?</h3>
+        <p>If you're experiencing issues with importing data, please check the <a href="readme.html">main documentation</a> or contact support for assistance.</p>
+    </div>
+</body>
+</html>

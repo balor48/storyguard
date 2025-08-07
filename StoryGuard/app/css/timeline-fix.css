@@ -1,0 +1,152 @@
+/* Fix for Timeline tab */
+
+/* Make the dropdown bars more compact */
+#timeline-tab select {
+    max-width: 300px;
+    margin: 5px auto;
+    display: inline-block;
+    width: auto;
+}
+
+/* Make the filter container more compact */
+#timeline-tab .search-container {
+    max-width: 600px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Dark mode support */
+.dark-mode #timeline-tab .search-container {
+    background-color: #333;
+}
+
+/* Make the timeline line less prominent */
+.timeline-container .timeline-line {
+    width: 2px;
+    background-color: rgba(52, 152, 219, 0.5); /* Lighter blue, more transparent */
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    z-index: 1;
+}
+
+/* Adjust the timeline items to be more compact */
+.timeline-container {
+    position: relative;
+    margin: 20px 0;
+    padding: 0;
+    max-width: 1000px; /* Limit the width */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 20px;
+    width: 45%; /* Make items narrower */
+}
+
+/* Make the timeline content more compact */
+.timeline-content {
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* Adjust for dark mode */
+.dark-mode .timeline-content {
+    background-color: #333;
+}
+
+/* When no timeline data is available, center the message */
+.timeline-container .no-data {
+    text-align: center;
+    padding: 20px;
+    color: #777;
+    font-style: italic;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Improve timeline character and plot button visibility */
+.timeline-character, 
+.timeline-plot {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    background-color: #e9f2fa;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid #c8dff0;
+}
+
+.timeline-character:hover,
+.timeline-plot:hover {
+    background-color: #d0e5f7;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Enhance plot type icon */
+.plot-type-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+}
+
+/* Style timeline characters section */
+.timeline-characters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.timeline-characters h5 {
+    width: 100%;
+    margin-bottom: 8px;
+    margin-top: 12px;
+    font-size: 15px;
+    color: #4a4a4a;
+}
+
+/* Dark mode styles */
+.dark-mode .timeline-character,
+.dark-mode .timeline-plot {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+.dark-mode .timeline-character:hover,
+.dark-mode .timeline-plot:hover {
+    background-color: #34495e;
+}
+
+.dark-mode .plot-type-icon {
+    background-color: #2980b9;
+}
+
+.dark-mode .timeline-characters h5 {
+    color: #e0e0e0;
+}

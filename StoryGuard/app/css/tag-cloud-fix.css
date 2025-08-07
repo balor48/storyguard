@@ -1,0 +1,163 @@
+/**
+ * Tag Cloud Improvements
+ * Fixes the tag cloud layout to handle overflow better
+ * Also ensures proper display in the worldbuilding tab
+ */
+
+/* Improve tag cloud container */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px;
+  background-color: var(--neutral-100);
+  border-radius: var(--border-radius);
+  margin-bottom: 10px;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+/* Dark mode styles for tag cloud */
+body.dark-mode .tag-cloud {
+  background-color: var(--neutral-700);
+}
+
+/* Style the cloud tags */
+.cloud-tag {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 5px;
+  border-radius: 5px;
+  color: white;
+  margin: 5px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  font-size: 1em;
+  width: 80px;
+  height: 80px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.cloud-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style the tag name */
+.cloud-tag .tag-name {
+  font-weight: bold;
+  margin-top: 5px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* Style the tag count */
+.cloud-tag .tag-count {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Style the tag filter indicator */
+.tag-filter-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  color: white;
+  font-size: 0.9em;
+}
+
+.tag-filter-indicator button {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 4px;
+  padding: 2px 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.8em;
+  margin-left: 10px;
+}
+
+.tag-filter-indicator button:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Add scrollbar styling for tag cloud */
+.tag-cloud::-webkit-scrollbar {
+  width: 8px;
+}
+
+.tag-cloud::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.tag-cloud::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.tag-cloud::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode scrollbar */
+body.dark-mode .tag-cloud::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .tag-cloud::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark-mode .tag-cloud::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Tag Cloud Header */
+.tag-cloud-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.tag-cloud-title {
+    margin: 0;
+    font-size: 1.2em;
+    color: var(--neutral-700);
+}
+
+body.dark-mode .tag-cloud-title {
+    color: var(--neutral-300);
+}
+
+/* Tag Cloud Container for Worldbuilding */
+.tag-cloud-container {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .tag-cloud-container {
+    background-color: var(--neutral-800);
+}
+
+/* Ensure pagination controls are visible in worldbuilding tab */
+#worldbuildingPagination {
+    display: flex !important;
+    margin-top: 15px;
+}

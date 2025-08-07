@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="css/settings.css">
+    <link rel="stylesheet" href="css/dark-mode.css">
+    <style>
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        /* Window container */
+        .window-container {
+            background-color: var(--card-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 800px;
+            height: auto; /* Auto height based on content */
+            max-height: 95vh; /* Maximum height of 95% of viewport height */
+            border: 2px solid var(--primary-color);
+            position: fixed;
+            top: 30px; /* Moved down 20px */
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode .window-container {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border-color: #2a5698;
+        }
+
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background-color: #333;
+            color: #fff;
+            border-color: #555;
+        }
+
+        body.dark-mode .section {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+
+        body.dark-mode .section h2 {
+            color: #fff;
+        }
+
+        body.dark-mode button {
+            background-color: #444;
+            color: #fff;
+            border-color: #555;
+        }
+
+        body.dark-mode button:hover {
+            background-color: #555;
+        }
+
+        /* Improved light theme styles */
+        .section {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: background-color 0.3s ease;
+        }
+
+        .section h2 {
+            color: #4a86e8;
+            font-size: 1.3em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e0e0e0;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            background-color: #ffffff;
+            color: #212529;
+            border: 1px solid #ced4da;
+            padding: 8px 12px;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: inline-block;
+            color: var(--text-color);
+        }
+
+        /* Base body styling - transparent background for rounded corners */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: transparent; /* Transparent background allows for rounded corners */
+            overflow: hidden;
+        }
+        
+        /* Main container with rounded corners and shadow */
+        .window-container {
+            margin: 0;
+            border-radius: 12px; /* Increased rounded corners for the dialog */
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2); /* Enhanced shadow for depth */
+            background-color: #f5f5f5;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            width: 90%; /* Change from fixed width to percentage */
+            max-width: 800px; /* Maximum width */
+            height: auto; /* Auto height based on content */
+            max-height: 95vh; /* Maximum height of 95% of viewport height */
+            border: 2px solid #4a86e8; /* Nice blue border all around */
+            position: fixed; /* Changed to fixed */
+            top: 30px; /* Moved down 20px */
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Custom title bar - replaces the standard window frame
+         * This allows us to have a frameless window without the system menu bar
+         */
+        .title-bar {
+            -webkit-app-region: drag; /* Makes the title bar draggable */
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            padding: 10px 20px; /* Increased right padding */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        .title-bar-text {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .title-bar-controls {
+            -webkit-app-region: no-drag; /* Ensures controls remain clickable */
+            margin-right: 10px; /* Move close button in from the edge */
+        }
+        
+        /* Content area with scroll */
+        .settings-content {
+            padding: 25px;
+            overflow-y: auto;
+            max-height: calc(100vh - 150px);
+        }
+
+        /* Footer with buttons - always visible */
+        .settings-footer {
+            padding: 15px 20px;
+            background-color: var(--card-color);
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+            position: sticky;
+            bottom: 0;
+        }
+        
+        /* Main settings title - RED color as requested */
+        h1 {
+            color: #ff0000; /* Red color for the Settings title */
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Ensure Settings title is visible in dark mode */
+        body.dark-mode h1 {
+            color: #ff0000; /* Keep the red color in dark mode */
+        }
+        
+        /* Settings sections styling */
+        .settings-section {
+            margin-bottom: 30px; /* Increased spacing between sections */
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            transition: border-color 0.3s ease;
+        }
+        
+        /* Two-column layout for appearance section */
+        .appearance-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        /* Section headings */
+        h3 {
+            color: #4a86e8; /* Blue color for section headings */
+            font-weight: 600;
+            font-size: 1.4em; /* Increased font size for section headings */
+            margin-top: 25px; /* More space above headings */
+            margin-bottom: 20px; /* More space below headings */
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 8px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Individual setting items */
+        .setting-item {
+            margin: 18px 0; /* Increased spacing between items */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .setting-item > label {
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        
+        /* Radio button groups - horizontal layout and centered */
+        .radio-group-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .radio-group-inline label {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .radio-group-inline input[type="radio"] {
+            margin: 0 5px 0 0;
+            cursor: pointer;
+            transform: scale(1.2); /* Slightly larger radio buttons */
+        }
+        
+        /* Checkbox styling */
+        .setting-item label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .setting-item input[type="checkbox"] {
+            margin-right: 8px;
+            cursor: pointer;
+            transform: scale(1.2); /* Slightly larger checkboxes */
+        }
+        
+        /* Input with button combination (for directory selection) */
+        .input-with-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%; /* Full width */
+            margin: 0 auto; /* Center the input */
+        }
+        
+        .input-with-button input[type="text"] {
+            flex: 1;
+            padding: 8px 12px; /* Slightly larger padding */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+            width: 100%;
+            min-width: 0; /* Allow shrinking below min content size */
+            box-sizing: border-box;
+            font-size: 14px; /* Slightly larger font */
+        }
+        
+        .input-with-button button {
+            padding: 6px 12px;
+            background-color: #4a86e8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            white-space: nowrap; /* Prevent button text from wrapping */
+            flex-shrink: 0; /* Prevent button from shrinking */
+        }
+        
+        .input-with-button button:hover {
+            background-color: #3a76d8;
+        }
+        
+        /* Button styling */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary {
+            background-color: #4a86e8;
+            color: white;
+            border-color: #3a76d8;
+        }
+        
+        .btn-primary:hover {
+            background-color: #3a76d8;
+        }
+        
+        .btn-warning {
+            background-color: #f39c12;
+            color: white;
+            border-color: #e67e22;
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        .btn-default {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn-default:hover {
+            background-color: #d0d0d0;
+        }
+        
+        /* Reset button styling */
+        #resetButton {
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #ddd;
+        }
+        
+        #resetButton:hover {
+            background-color: #e9ecef;
+        }
+        
+        /* Save button styling */
+        #saveButton {
+            background-color: #4a86e8;
+            color: white;
+            border: 1px solid #3a76d8;
+            font-weight: 500;
+        }
+        
+        #saveButton:hover {
+            background-color: #3a76d8;
+        }
+        
+        /* Close button styling */
+        #closeButton {
+            background-color: #dc3545;
+            color: white;
+            border: 1px solid #c82333;
+            margin-right: auto; /* Push it to the left */
+        }
+        
+        #closeButton:hover {
+            background-color: #c82333;
+        }
+        
+        /* Close button in dark mode */
+        body.dark-mode #closeButton {
+            background-color: #dc3545;
+            color: white;
+            border-color: #bd2130;
+        }
+        
+        body.dark-mode #closeButton:hover {
+            background-color: #bd2130;
+        }
+        
+        /* Dark mode button styling */
+        body.dark-mode .btn-primary {
+            background-color: #4a86e8;
+            color: white;
+            border-color: #3a76d8;
+        }
+        
+        body.dark-mode .btn-primary:hover {
+            background-color: #3a76d8;
+        }
+        
+        body.dark-mode .btn-warning {
+            background-color: #f39c12;
+            color: white;
+            border-color: #e67e22;
+        }
+        
+        body.dark-mode .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        body.dark-mode .btn-default {
+            background-color: #444;
+            color: #fff;
+            border-color: #555;
+        }
+        
+        body.dark-mode .btn-default:hover {
+            background-color: #555;
+        }
+        
+        /* Theme synchronization */
+        .theme-light {
+            background-color: #f5f5f5;
+            color: #000;
+        }
+        
+        .theme-dark {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        /* Setting description */
+        .setting-description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        /* Font size classes */
+        .font-small {
+            font-size: 0.85rem !important;
+        }
+        
+        .font-medium {
+            font-size: 1rem !important;
+        }
+        
+        .font-large {
+            font-size: 1.2rem !important;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: var(--secondary-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 10px;
+        }
+
+        .info-box p {
+            margin: 8px 0;
+        }
+
+        .info-box ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .info-box code {
+            background-color: var(--card-color);
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .path-info {
+            margin-top: 5px;
+            font-style: italic;
+            color: var(--text-secondary-color);
+        }
+        
+        /* Directory section styling */
+        .directory-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .directory-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .input-with-button {
+            display: flex;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .input-with-button input {
+            flex-grow: 1;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        
+        .input-with-button button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            white-space: nowrap;
+        }
+        
+        /* Dark mode adjustments */
+        body.dark-mode .directory-item {
+            border-color: #444;
+        }
+
+        /* Add media queries for responsiveness */
+        @media (max-width: 768px) {
+            .window-container {
+                width: 95%;
+                margin: 0 auto;
+                top: 10px;
+            }
+            
+            .input-with-button {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 5px;
+            }
+            
+            .input-with-button input[type="text"] {
+                min-width: auto;
+                width: 100%;
+            }
+            
+            .input-with-button button {
+                width: 100%;
+                margin-top: 5px;
+            }
+            
+            .section {
+                padding: 15px;
+            }
+            
+            .action-buttons button {
+                min-width: auto;
+                padding: 8px 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .window-container {
+                width: 98%;
+                top: 5px;
+            }
+            
+            .section {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 1.5rem !important;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .action-buttons button {
+                width: 100%;
+            }
+        }
+
+        /* Footer with action buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            padding: 15px 20px;
+            background-color: #f0f0f0;
+            border-top: 1px solid #ddd;
+            margin-top: auto; /* Push to bottom */
+        }
+        
+        /* Dark mode styling for action buttons area */
+        body.dark-mode .action-buttons {
+            background-color: #2d2d2d;
+            border-top-color: #444;
+        }
+        
+        .action-buttons button {
+            min-width: 100px;
+            padding: 10px 20px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        /* Responsive wrapper for content */
+        .content-wrapper {
+            flex: 1;
+            overflow-y: auto;
+            padding: 0 20px 20px;
+            box-sizing: border-box;
+            max-height: calc(95vh - 150px); /* Account for header and footer */
+        }
+
+        /* Universal box-sizing for all elements */
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="window-container">
+        <h1 style="text-align: center; color: red; margin: 20px 0;">Settings</h1>
+        
+        <div class="content-wrapper">
+            <!-- Appearance Section -->
+            <div class="section">
+                <h2>Appearance</h2>
+                <div class="appearance-grid">
+                    <div class="setting-item">
+                        <label>Theme:</label>
+                        <div class="radio-group-inline">
+                            <label>
+                                <input type="radio" name="theme" value="light" checked>
+                                Light
+                            </label>
+                            <label>
+                                <input type="radio" name="theme" value="dark">
+                                Dark
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Notifications Section -->
+            <div class="section">
+                <h2>Notifications</h2>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="enableNotifications">
+                        Enable Notifications
+                    </label>
+                    <p class="setting-description">Show toast notifications for important events like successful saves and errors.</p>
+                </div>
+            </div>
+            
+            <!-- Consolidated Directories Section -->
+            <div class="section">
+                <h2>Directories</h2>
+                
+                <!-- Database Directory -->
+                <div class="setting-item directory-item">
+                    <label>Database Directory:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="databasePath" readonly>
+                        <button id="browseDatabaseDir" class="btn btn-primary">Browse</button>
+                    </div>
+                    <p class="setting-description path-info">Where database files are stored.</p>
+                </div>
+                
+                <!-- Document Directory -->
+                <div class="setting-item directory-item">
+                    <label>Document Directory:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="documentPath" readonly>
+                        <button id="browseDocumentDir" class="btn btn-primary">Browse</button>
+                    </div>
+                    <p class="setting-description path-info">Where document files are stored.</p>
+                </div>
+                
+                <!-- Backup Directory -->
+                <div class="setting-item directory-item">
+                    <label>Backup Directory:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="backupPath" readonly>
+                        <button id="browseBackupDir" class="btn btn-primary">Browse</button>
+                    </div>
+                    <p class="setting-description path-info">Where backup files are stored.</p>
+                </div>
+                
+                <!-- Images Directory -->
+                <div class="setting-item directory-item">
+                    <label>Images Directory:</label>
+                    <div class="input-with-button">
+                        <input type="text" id="imagePath" readonly>
+                        <button id="browseImageDir" class="btn btn-primary">Browse</button>
+                    </div>
+                    <p class="setting-description path-info">Where character and location images are stored.</p>
+                </div>
+            </div>
+            
+            <!-- Auto-Backup Settings Section -->
+            <div class="section">
+                <h2>Backup</h2>
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="enableAutoBackup">
+                        Enable Automatic Backups
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <label>Backup Interval (minutes):</label>
+                    <input type="number" id="backupInterval" value="30" min="5" max="1440" style="width: 60px;"> 
+                    <p class="setting-description">Minimum interval is 5 minutes to prevent excessive backups.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button id="closeButton" class="btn btn-default">Close</button>
+            <button id="resetButton" class="btn btn-warning">Reset to Defaults</button>
+            <button id="saveButton" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', async () => {
+            try {
+                // Get detailed path information from main process
+                const pathsData = await window.api.getPaths();
+                
+                console.log('Received path data:', pathsData);
+                
+                // Update path information section with the help text if available
+                if (pathsData.pathHelp) {
+                    console.log('Path help text available but path info section has been removed');
+                }
+                
+                // Set default paths with proper formatting
+                document.getElementById('databasePath').value = pathsData.database || '';
+                document.getElementById('documentPath').value = pathsData.documents || '';
+                document.getElementById('backupPath').value = pathsData.backup || '';
+                document.getElementById('imagePath').value = pathsData.images || '';
+                
+                // Update the path info descriptions with existence status
+                if (pathsData.pathInfo) {
+                    const dbPathInfo = document.querySelector('#databasePath').nextElementSibling.nextElementSibling;
+                    const pdfPathInfo = document.querySelector('#documentPath').nextElementSibling.nextElementSibling;
+                    const backupPathInfo = document.querySelector('#backupPath').nextElementSibling.nextElementSibling;
+                    
+                    if (dbPathInfo && pathsData.pathInfo.database) {
+                        dbPathInfo.textContent = `This is where your database files will be stored. ${pathsData.pathInfo.database.exists ? '✓ Directory exists' : '⚠️ Directory not found'}`;
+                    }
+                    
+                    if (pdfPathInfo && pathsData.pathInfo.documents) {
+                        pdfPathInfo.textContent = `This is where your document files will be stored. ${pathsData.pathInfo.documents.exists ? '✓ Directory exists' : '⚠️ Directory not found'}`;
+                    }
+                    
+                    if (backupPathInfo && pathsData.pathInfo.backup) {
+                        backupPathInfo.textContent = `This is where your backup files will be stored. ${pathsData.pathInfo.backup.exists ? '✓ Directory exists' : '⚠️ Directory not found'}`;
+                    }
+                }
+                
+                // Check if paths are already stored in localStorage (fallback)
+                const storedDatabasePath = localStorage.getItem('databasePath');
+                const storedPdfPath = localStorage.getItem('documentPath');
+                const storedBackupPath = localStorage.getItem('backupPath');
+                const storedImagePath = localStorage.getItem('imagePath');
+                
+                // Use stored paths if available and paths weren't already set from settings.json
+                if (storedDatabasePath && !pathsData.pathInfo?.database?.path) {
+                    document.getElementById('databasePath').value = storedDatabasePath;
+                }
+                if (storedPdfPath && !pathsData.pathInfo?.documents?.path) {
+                    document.getElementById('documentPath').value = storedPdfPath;
+                }
+                if (storedBackupPath && !pathsData.pathInfo?.backup?.path) {
+                    document.getElementById('backupPath').value = storedBackupPath;
+                }
+                if (storedImagePath && !pathsData.pathInfo?.images?.path) {
+                    document.getElementById('imagePath').value = storedImagePath;
+                }
+                
+                // Check if dark mode is enabled in localStorage
+                const isDarkMode = localStorage.getItem('darkMode') === 'true';
+                
+                // Store the original theme for use with the cancel button
+                window.originalTheme = isDarkMode ? 'dark' : 'light';
+                console.log('Original theme stored:', window.originalTheme);
+                
+                // Apply dark mode if enabled
+                if (isDarkMode) {
+                    document.body.classList.add('dark-mode');
+                    // Set the dark radio button as checked
+                    document.querySelector('input[name="theme"][value="dark"]').checked = true;
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    // Set the light radio button as checked
+                    document.querySelector('input[name="theme"][value="light"]').checked = true;
+                }
+                
+                // Check if notifications are enabled in localStorage
+                const notificationsEnabled = localStorage.getItem('toastNotificationsEnabled') === 'true';
+                document.getElementById('enableNotifications').checked = notificationsEnabled;
+                
+                // Load auto-backup settings from localStorage
+                const autoBackupEnabled = localStorage.getItem('enableAutoBackup') === 'true';
+                const backupIntervalValue = localStorage.getItem('backupInterval') || 
+                                           localStorage.getItem('autoBackupInterval') || '30';
+                
+                // Apply auto-backup settings to form
+                document.getElementById('enableAutoBackup').checked = autoBackupEnabled;
+                document.getElementById('backupInterval').value = backupIntervalValue;
+                
+                console.log('Loaded auto-backup settings:', { 
+                    enabled: autoBackupEnabled, 
+                    interval: backupIntervalValue 
+                });
+                
+                // Add theme change handler
+                document.querySelectorAll('input[name="theme"]').forEach(radio => {
+                    radio.addEventListener('change', (e) => {
+                        if (e.target.checked) {
+                            const isDark = e.target.value === 'dark';
+                            
+                            // Apply theme to settings dialog only - don't save to localStorage yet
+                            document.body.classList.toggle('dark-mode', isDark);
+                            
+                            // Don't save to localStorage or notify main process - this will happen on Save
+                        }
+                    });
+                });
+                
+                // Add notification toggle handler
+                document.getElementById('enableNotifications').addEventListener('change', function() {
+                    const isEnabled = this.checked;
+                    localStorage.setItem('toastNotificationsEnabled', isEnabled);
+                    
+                    // Notify main window about notification setting change
+                    window.api.send('notification-setting-changed', isEnabled);
+                    
+                    // Use updateNotificationSetting if available, otherwise update directly
+                    if (window.Core) {
+                        if (typeof window.Core.updateNotificationSetting === 'function') {
+                            window.Core.updateNotificationSetting(isEnabled);
+                            console.log('Updated notification setting using Core.updateNotificationSetting:', isEnabled);
+                        } else if (typeof window.Core.toastNotificationsEnabled !== 'undefined') {
+                            window.Core.toastNotificationsEnabled = isEnabled;
+                            console.log('Updated Core.toastNotificationsEnabled to:', isEnabled);
+                        }
+                    }
+                });
+                
+                // Add backup interval validation
+                document.getElementById('backupInterval').addEventListener('input', function() {
+                    const value = parseInt(this.value, 10);
+                    if (!isNaN(value) && value < 5) {
+                        this.value = "5";
+                    }
+                });
+                
+                // Listen for theme changes from main window
+                window.api.on('theme-changed', (isDark) => {
+                    // Update radio button
+                    const theme = isDark ? 'dark' : 'light';
+                    document.querySelector(`input[name="theme"][value="${theme}"]`).checked = true;
+                    
+                    // Apply theme to settings dialog
+                    document.body.classList.toggle('dark-mode', isDark);
+                    
+                    // Update localStorage
+                    localStorage.setItem('darkMode', isDark);
+                });
+                
+                // Path protection system - prevents directory name appending
+                window.protectedPaths = {};
+                
+                // Listen for force-exact-path events
+                window.api.onForceExactPath((data) => {
+                    console.log('IMPORTANT: Received protected path for:', data.directoryType);
+                    window.protectedPaths[data.directoryType] = data.exactPath;
+                });
+                
+                // Browse button handlers - USE EXACT PATH SELECTED
+                document.getElementById('browseDatabaseDir').addEventListener('click', async () => {
+                    try {
+                        // Pass the directory type when browsing
+                        const path = await window.api.browseDirectory('database');
+                        if (path) {
+                            // Use EXACTLY the path that was selected - NO MODIFICATIONS
+                            document.getElementById('databasePath').value = path;
+                            console.log('Using exact database path:', path);
+                        }
+                    } catch (error) {
+                        console.error('Error browsing for database directory:', error);
+                    }
+                });
+
+                document.getElementById('browseDocumentDir').addEventListener('click', async () => {
+                    try {
+                        // Pass the directory type when browsing
+                        const path = await window.api.browseDirectory('documents');
+                        if (path) {
+                            // Use EXACTLY the path that was selected - NO MODIFICATIONS
+                            document.getElementById('documentPath').value = path;
+                            console.log('Using exact document path:', path);
+                        }
+                    } catch (error) {
+                        console.error('Error browsing for document directory:', error);
+                    }
+                });
+
+                document.getElementById('browseBackupDir').addEventListener('click', async () => {
+                    try {
+                        // Pass the directory type when browsing
+                        const path = await window.api.browseDirectory('backup');
+                        if (path) {
+                            // Use EXACTLY the path that was selected - NO MODIFICATIONS
+                            document.getElementById('backupPath').value = path;
+                            console.log('Using exact backup path:', path);
+                        }
+                    } catch (error) {
+                        console.error('Error browsing for backup directory:', error);
+                    }
+                });
+                
+                document.getElementById('browseImageDir').addEventListener('click', async () => {
+                    try {
+                        // Pass the directory type when browsing
+                        const path = await window.api.browseDirectory('images');
+                        if (path) {
+                            // Use EXACTLY the path that was selected - NO MODIFICATIONS
+                            document.getElementById('imagePath').value = path;
+                            console.log('Using exact image path:', path);
+                        }
+                    } catch (error) {
+                        console.error('Error browsing for image directory:', error);
+                    }
+                });
+                
+                // Add save button handler
+                document.getElementById('saveButton').addEventListener('click', async () => {
+                    // Get the backup interval value once
+                    let backupIntervalValue = parseInt(document.getElementById('backupInterval').value, 10);
+                    
+                    // Enforce minimum of 5 minutes
+                    if (isNaN(backupIntervalValue) || backupIntervalValue < 5) {
+                        backupIntervalValue = 5;
+                        document.getElementById('backupInterval').value = "5";
+                    }
+                    
+                    const enableAutoBackupValue = document.getElementById('enableAutoBackup').checked;
+                    
+                    // Get the selected theme value
+                    const selectedTheme = document.querySelector('input[name="theme"]:checked').value;
+                    const isDark = selectedTheme === 'dark';
+                    
+                    // Explicitly save theme to localStorage
+                    localStorage.setItem('darkMode', isDark);
+                    
+                    // Notify about theme change if it's different from original
+                    if (selectedTheme !== window.originalTheme) {
+                        console.log('Theme changed from', window.originalTheme, 'to', selectedTheme);
+                        window.api.send('theme-changed', isDark);
+                        
+                        // Update original theme to reflect the saved value
+                        window.originalTheme = selectedTheme;
+                    }
+                    
+                    const settings = {
+                        theme: selectedTheme,
+                        enableNotifications: document.getElementById('enableNotifications').checked,
+                        databasePath: document.getElementById('databasePath').value,
+                        documentPath: document.getElementById('documentPath').value,
+                        backupPath: document.getElementById('backupPath').value,
+                        imagePath: document.getElementById('imagePath').value,
+                        enableAutoBackup: enableAutoBackupValue,
+                        // IMPORTANT: Include BOTH names for maximum compatibility with all scripts
+                        backupInterval: backupIntervalValue,
+                        autoBackupInterval: backupIntervalValue  // This is the key fix - duplicate with different name
+                    };
+                    
+                    // Store ALL settings in localStorage for persistence - include BOTH variable names
+                    localStorage.setItem('databasePath', settings.databasePath);
+                    localStorage.setItem('documentPath', settings.documentPath);
+                    localStorage.setItem('backupPath', settings.backupPath);
+                    localStorage.setItem('imagePath', settings.imagePath);
+                    localStorage.setItem('enableAutoBackup', settings.enableAutoBackup);
+                    localStorage.setItem('backupInterval', backupIntervalValue);
+                    localStorage.setItem('autoBackupInterval', backupIntervalValue); // Additional storage with alternate name
+                    localStorage.setItem('settings', JSON.stringify(settings));
+                    
+                    // Explicitly save notification setting
+                    localStorage.setItem('toastNotificationsEnabled', settings.enableNotifications);
+                    
+                    // Notify main window about notification setting change
+                    window.api.send('notification-setting-changed', settings.enableNotifications);
+                    
+                    // Log what we're actually saving
+                    console.log('AUTO-BACKUP SETTINGS SAVED: enabled=', enableAutoBackupValue, 
+                                'interval=', backupIntervalValue, '(saved with both name variants)');
+                    
+                    console.log('Settings saved to localStorage:', settings);
+                    console.log('Notification setting saved:', settings.enableNotifications);
+                    
+                    // Dispatch settings changed event
+                    window.dispatchEvent(new CustomEvent('settings-saved'));
+                    
+                    try {
+                        // Use the invoke method for settings that returns a result
+                        const result = await window.api.invoke('save-settings', settings);
+                        if (result && result.success) {
+                            console.log('Settings saved successfully to file');
+                            window.api.send('close-settings-window');
+                        } else {
+                            console.error('Error saving settings:', result?.error);
+                            alert('Error saving settings: ' + (result?.error || 'Unknown error'));
+                        }
+                    } catch (error) {
+                        console.error('Error saving settings:', error);
+                        alert('Error saving settings: ' + error.message);
+                    }
+                });
+                
+                // Add reset button handler
+                document.getElementById('resetButton').addEventListener('click', async () => {
+                    const paths = await window.api.getPaths();
+                    const appRootDir = paths.root || '';
+                    
+                    // Reset to defaults with correct path handling
+                    document.querySelector('input[name="theme"][value="light"]').checked = true;
+                    document.getElementById('enableNotifications').checked = true;
+                    
+                    // Use proper path joining instead of hardcoded backslashes
+                    document.getElementById('databasePath').value = await window.api.joinPaths(appRootDir, 'database');
+                    document.getElementById('documentPath').value = await window.api.joinPaths(appRootDir, 'documents');
+                    document.getElementById('backupPath').value = await window.api.joinPaths(appRootDir, 'backup');
+                    document.getElementById('imagePath').value = await window.api.joinPaths(appRootDir, 'images');
+                    
+                    // Set auto-backup settings to defaults
+                    const defaultAutoBackupEnabled = true; // Change to true from false
+                    const defaultInterval = 30;
+                    
+                    // Update UI
+                    document.getElementById('enableAutoBackup').checked = defaultAutoBackupEnabled;
+                    document.getElementById('backupInterval').value = defaultInterval.toString();
+                    
+                    // Also update localStorage immediately with both variable names
+                    localStorage.setItem('enableAutoBackup', defaultAutoBackupEnabled);
+                    localStorage.setItem('backupInterval', defaultInterval);
+                    localStorage.setItem('autoBackupInterval', defaultInterval);
+                    
+                    console.log('Reset auto-backup settings to:', {
+                        enabled: defaultAutoBackupEnabled,
+                        interval: defaultInterval
+                    });
+                });
+                
+                // Add close button handler
+                document.getElementById('closeButton').addEventListener('click', () => {
+                    // Revert theme to original setting when canceling
+                    const originalIsDark = window.originalTheme === 'dark';
+                    
+                    // Restore original theme in localStorage only if it changed
+                    const currentTheme = document.querySelector('input[name="theme"]:checked').value;
+                    if (currentTheme !== window.originalTheme) {
+                        console.log('Canceling - reverting theme to original:', window.originalTheme);
+                        
+                        // Send theme-changed event to restore the application's theme
+                        window.api.send('theme-changed', originalIsDark);
+                    }
+                    
+                    // Close the window
+                    window.api.send('close-settings-window');
+                });
+            } catch (error) {
+                console.error('Error initializing settings:', error);
+            }
+        });
+    </script>
+</body>
+</html>

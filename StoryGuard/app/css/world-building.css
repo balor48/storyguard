@@ -1,0 +1,194 @@
+/* Base card styles */
+.world-building-card {
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: background-color 0.2s ease;
+}
+
+/* Category header and card styles */
+.world-building-viz .category-header {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.world-building-viz .element-card {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: #2d3338; /* Dark background for cards */
+}
+
+.world-building-viz .element-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Category colors for headers only */
+.world-building-viz .category-header[data-category="Culture"] {
+    background-color: rgba(52, 152, 219, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Race/Species"] {
+    background-color: rgba(231, 76, 60, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Magic"] {
+    background-color: rgba(155, 89, 182, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Magic System"] {
+    background-color: rgba(155, 89, 182, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Political"] {
+    background-color: rgba(41, 128, 185, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Historical Event"] {
+    background-color: rgba(231, 76, 60, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Material"] {
+    background-color: rgba(46, 204, 113, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Organization"] {
+    background-color: rgba(241, 196, 15, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Technology"] {
+    background-color: rgba(46, 204, 113, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Religion"] {
+    background-color: rgba(243, 156, 18, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Government"] {
+    background-color: rgba(26, 188, 156, 0.7);
+}
+
+.world-building-viz .category-header[data-category="History"] {
+    background-color: rgba(230, 126, 34, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Geography"] {
+    background-color: rgba(41, 128, 185, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Flora/Fauna"] {
+    background-color: rgba(39, 174, 96, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Language"] {
+    background-color: rgba(142, 68, 173, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Economy"] {
+    background-color: rgba(243, 156, 18, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Artifact"] {
+    background-color: rgba(192, 57, 43, 0.7);
+}
+
+.world-building-viz .category-header[data-category="Custom"] {
+    background-color: rgba(127, 140, 141, 0.7);
+}
+
+/* Element card text color */
+.world-building-viz .element-card .element-name,
+.world-building-viz .element-card .element-description {
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Color theme classes */
+.card-theme-blue {
+    background-color: rgba(51, 122, 183, 0.15);
+    border: 1px solid rgba(51, 122, 183, 0.3);
+}
+
+.card-theme-green {
+    background-color: rgba(92, 184, 92, 0.15);
+    border: 1px solid rgba(92, 184, 92, 0.3);
+}
+
+.card-theme-orange {
+    background-color: rgba(240, 173, 78, 0.15);
+    border: 1px solid rgba(240, 173, 78, 0.3);
+}
+
+.card-theme-yellow {
+    background-color: rgba(241, 196, 15, 0.15);
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.card-theme-purple {
+    background-color: rgba(142, 68, 173, 0.15);
+    border: 1px solid rgba(142, 68, 173, 0.3);
+}
+
+.card-theme-red {
+    background-color: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.card-theme-teal {
+    background-color: rgba(26, 188, 156, 0.15);
+    border: 1px solid rgba(26, 188, 156, 0.3);
+}
+
+.card-theme-pink {
+    background-color: rgba(233, 30, 99, 0.15);
+    border: 1px solid rgba(233, 30, 99, 0.3);
+}
+
+.card-theme-brown {
+    background-color: rgba(121, 85, 72, 0.15);
+    border: 1px solid rgba(121, 85, 72, 0.3);
+}
+
+.card-theme-cyan {
+    background-color: rgba(0, 188, 212, 0.15);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.card-theme-indigo {
+    background-color: rgba(63, 81, 181, 0.15);
+    border: 1px solid rgba(63, 81, 181, 0.3);
+}
+
+.card-theme-lime {
+    background-color: rgba(205, 220, 57, 0.15);
+    border: 1px solid rgba(205, 220, 57, 0.3);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .world-building-card {
+    --card-text: #ffffff;
+}
+
+/* Light theme adjustments */
+[data-theme="light"] .world-building-card {
+    --card-text: #ffffff;
+}
+
+.world-building-card .title {
+    color: var(--card-text);
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.world-building-card .content {
+    color: var(--card-text);
+    opacity: 0.9;
+} 

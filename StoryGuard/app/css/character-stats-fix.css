@@ -1,0 +1,88 @@
+/* Character Stats Fix - Provides precise control over character tab stat boxes */
+
+/* Character tab specific statistics */
+#characters-tab .statistics {
+  display: inline-block !important;
+  margin-left: 20px !important;
+  margin-top: -35px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+#characters-tab .statistics-grid {
+  display: flex !important;
+  gap: 10px !important;
+  justify-content: flex-start !important;
+}
+
+#characters-tab .stat-card {
+  width: 140px !important;
+  max-width: 140px !important;
+  min-width: 140px !important;
+  padding: 10px !important;
+  margin: 0 !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+  border: 1px solid var(--border-color, #ddd) !important;
+  background-color: var(--card-color, #f8f9fa) !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+  display: inline-block !important;
+  overflow: hidden !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  position: relative !important;
+}
+
+#characters-tab .stat-card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
+}
+
+#characters-tab .stat-card h4 {
+  margin: 0 !important;
+  color: var(--primary-color, #3a6ea5) !important;
+  font-size: 0.9em !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+#characters-tab .stat-card .stat-icon {
+  font-size: 1.2em !important;
+  margin-bottom: 5px !important;
+  color: var(--primary-color, #3a6ea5) !important;
+  position: relative !important;
+  left: -15px !important;
+}
+
+#characters-tab .stat-card p {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.2em !important;
+  font-weight: bold !important;
+  color: var(--text-color, #333) !important;
+  position: absolute !important;
+  top: 21px !important;
+  right: 25px !important;
+  text-align: right !important;
+  width: auto !important;
+  display: block !important;
+}
+
+/* Dark mode support */
+.dark-mode #characters-tab .stat-card {
+  background-color: var(--dark-card-color, #2a2a2a) !important;
+  border-color: var(--dark-border-color, #444) !important;
+}
+
+.dark-mode #characters-tab .stat-card h4,
+.dark-mode #characters-tab .stat-card .stat-icon {
+  color: var(--dark-primary-color, #4a8ec6) !important;
+}
+
+.dark-mode #characters-tab .stat-card p {
+  color: var(--dark-text-color, #eee) !important;
+} 

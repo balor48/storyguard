@@ -1,0 +1,138 @@
+/* Final Table Fix - Overrides the specific styles in characterdb.css */
+
+/* Override the primary color variable for tables only */
+:root {
+    --table-header-color: #3498db;
+}
+
+/* Override the table styles */
+table {
+    width: auto !important;
+    min-width: 600px !important;
+    max-width: 90% !important;
+    margin: 0 auto 20px !important;
+}
+
+/* Override the table header styles */
+th {
+    background-color: var(--table-header-color) !important;
+    color: white !important;
+    font-weight: 500 !important;
+    padding: 15px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 1 !important;
+}
+
+/* Override the sortable header hover styles */
+.sortable:hover {
+    background-color: #2980b9 !important;
+}
+
+/* Override the sort indicators */
+.sort-asc::after,
+.sort-desc::after {
+    content: '' !important;
+    position: absolute !important;
+    right: 5px !important;
+    top: 50% !important;
+    border-left: 5px solid transparent !important;
+    border-right: 5px solid transparent !important;
+}
+
+.sort-asc::after {
+    border-bottom: 5px solid #fff !important;
+    transform: translateY(-50%) !important;
+}
+
+.sort-desc::after {
+    border-top: 5px solid #fff !important;
+    transform: translateY(-50%) !important;
+}
+
+/* Override the table cell styles */
+td {
+    padding: 12px 15px !important;
+    background-color: white !important;
+}
+
+/* Override the alternating row colors */
+tr:nth-child(even) td {
+    background-color: #f5f5f5 !important;
+}
+
+/* Override the hover effect */
+tr:hover td {
+    background-color: #e3f2fd !important;
+    transition: background-color 0.2s ease !important;
+}
+
+/* Dark mode overrides */
+.dark-mode th {
+    background-color: #2c3e50 !important;
+}
+
+.dark-mode td {
+    background-color: #222 !important;
+}
+
+.dark-mode tr:nth-child(even) td {
+    background-color: #333 !important;
+}
+
+.dark-mode tr:hover td {
+    background-color: #3a3a3a !important;
+}
+
+/* Specific table overrides */
+#characterTable,
+#locationTable,
+#plotTable,
+#worldElementTable,
+#relationshipTable,
+#statisticsTable,
+#analyzeBookTable {
+    width: auto !important;
+    min-width: 600px !important;
+    max-width: 90% !important;
+    margin: 0 auto 20px !important;
+}
+
+/* Make sure the table container doesn't force full width */
+.table-container {
+    width: auto !important;
+    min-width: 600px !important;
+    max-width: 90% !important;
+    margin: 30px auto 0 !important;
+    overflow-x: auto !important; /* Add horizontal scrolling for small screens */
+}
+
+/* Make worldbuilding table wider */
+#worldbuilding-tab .table-container {
+    width: 98% !important;
+    min-width: 1000px !important;
+    max-width: 98% !important;
+    margin: 30px auto 0 !important;
+}
+
+/* Ensure the world element table itself is also wider */
+#worldbuilding-tab #worldElementTable {
+    width: 100% !important;
+    min-width: 1000px !important;
+}
+
+/* Ensure responsive behavior on small screens */
+@media (max-width: 768px) {
+    table,
+    #characterTable,
+    #locationTable,
+    #plotTable,
+    #worldElementTable,
+    #relationshipTable,
+    #statisticsTable,
+    #analyzeBookTable,
+    .table-container {
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+}

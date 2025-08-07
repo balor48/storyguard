@@ -1,0 +1,104 @@
+/**
+ * Action Buttons Icon Fix
+ * Replaces all text-based action buttons with icon-based buttons across the application
+ */
+
+/* Common styles for all action buttons */
+.actions-column button {
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 0 5px !important;
+    border-radius: 5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 0 !important; /* Hide text content */
+    color: transparent !important; /* Hide text content */
+    overflow: hidden !important;
+    background-color: #3498db !important; /* Blue background */
+    transition: all 0.2s ease !important;
+}
+
+/* View button (eye icon) */
+.actions-column .view-btn,
+.actions-column .show-btn {
+    background-color: #3498db !important; /* Blue */
+    position: relative !important;
+}
+
+.actions-column .view-btn::before,
+.actions-column .show-btn::before {
+    content: "\f06e" !important; /* fa-eye icon */
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    color: white !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Edit button (pencil icon) */
+.actions-column .edit-btn {
+    background-color: #2980b9 !important; /* Darker blue */
+    position: relative !important;
+}
+
+.actions-column .edit-btn::before {
+    content: "\f304" !important; /* fa-edit icon */
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    color: white !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Delete button (trash icon) */
+.actions-column .delete-btn {
+    background-color: #e74c3c !important; /* Red */
+    position: relative !important;
+}
+
+.actions-column .delete-btn::before {
+    content: "\f2ed" !important; /* fa-trash-alt icon */
+    font-family: "Font Awesome 5 Free" !important;
+    font-weight: 900 !important;
+    font-size: 18px !important;
+    color: white !important;
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+/* Hover effects */
+.actions-column button:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+    opacity: 0.9 !important;
+}
+
+/* Active (click) effects */
+.actions-column button:active {
+    transform: translateY(0) !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dark mode adjustments */
+body.dark-mode .actions-column button {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Adjust columns to accommodate the buttons */
+.actions-column {
+    min-width: 150px !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+} 

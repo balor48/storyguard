@@ -1,0 +1,308 @@
+/* Base plot card styles */
+.plot-arc-container {
+    margin-bottom: 30px;
+    background: var(--card-color);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.plot-section {
+    margin-bottom: 25px;
+}
+
+/* Plot type header (blue bar) */
+.plot-type-header {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Plot cards (under each type) */
+.plot-card {
+    background-color: #7f8c8d; /* Default gray */
+    color: white !important; /* Always use white text for readability */
+    border-radius: 4px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 10px;
+    min-width: 150px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.plot-card:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+/* Plot type colors */
+.plot-type-main-plot, .plot-card[data-type="Main Plot"] {
+    background-color: #3498db;
+}
+
+.plot-type-character-arc, .plot-card[data-type="Character Arc"] {
+    background-color: #9b59b6;
+}
+
+.plot-type-quest, .plot-card[data-type="Quest"] {
+    background-color: #2ecc71;
+}
+
+.plot-type-subplot, .plot-card[data-type="Subplot"] {
+    background-color: #e74c3c;
+}
+
+.plot-type-story-arc, .plot-card[data-type="Story Arc"] {
+    background-color: #f39c12;
+}
+
+.plot-type-chapter, .plot-card[data-type="Chapter"] {
+    background-color: #1abc9c;
+}
+
+.plot-type-scene, .plot-card[data-type="Scene"] {
+    background-color: #e67e22;
+}
+
+.plot-type-conflict, .plot-card[data-type="Conflict"] {
+    background-color: #d35400;
+}
+
+.plot-type-resolution, .plot-card[data-type="Resolution"] {
+    background-color: #2980b9;
+}
+
+.plot-type-dungeon, .plot-card[data-type="Dungeon"] {
+    background-color: #5D4037;
+}
+
+.plot-type-dungeontwo, .plot-card[data-type="Dungeontwo"] {
+    background-color: #795548;
+}
+
+.plot-type-twist, .plot-card[data-type="Twist"] {
+    background-color: #8e44ad;
+}
+
+.plot-type-other, .plot-card[data-type="Other"] {
+    background-color: #7f8c8d;
+}
+
+/* Type selection badges */
+.plot-type-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    color: white !important;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.plot-type-badge:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.16), 0 2px 4px rgba(0,0,0,0.23);
+}
+
+.plot-type-badge-main-plot {
+    background-color: #3498db;
+}
+
+.plot-type-badge-character-arc {
+    background-color: #9b59b6;
+}
+
+.plot-type-badge-quest {
+    background-color: #2ecc71;
+}
+
+.plot-type-badge-subplot {
+    background-color: #e74c3c;
+}
+
+.plot-type-badge-story-arc {
+    background-color: #f39c12;
+}
+
+.plot-type-badge-chapter {
+    background-color: #1abc9c;
+}
+
+.plot-type-badge-scene {
+    background-color: #e67e22;
+}
+
+.plot-type-badge-conflict {
+    background-color: #d35400;
+}
+
+.plot-type-badge-resolution {
+    background-color: #2980b9;
+}
+
+.plot-type-badge-dungeon {
+    background-color: #5D4037;
+}
+
+.plot-type-badge-dungeontwo {
+    background-color: #795548;
+}
+
+.plot-type-badge-twist {
+    background-color: #8e44ad;
+}
+
+.plot-type-badge-other {
+    background-color: #7f8c8d;
+}
+
+/* Dark theme adjustments */
+body.dark-mode .plot-card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .plot-type-header {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Status badge styles */
+.status-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: 8px;
+    vertical-align: middle;
+    color: white;
+    background-color: #7f8c8d;
+}
+
+.status-planned {
+    background-color: #3498db;
+}
+
+.status-in-progress {
+    background-color: #f39c12;
+}
+
+.status-completed {
+    background-color: #2ecc71;
+}
+
+.status-revised {
+    background-color: #9b59b6;
+}
+
+.status-cut {
+    background-color: #e74c3c;
+}
+
+/* Color theme classes */
+.plot-theme-blue {
+    background-color: rgba(51, 122, 183, 0.15);
+    border: 1px solid rgba(51, 122, 183, 0.3);
+}
+
+.plot-theme-green {
+    background-color: rgba(92, 184, 92, 0.15);
+    border: 1px solid rgba(92, 184, 92, 0.3);
+}
+
+.plot-theme-orange {
+    background-color: rgba(240, 173, 78, 0.15);
+    border: 1px solid rgba(240, 173, 78, 0.3);
+}
+
+.plot-theme-yellow {
+    background-color: rgba(241, 196, 15, 0.15);
+    border: 1px solid rgba(241, 196, 15, 0.3);
+}
+
+.plot-theme-purple {
+    background-color: rgba(142, 68, 173, 0.15);
+    border: 1px solid rgba(142, 68, 173, 0.3);
+}
+
+.plot-theme-red {
+    background-color: rgba(231, 76, 60, 0.15);
+    border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+.plot-theme-teal {
+    background-color: rgba(26, 188, 156, 0.15);
+    border: 1px solid rgba(26, 188, 156, 0.3);
+}
+
+.plot-theme-pink {
+    background-color: rgba(233, 30, 99, 0.15);
+    border: 1px solid rgba(233, 30, 99, 0.3);
+}
+
+.plot-theme-brown {
+    background-color: rgba(121, 85, 72, 0.15);
+    border: 1px solid rgba(121, 85, 72, 0.3);
+}
+
+.plot-theme-cyan {
+    background-color: rgba(0, 188, 212, 0.15);
+    border: 1px solid rgba(0, 188, 212, 0.3);
+}
+
+.plot-theme-indigo {
+    background-color: rgba(63, 81, 181, 0.15);
+    border: 1px solid rgba(63, 81, 181, 0.3);
+}
+
+.plot-theme-lime {
+    background-color: rgba(205, 220, 57, 0.15);
+    border: 1px solid rgba(205, 220, 57, 0.3);
+}
+
+/* Light theme adjustments */
+body:not(.dark-mode) .plot-card {
+    --card-text: #2c3e50;
+}
+
+.plot-card .title {
+    color: var(--card-text);
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.plot-card .description {
+    color: var(--card-text);
+    opacity: 0.9;
+    font-size: 0.9em;
+    max-height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+/* Add styles for section titles */
+.section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Plot Arc Visualization Styles */ 

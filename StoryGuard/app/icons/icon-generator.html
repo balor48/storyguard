@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Story Database Icon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin: 10px;
+        }
+        .controls {
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .download-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .download-links a {
+            margin: 10px;
+            padding: 8px 12px;
+            background-color: #f1f1f1;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Story Database Icon Generator</h1>
+    <p>This tool generates basic icons for the Story Database PWA.</p>
+    
+    <div class="controls">
+        <button id="generateBtn">Generate Icons</button>
+    </div>
+    
+    <div id="canvasContainer"></div>
+    <div id="downloadLinks" class="download-links"></div>
+    
+    <script>
+        // Icon sizes needed for PWA
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        
+        // Function to generate a simple icon
+        function generateIcon(size, text) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Background
+            ctx.fillStyle = '#3498db';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Add a simple design
+            ctx.fillStyle = '#2980b9';
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Add text
+            ctx.fillStyle = 'white';
+            ctx.font = `bold ${size/4}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(text, size/2, size/2);
+            
+            return canvas;
+        }
+        
+        // Function to create download links
+        function createDownloadLink(canvas, size) {
+            const link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = `icon-${size}x${size}.png`;
+            link.textContent = `Download ${size}x${size} icon`;
+            link.className = 'download-link';
+            return link;
+        }
+        
+        // Generate all icons
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            const canvasContainer = document.getElementById('canvasContainer');
+            const downloadLinks = document.getElementById('downloadLinks');
+            
+            // Clear previous content
+            canvasContainer.innerHTML = '';
+            downloadLinks.innerHTML = '';
+            
+            // Generate icons for each size
+            sizes.forEach(size => {
+                const canvas = generateIcon(size, 'SDB');
+                canvasContainer.appendChild(canvas);
+                
+                const link = createDownloadLink(canvas, size);
+                downloadLinks.appendChild(link);
+            });
+        });
+    </script>
+</body>
+</html>

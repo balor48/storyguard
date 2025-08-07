@@ -1,0 +1,61 @@
+/* Custom CSS fix for relationship table headers */
+
+/* Target every possible table header in the application */
+th,
+thead th,
+table th,
+[role="columnheader"],
+.table th,
+.table-container th,
+.character-list th,
+.character-list table th,
+div[role="dialog"] th,
+.panel th,
+.modal th,
+div[role="dialog"] .character-list table th,
+.panel .character-list table th,
+.modal .character-list table th,
+div[role="dialog"] .character-list th,
+.panel .character-list th,
+.modal .character-list th,
+.character-list table th:first-child,
+.character-list table th:last-child {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Specific targeting for the First Name/Last Name headers */
+th:contains("First Name"),
+th:contains("Last Name"),
+th[onclick*="firstName"],
+th[onclick*="lastName"],
+[data-column="firstName"],
+[data-column="lastName"],
+th[data-field="firstName"],
+th[data-field="lastName"] {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Direct targeting by column position */
+.character-list table th:nth-of-type(1),
+.character-list table th:nth-of-type(2),
+table th:nth-of-type(1),
+table th:nth-of-type(2) {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+
+/* Target headers that might have inline styles */
+th[style*="text-align"] {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Analysis Options</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2980b9;
+        }
+        .option-section {
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+        .option-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .option-description {
+            margin-left: 20px;
+        }
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .note {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff8f0;
+            border-left: 4px solid #e67e22;
+            padding: 10px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Analysis Options</h1>
+    
+    <p>The Book Analysis tab allows you to extract character names from book files and add them to your character database. This document explains the various options available for character detection and analysis.</p>
+    
+    <div class="note">
+        <strong>Note:</strong> The effectiveness of character detection depends on the writing style and formatting of your book. You may need to experiment with different options to get the best results for your specific text.
+    </div>
+    
+    <h2>Supported File Formats</h2>
+    <ul>
+        <li><strong>TXT</strong> - Plain text files</li>
+        <li><strong>DOCX</strong> - Microsoft Word documents</li>
+        <li><strong>RTF</strong> - Rich Text Format</li>
+        <li><strong>HTML</strong> - Web pages and HTML documents</li>
+    </ul>
+    
+    <h2>Detection Methods</h2>
+    
+    <div class="option-section">
+        <p class="option-name">Dialogue Attribution</p>
+        <div class="option-description">
+            <p>Identifies character names based on dialogue patterns in the text. This method looks for patterns like:</p>
+            <ul>
+                <li>"Character said" - e.g., "John said"</li>
+                <li>"said Character" - e.g., "said John"</li>
+            </ul>
+            <p>This method works with various dialogue verbs like "said," "asked," "replied," "whispered," etc.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Named Entity Recognition</p>
+        <div class="option-description">
+            <p>Uses basic pattern matching to identify potential proper names in the text. This method looks for capitalized words that are likely to be names rather than common nouns or the start of sentences.</p>
+            <p>This option is useful for texts where characters are frequently mentioned outside of dialogue.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Capitalized Word Analysis</p>
+        <div class="option-description">
+            <p>Analyzes all capitalized words in the text to identify potential character names. This is a broader approach than Named Entity Recognition and may include more false positives.</p>
+            <p>This option is useful for texts with unusual naming conventions or fantasy/sci-fi names.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Frequency Analysis</p>
+        <div class="option-description">
+            <p>Analyzes the frequency of potential character names in the text. Names that appear more frequently are more likely to be significant characters.</p>
+            <p>This option helps prioritize characters based on their importance in the text.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Title & Honorific Detection</p>
+        <div class="option-description">
+            <p>Identifies character names that include titles or honorifics, such as:</p>
+            <ul>
+                <li>Military/law enforcement: Captain, Lieutenant, Sergeant, etc.</li>
+                <li>Academic/religious: Dr., Professor, Reverend, etc.</li>
+                <li>Nobility: Sir, Lady, King, Queen, etc.</li>
+                <li>Formal: Mr., Mrs., Ms., etc.</li>
+            </ul>
+            <p>This option helps correctly parse names with titles into appropriate first/last name fields.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Direct Address Pattern</p>
+        <div class="option-description">
+            <p>Identifies character names in direct address patterns, such as:</p>
+            <ul>
+                <li>"Hello, Character" - e.g., "Hello, John"</li>
+                <li>"Character, come here" - e.g., "John, come here"</li>
+            </ul>
+            <p>This option is useful for detecting characters who are directly addressed in dialogue.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Possessive Form Detection</p>
+        <div class="option-description">
+            <p>Identifies character names in possessive forms, such as:</p>
+            <ul>
+                <li>"Character's" - e.g., "John's book"</li>
+            </ul>
+            <p>This option helps detect characters who are mentioned in possessive contexts.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Character Introduction</p>
+        <div class="option-description">
+            <p>Looks for patterns that typically introduce new characters, such as:</p>
+            <ul>
+                <li>"a man/woman named Character" - e.g., "a man named John"</li>
+                <li>"Character was a" - e.g., "John was a tall man"</li>
+            </ul>
+            <p>This option is useful for detecting character introductions in narrative text.</p>
+        </div>
+    </div>
+    
+    <h2>Additional Options</h2>
+    
+    <div class="option-section">
+        <p class="option-name">Combine Name Variants</p>
+        <div class="option-description">
+            <p>Attempts to combine different variants of the same character name, such as:</p>
+            <ul>
+                <li>Full name vs. first name only: "John Smith" and "John"</li>
+                <li>Nicknames: "Robert" and "Bob"</li>
+                <li>Title variations: "Dr. Smith" and "Smith"</li>
+            </ul>
+            <p>This option helps consolidate multiple references to the same character.</p>
+        </div>
+    </div>
+    
+    <div class="option-section">
+        <p class="option-name">Filter Common Words</p>
+        <div class="option-description">
+            <p>Filters out common words that might be mistaken for character names, such as:</p>
+            <ul>
+                <li>Days of the week: "Monday," "Tuesday," etc.</li>
+                <li>Months: "January," "February," etc.</li>
+                <li>Common place names: "America," "England," etc.</li>
+                <li>Other common capitalized words</li>
+            </ul>
+            <p>This option helps reduce false positives in character detection.</p>
+        </div>
+    </div>
+    
+    <h2>Minimum Character Mentions</h2>
+    <p>This setting determines the minimum number of times a character must be mentioned in the text to be included in the results. Increasing this value will filter out minor characters or false positives that are only mentioned a few times.</p>
+    
+    <div class="warning">
+        <strong>Tip:</strong> Start with a higher value (e.g., 5-10) to focus on main characters, then reduce it if you want to include more minor characters.
+    </div>
+    
+    <h2>Working with Results</h2>
+    
+    <h3>Series and Book Selection</h3>
+    <p>After analyzing a book, you can select or create a series and book to associate with the detected characters. Use the "Add to Table" button to apply these values to all character entries in the results table.</p>
+    
+    <h3>Adding Characters to the Database</h3>
+    <p>To add characters to your database:</p>
+    <ol>
+        <li>Select the checkboxes next to the characters you want to add</li>
+        <li>Review and edit the character information as needed</li>
+        <li>Click the "Add Selected to Database" button</li>
+    </ol>
+    <p>The selected characters will be added to your character database with the specified information.</p>
+    
+    <h3>Generating a PDF Report</h3>
+    <p>You can generate a PDF report of the analysis results by clicking the "Generate PDF Report" button. This report includes:</p>
+    <ul>
+        <li>File information (name, size, word count)</li>
+        <li>Analysis settings used</li>
+        <li>List of detected characters with their information</li>
+    </ul>
+    
+    <div class="note">
+        <strong>Note:</strong> The PDF report is generated locally in your browser and is not uploaded to any server.
+    </div>
+    
+    <h2>Troubleshooting</h2>
+    
+    <h3>Too Many False Positives</h3>
+    <p>If you're getting too many false positives (words incorrectly identified as character names):</p>
+    <ul>
+        <li>Increase the "Minimum Character Mentions" value</li>
+        <li>Enable the "Filter Common Words" option</li>
+        <li>Disable broader detection methods like "Capitalized Word Analysis"</li>
+    </ul>
+    
+    <h3>Missing Characters</h3>
+    <p>If important characters are missing from the results:</p>
+    <ul>
+        <li>Decrease the "Minimum Character Mentions" value</li>
+        <li>Enable additional detection methods</li>
+        <li>Check if the character names follow unusual patterns that might not be detected by the current methods</li>
+    </ul>
+    
+    <h3>File Format Issues</h3>
+    <p>If you're having trouble with a specific file format:</p>
+    <ul>
+        <li>Try converting the file to a different format (e.g., from DOCX to TXT)</li>
+        <li>Check if the file contains special formatting or characters that might interfere with text extraction</li>
+        <li>For large files, try analyzing smaller sections separately</li>
+    </ul>
+    
+    <p><a href="javascript:window.close();">Close this window</a></p>
+</body>
+</html>

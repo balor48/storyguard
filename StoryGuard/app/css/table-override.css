@@ -1,0 +1,138 @@
+/* Table Override Styles - Loaded last to ensure highest specificity */
+
+/* Force table styles */
+.table-container table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 20px !important;
+    border-radius: 8px !important;
+    overflow: hidden !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Force table header styles */
+.table-container thead {
+    background-color: #3498db !important;
+    color: white !important;
+}
+
+.table-container thead th {
+    padding: 15px !important;
+    text-align: left !important;
+    font-weight: 600 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10 !important;
+    background-color: #3498db !important;
+}
+
+/* Force table body styles */
+.table-container tbody tr {
+    border-bottom: 1px solid #ddd !important;
+    transition: background-color 0.2s ease !important;
+}
+
+.table-container tbody tr td {
+    background-color: white !important;
+    padding: 12px 15px !important;
+    vertical-align: middle !important;
+}
+
+/* Force alternating row colors */
+.table-container tbody tr:nth-child(even) td {
+    background-color: #f5f5f5 !important;
+}
+
+/* Force hover effect */
+.table-container tbody tr:hover td {
+    background-color: #e3f2fd !important;
+}
+
+/* Force dark mode styles */
+.dark-mode .table-container thead {
+    background-color: #2c3e50 !important;
+}
+
+.dark-mode .table-container tbody tr td {
+    background-color: #222 !important;
+}
+
+.dark-mode .table-container tbody tr:nth-child(even) td {
+    background-color: #333 !important;
+}
+
+.dark-mode .table-container tbody tr:hover td {
+    background-color: #3a3a3a !important;
+}
+
+/* Force consistent column widths */
+/* Character table */
+.table-container #characterTable th:nth-child(1) { width: 60px !important; } /* Image */
+.table-container #characterTable th:nth-child(2) { width: 80px !important; } /* Title */
+.table-container #characterTable th:nth-child(3) { width: 120px !important; } /* First Name */
+.table-container #characterTable th:nth-child(4) { width: 120px !important; } /* Last Name */
+.table-container #characterTable th:nth-child(5) { width: 80px !important; } /* Sex */
+.table-container #characterTable th:nth-child(6) { width: 100px !important; } /* Race */
+.table-container #characterTable th:nth-child(7) { width: 120px !important; } /* Series */
+.table-container #characterTable th:nth-child(8) { width: 120px !important; } /* Book */
+.table-container #characterTable th:nth-child(9) { width: 150px !important; } /* Actions */
+
+/* Location table */
+.table-container #locationTable th:nth-child(1) { width: 150px !important; } /* Name */
+.table-container #locationTable th:nth-child(2) { width: 100px !important; } /* Type */
+.table-container #locationTable th:nth-child(3) { width: 100px !important; } /* Size/Scale */
+.table-container #locationTable th:nth-child(4) { width: 120px !important; } /* Series */
+.table-container #locationTable th:nth-child(5) { width: 120px !important; } /* Book */
+.table-container #locationTable th:nth-child(6) { width: 150px !important; } /* Actions */
+
+/* Plot table */
+.table-container #plotTable th:nth-child(1) { width: 150px !important; } /* Title */
+.table-container #plotTable th:nth-child(2) { width: 100px !important; } /* Type */
+.table-container #plotTable th:nth-child(3) { width: 120px !important; } /* Series */
+.table-container #plotTable th:nth-child(4) { width: 120px !important; } /* Book */
+.table-container #plotTable th:nth-child(5) { width: 80px !important; } /* Chapter */
+.table-container #plotTable th:nth-child(6) { width: 100px !important; } /* Status */
+.table-container #plotTable th:nth-child(8) { width: 150px !important; } /* Actions */
+
+/* Hide Description column in plot table */
+.table-container #plotTable th:nth-child(7),
+.table-container #plotTable td:nth-child(7) {
+    display: none !important;
+}
+
+/* World Element table */
+.table-container #worldElementTable th:nth-child(1) { width: 300px !important; } /* Name */
+.table-container #worldElementTable th:nth-child(2) { width: 200px !important; } /* Category */
+.table-container #worldElementTable th:nth-child(3) { width: 250px !important; } /* Series */
+.table-container #worldElementTable th:nth-child(4) { width: auto !important; } /* Description */
+.table-container #worldElementTable th:nth-child(5) { width: 200px !important; } /* Actions */
+
+/* Special high-specificity overrides for worldbuilding */
+body .table-container#worldElementTable th:nth-child(1),
+html body #worldbuilding-tab .table-container #worldElementTable th:nth-child(1) { 
+    width: 300px !important; 
+} /* Name */
+
+body .table-container #worldElementTable th:nth-child(2),
+html body #worldbuilding-tab .table-container #worldElementTable th:nth-child(2) { 
+    width: 200px !important; 
+} /* Category */
+
+body .table-container #worldElementTable th:nth-child(3),
+html body #worldbuilding-tab .table-container #worldElementTable th:nth-child(3) { 
+    width: 250px !important; 
+} /* Series */
+
+body .table-container #worldElementTable th:nth-child(5),
+html body #worldbuilding-tab .table-container #worldElementTable th:nth-child(5) { 
+    width: 200px !important; 
+} /* Actions */
+
+/* Force responsive behavior */
+@media (max-width: 768px) {
+    .table-container table {
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+}

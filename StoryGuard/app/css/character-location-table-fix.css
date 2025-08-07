@@ -1,0 +1,199 @@
+/* Table Fixes for Character, Location, and Plot Tables */
+/* This CSS ensures all tables take up the full width of their containers */
+
+/* Character Table Container */
+#characters-tab .table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 1000px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow-x: hidden !important;
+}
+
+/* Character Table */
+#characterTable {
+  width: 100% !important;
+  min-width: 1000px !important;
+  table-layout: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+/* Ensure column widths are maintained correctly for Character Table */
+#characters-tab .table-container #characterTable th:nth-child(1) { width: 100px !important; } /* Title */
+#characters-tab .table-container #characterTable th:nth-child(2) { width: 140px !important; } /* First Name */
+#characters-tab .table-container #characterTable th:nth-child(3) { width: 140px !important; } /* Last Name */
+#characters-tab .table-container #characterTable th:nth-child(4) { width: 80px !important; } /* Sex */
+#characters-tab .table-container #characterTable th:nth-child(5) { width: 120px !important; } /* Race */
+#characters-tab .table-container #characterTable th:nth-child(6) { width: 140px !important; } /* Series */
+#characters-tab .table-container #characterTable th:nth-child(7) { width: 140px !important; } /* Book */
+#characters-tab .table-container #characterTable th:nth-child(8) { width: 140px !important; } /* Actions */
+
+/* Character Table row and cell fixes */
+#characterTable tr,
+#characterTable td {
+  box-sizing: border-box !important;
+  padding: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Location Table Container */
+#locations-tab .table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 1000px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow-x: hidden !important;
+  max-height: none; /* Default to no height limit for small number of entries */
+  overflow-y: visible;
+  transition: max-height 0.3s ease, overflow-y 0.3s ease;
+}
+
+/* Location Table */
+#locationTable {
+  width: 100% !important;
+  min-width: 1000px !important;
+  table-layout: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+/* Ensure column widths are maintained correctly for Location Table */
+#locations-tab .table-container #locationTable th:nth-child(1) { width: 160px !important; } /* Name */
+#locations-tab .table-container #locationTable th:nth-child(2) { width: 140px !important; } /* Type */
+#locations-tab .table-container #locationTable th:nth-child(3) { width: 140px !important; } /* Size/Scale */
+#locations-tab .table-container #locationTable th:nth-child(4) { width: 160px !important; } /* Series */
+#locations-tab .table-container #locationTable th:nth-child(5) { width: 160px !important; } /* Book */
+#locations-tab .table-container #locationTable th:nth-child(6) { width: 140px !important; } /* Actions */
+
+/* Location Table row and cell fixes */
+#locationTable tr,
+#locationTable td {
+  box-sizing: border-box !important;
+  padding: 8px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Additional fixes specifically for the Location table right side gap */
+#locations-tab .table-container {
+  width: 100% !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#locationTable {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-right: 0 !important;
+}
+
+/* Applied when showing many entries (25+) */
+#locations-tab .table-container.many-entries {
+  max-height: 500px; /* Fixed height for larger number of entries */
+  overflow-y: auto; /* Add scrollbar when content exceeds height */
+}
+
+/* Ensuring pagination controls are always visible at the bottom */
+#locations-tab .pagination-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  margin-top: 5px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Styles for the pagination buttons */
+#locations-tab .pagination-buttons {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#locations-tab .pagination-buttons button {
+  padding: 5px 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#locations-tab .pagination-buttons button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+}
+
+#locations-tab .pagination-buttons button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Styles for the page size selector */
+#locations-tab .page-size-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+#locations-tab .page-size-selector {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+/* Plot Table Container */
+#plots-tab .table-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 1000px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow-x: hidden !important;
+}
+
+/* Plot Table */
+#plotTable {
+  width: 100% !important;
+  min-width: 1000px !important;
+  table-layout: fixed !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+}
+
+/* Ensure column widths are maintained correctly for Plot Table */
+#plots-tab .table-container #plotTable th:nth-child(1) { width: 150px !important; } /* Title */
+#plots-tab .table-container #plotTable th:nth-child(2) { width: 100px !important; } /* Type */
+#plots-tab .table-container #plotTable th:nth-child(3) { width: 120px !important; } /* Series */
+#plots-tab .table-container #plotTable th:nth-child(4) { width: 120px !important; } /* Book */
+#plots-tab .table-container #plotTable th:nth-child(5) { width: 80px !important; } /* Chapter */
+#plots-tab .table-container #plotTable th:nth-child(6) { width: 100px !important; } /* Status */
+#plots-tab .table-container #plotTable th:nth-child(7) { width: 200px !important; } /* Description */
+
+/* Additional fixes specifically for the Plot table right side gap */
+#plots-tab .table-container {
+  width: 100% !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+
+#plotTable {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-right: 0 !important;
+}
+
+/* NOTE: This file should be loaded last to ensure these styles override all others */ 

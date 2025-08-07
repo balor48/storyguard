@@ -1,0 +1,59 @@
+{
+  "name": "storyguard",
+  "version": "1.0.0",
+  "description": "Desktop version of Story Database",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^29.4.6",
+    "electron-builder": "^24.13.3",
+    "electron-packager": "^17.1.2"
+  },
+  "build": {
+    "appId": "com.storyguard.app",
+    "productName": "StoryGuard",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist",
+      "!build"
+    ],
+    "extraResources": [
+      "readme",
+      "images",
+      "documents",
+      "database",
+      "backup"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "images/icon.ico",
+      "signingHashAlgorithms": null,
+      "sign": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "asar": false,
+    "npmRebuild": false,
+    "buildDependenciesFromSource": true,
+    "electronDownload": {
+      "mirror": "https://github.com/electron/electron/releases/download"
+    }
+  },
+  "dependencies": {
+    "html-docx-js": "^0.3.1",
+    "officegen": "^0.6.5"
+  },
+  "productName": "StoryGuard"
+}

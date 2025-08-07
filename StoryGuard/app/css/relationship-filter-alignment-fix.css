@@ -1,0 +1,51 @@
+/**
+ * Relationship Filter Alignment Fix
+ * Centers filter elements vertically and fixes dropdown overflow
+ */
+
+/* Center all elements vertically in the search container */
+#relationships-tab .search-container {
+    display: flex !important;
+    align-items: center !important; /* Center items vertically */
+    min-height: 60px !important; /* Ensure consistent height */
+    box-sizing: border-box !important;
+    padding: 10px 20px !important; /* Consistent padding */
+}
+
+/* Fix dropdown size to prevent overflow */
+#relationshipFilterType,
+#relationshipFilterCharacter {
+    height: 36px !important; /* Consistent height */
+    box-sizing: border-box !important;
+    max-width: 198px !important; /* Prevent overflow by 2px */
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+    vertical-align: middle !important;
+    margin: 0 !important; /* Remove any margin that might cause misalignment */
+}
+
+/* Center the filter buttons container */
+.relationship-filter-buttons {
+    display: flex !important;
+    align-items: center !important; /* Center buttons vertically */
+    margin: 0 0 0 auto !important; /* Push to right while maintaining vertical alignment */
+    height: 36px !important; /* Match height with selects */
+}
+
+/* Ensure buttons are centered vertically */
+.apply-filter-btn,
+.clear-filter-btn {
+    height: 36px !important; /* Match height for consistency */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Ensure vertical alignment in dark mode */
+body.dark-mode #relationships-tab .search-container {
+    align-items: center !important;
+} 

@@ -1,0 +1,39 @@
+/**
+ * Stats Cards Fix for Dark Mode
+ * Improves contrast for stats cards in dark mode
+ */
+
+/* Fix for stats cards in dark mode */
+body.dark-mode .stat-card {
+  /* Improve background contrast */
+  background-color: var(--neutral-700);
+  border-color: var(--neutral-600);
+}
+
+/* Make the text labels more visible */
+body.dark-mode .stat-card h4 {
+  color: var(--neutral-300);
+  font-weight: 600;
+}
+
+/* Make the numbers more visible */
+body.dark-mode .stat-card p {
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Improve icon visibility */
+body.dark-mode .stat-icon {
+  color: var(--primary-light);
+  opacity: 1;
+}
+
+/* Add a subtle glow effect on hover for better visibility */
+body.dark-mode .stat-card:hover {
+  box-shadow: 0 0 10px rgba(77, 171, 247, 0.3);
+  border-color: var(--primary-color);
+}
+
+body.dark-mode .stat-card:hover p {
+  color: var(--primary-light);
+}

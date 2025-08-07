@@ -1,0 +1,92 @@
+/**
+ * Character Table Column Fix
+ * Adjusts column widths for better visibility of all elements, particularly the action buttons
+ */
+
+/* Updated column widths for character table - after Sex column removal */
+#characters-tab .table-container #characterTable th:nth-child(1),
+#characters-tab .table-container #characterTable td:nth-child(1) {
+  width: 90px !important; /* Title */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(2),
+#characters-tab .table-container #characterTable td:nth-child(2) {
+  width: 130px !important; /* First Name */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(3),
+#characters-tab .table-container #characterTable td:nth-child(3) {
+  width: 130px !important; /* Last Name */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(4),
+#characters-tab .table-container #characterTable td:nth-child(4) {
+  width: 120px !important; /* Race */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(5),
+#characters-tab .table-container #characterTable td:nth-child(5) {
+  width: 140px !important; /* Series */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(6),
+#characters-tab .table-container #characterTable td:nth-child(6) {
+  width: 120px !important; /* Book */
+}
+
+#characters-tab .table-container #characterTable th:nth-child(7),
+#characters-tab .table-container #characterTable td:nth-child(7) {
+  width: 100px !important; /* Role - reduced width */
+  max-width: 100px !important;
+}
+
+#characters-tab .table-container #characterTable th:nth-child(8),
+#characters-tab .table-container #characterTable td:nth-child(8) {
+  width: 170px !important; /* Actions - increased width */
+  min-width: 170px !important;
+}
+
+/* Improve action buttons layout with flexbox */
+.actions-column {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  gap: 8px !important; /* Consistent spacing between buttons */
+  min-width: 160px !important;
+  white-space: nowrap !important;
+  padding-left: 10px !important;
+}
+
+/* Adjust action buttons to be slightly smaller but ensure they're fully visible */
+.actions-column button {
+  flex: 0 0 auto !important;
+  width: 36px !important;
+  min-width: 36px !important;
+  height: 36px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Adjust icon size */
+.actions-column button i {
+  font-size: 16px !important;
+}
+
+/* Ensure this file overrides other styles */
+.table-container .actions-column {
+  min-width: 160px !important;
+}
+
+/* Fix for action buttons in dark mode */
+body.dark-mode .actions-column {
+  background-color: transparent !important;
+}
+
+/* Ensure the overall table layout is correct */
+#characterTable {
+  table-layout: fixed !important;
+  width: 100% !important;
+} 

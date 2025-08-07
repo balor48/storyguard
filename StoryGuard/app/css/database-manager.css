@@ -1,0 +1,226 @@
+/* Database Manager Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: var(--background-color, #fff);
+    color: var(--text-color, #333);
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: var(--text-color, #333);
+    font-size: 24px;
+}
+
+.close-btn {
+    background-color: #f44336;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    width: 180px;
+}
+
+.database-list-container {
+    margin-bottom: 20px;
+}
+
+.database-list-container h4 {
+    margin-top: 0;
+    color: var(--text-color, #333);
+    font-size: 18px;
+}
+
+#databaseTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#databaseTable th,
+#databaseTable td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#databaseTable th {
+    font-weight: bold;
+}
+
+#databaseTable td:last-child {
+    text-align: center;
+}
+
+.current-db-label {
+    margin-left: 5px;
+    padding: 3px 6px;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 3px;
+    font-size: 12px;
+}
+
+.switch-btn {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.rename-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.export-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.warning-box {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    border-left: 4px solid #ffeeba;
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.warning-icon {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.database-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.database-actions h4 {
+    margin-top: 0;
+    color: var(--text-color, #333);
+    font-size: 18px;
+}
+
+.new-database-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 250px;
+}
+
+.create-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.import-btn {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 400px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin: 10px 0;
+}
+
+/* Dark mode adjustments */
+.dark-mode .modal-content {
+    background-color: #2d333b;
+    color: #fff;
+}
+
+.dark-mode .modal-header {
+    border-bottom-color: #555;
+}
+
+.dark-mode #databaseTable th,
+.dark-mode #databaseTable td {
+    border-bottom-color: #555;
+}
+
+.dark-mode .warning-box {
+    background-color: #3e3e23;
+    color: #e6d18a;
+    border-left-color: #9d8a3b;
+}
+
+.dark-mode .database-actions,
+.dark-mode .database-list {
+    background-color: #383f47 !important;
+    border-color: #555 !important;
+}
+
+.dark-mode .database-actions h4, 
+.dark-mode .database-list h4 {
+    color: #eee !important;
+    border-color: #555 !important;
+}
+
+.dark-mode .new-database-input {
+    background-color: #fff;
+    color: #333;
+    border-color: #666;
+}
+
+.dark-mode .new-database-input::placeholder {
+    color: #777;
+}

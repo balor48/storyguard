@@ -1,0 +1,116 @@
+/* Fix for tag selector and Add Tag button visibility */
+
+/* Make the tag selector more visible */
+.tag-selector {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #f9f9f9;
+  min-height: 50px;
+}
+
+/* Style the tag selector header */
+.tag-selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+/* Make the Add Tag button more prominent */
+.add-tag-btn {
+  background-color: #3498db !important;
+  color: white !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  font-size: 0.9rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  border: none !important;
+  display: inline-block !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: auto !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.add-tag-btn:hover {
+  background-color: #2980b9 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Style for entity tags */
+.entity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.entity-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 15px;
+  color: white;
+  font-size: 0.85rem;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+
+.tag-name {
+  margin-right: 5px;
+}
+
+.tag-remove {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+/* Style for no tags message */
+.no-tags {
+  color: #888;
+  font-style: italic;
+  padding: 5px 0;
+}
+
+/* Fix for tag dialog */
+.tag-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tag-dialog-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Add a helper message */
+.tag-selector::after {
+  content: "Click 'Add Tag' to create or select tags";
+  display: block;
+  color: #888;
+  font-style: italic;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  text-align: center;
+}

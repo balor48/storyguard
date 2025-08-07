@@ -1,0 +1,31 @@
+/**
+ * Relationship Dark Mode Fixes
+ * Improves relationship visualization in dark mode
+ */
+
+/* Force white text for relationship labels in dark mode */
+body.dark-mode .relationship-label-text {
+    fill: #FFFFFF !important;
+    color: #FFFFFF !important;
+    stroke: none !important;
+    border: none !important;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8) !important;
+    font-weight: bold !important;
+}
+
+/* Ensure SVG text elements use white fill in dark mode */
+body.dark-mode #relationshipNetwork text.relationship-label-text {
+    fill: #FFFFFF !important;
+    stroke: none !important;
+}
+
+/* Ensure relationship lines are clearly visible in dark mode */
+body.dark-mode .relationship-lines line {
+    stroke-opacity: 0.8 !important;
+}
+
+/* Relationship type on connection lines */
+body.dark-mode .relationship-lines text {
+    fill: #FFFFFF !important;
+    stroke: none !important;
+} 
