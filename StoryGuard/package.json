@@ -2,7 +2,7 @@
   "name": "storyguard",
   "version": "1.0.0",
   "description": "Desktop version of Story Database",
-  "main": "main.js",
+   "main": "src/main/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder --win --x64"
